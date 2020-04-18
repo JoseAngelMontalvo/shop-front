@@ -1,0 +1,25 @@
+.section-footer {
+    -ms-flex: 1 0 0;
+    flex: 1 0 0;
+    padding: 0 10px;
+}
+
+.section-footer h4 {
+    margin: 0 0 5px 0;
+}
+
+.section-footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.section-footer ul li {
+    padding: 5px 0;
+}
+
+.section-footer ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: var(--small-text);
+}

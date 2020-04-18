@@ -1,0 +1,6 @@
+HOME
+http://localhost:3000/
+PRODUCT
+http://localhost:3000/product/2
+SIGNIN
+http://localhost:3000/signin

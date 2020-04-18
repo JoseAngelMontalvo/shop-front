@@ -1,25 +1,51 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter,Switch, Route, Link } from 'react-router-dom'
 import './App.css';
+import {Header} from "./core/components/header/header";
+import {SliderPpalHome} from "./features/store/home/ui/slider-ppal-home/slider-ppal-home";
+import {CategoriesHome} from "./features/store/home/ui/categories-home/categories-home";
+import {ShowCaseHome} from "./features/store/home/ui/showcase-home/showcase-home";
+import {categories} from "./mock-up/categories-mokup";
+import {products} from "./mock-up/products-mokup";
+import {sectionsFooter} from "./mock-up/sections-footer";
+import {Product} from "./features/store/product/ui/product";
+import {Footer} from "./core/components/footer/ui/footer";
+import {SignIn} from "./features/store/signin/ui/signin";
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <>
+
+        <BrowserRouter>
+
+            <Switch>
+            <Route exact path="/">
+                <Header/>
+                <SliderPpalHome urlImage="/img/banner_3.jpg" alt="Imagen slider home"/>
+                <CategoriesHome categories={categories}/>
+                <ShowCaseHome/>
+                <Footer sections={sectionsFooter}/>
+            </Route>
+            <Route path="/product/:id">
+                <Header/>
+                <Product/>
+                <Footer sections={sectionsFooter}/>
+            </Route>
+                <Route path="/signin">
+                    <SignIn/>
+                </Route>
+            </Switch>
+
+        </BrowserRouter>
+
+
+
+
+
+    </>
   );
 }
 

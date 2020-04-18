@@ -1,0 +1,40 @@
+.footer {
+    padding: 50px;
+    display: flex;
+    background-color: var(--secondary-bk-color)
+}
+.logo-footer {
+    -ms-flex: 1 0 0;
+    flex: 1 0 0;
+    padding: 0 10px;
+    text-align: center;
+}
+
+.logo-footer img {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.logo-footer p {
+    font-family: var(--title-font);
+    font-weight: bold;
+    font-size: 20px;
+    margin: 10px 0;
+    color: var(--text-color);
+}
+
+.logo-footer p.copyright {
+    font-size: var(--small-text);
+    font-weight: normal;
+    font-family: var(--body-text);
+    width: 200px;
+    text-align: center;
+    margin: auto;
+}
+
+
+
+
+
