@@ -21,7 +21,7 @@ export const products: Product[] = [
     "userCreate": "2",
     "highlight": false,
     "rating": 2.5,
-    "reviews": "Hola que ase"
+    "reviews": ["Hola que ase"]
   },
   {
     "id": "2",
@@ -42,7 +42,7 @@ export const products: Product[] = [
     "userCreate": "2",
     "highlight": false,
     "rating": 2.5,
-    "reviews": "Hola que ase"
+    "reviews": ["Hola que ase"]
   },
   {
     "id": "3",
@@ -63,7 +63,7 @@ export const products: Product[] = [
     "userCreate": "2",
     "highlight": false,
     "rating": 2.5,
-    "reviews": "Hola que ase"
+    "reviews": ["Hola que ase"]
   },
   {
     "id": "4",
@@ -85,7 +85,7 @@ export const products: Product[] = [
     "userCreate": "2",
     "highlight": false,
     "rating": 2.5,
-    "reviews": "Hola que ase"
+    "reviews": ["Hola que ase"]
   },
   {
     "id": "5",
@@ -107,7 +107,7 @@ export const products: Product[] = [
     "userCreate": "2",
     "highlight": false,
     "rating": 2.5,
-    "reviews": "Hola que ase"
+    "reviews": ["Hola que ase"]
   },
   {
     "id": "6",
@@ -128,7 +128,7 @@ export const products: Product[] = [
     "userCreate": "2",
     "highlight": false,
     "rating": 2.5,
-    "reviews": "Hola que ase"
+    "reviews": ["Hola que ase"]
   },
   {
     "id": "7",
@@ -148,7 +148,7 @@ export const products: Product[] = [
     "userCreate": "2",
     "highlight": false,
     "rating": 2.5,
-    "reviews": "Hola que ase"
+    "reviews": ["Hola que ase"]
   },
   {
     "id": "8",
@@ -172,6 +172,6 @@ export const products: Product[] = [
     "userCreate": "2",
     "highlight": false,
     "rating": 2.5,
-    "reviews": "Hola que ase"
+    "reviews": ["Hola que ase"]
   },
 ];
