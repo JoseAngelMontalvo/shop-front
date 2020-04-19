@@ -6,6 +6,7 @@ import {Product} from "../domain/product";
 export class ProductHttpRepository implements ProductRepository {
   constructor(private readonly ProductDtoToProductMapper:ProductDtoToProductMapper) {
   }
+
   async findAll(): Promise<Product[]> {
     const response = await fetch('http://localhost:3001/products/getallproducts')
     const data = (await response.json()) as ProductDto[]
@@ -14,4 +15,12 @@ export class ProductHttpRepository implements ProductRepository {
     ))
     return result
   }
+
+  async findById(id:any): Promise<Product> {
+    const response = await fetch(`http://localhost:3001/products/getproductbyid/${id}`)
+    const data = (await response.json()) as ProductDto
+    const result: Product = this.ProductDtoToProductMapper.map(data)
+    return result
+  }
+
 }

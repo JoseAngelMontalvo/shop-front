@@ -20,7 +20,6 @@ export const ShowCaseHome: React.FunctionComponent = () => {
     getAllProducts()
   }, [])
 
-  console.log('HOLA' + products[0])
 
   return (
     <>

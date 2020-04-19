@@ -1,20 +1,30 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import { bind } from "../../../../core/utils/bind";
 import styles from "./product.module.css";
 import { SliderProduct } from "./slider-product/slider-product";
 import { FeaturesProduct } from "./features-product/features-product";
-import { products } from "../../../../mock-up/products-mokup";
 import {Product as ProductModel} from "../domain/product";
+import {ProductRepositoryFactory} from "../infrastructure/product-repository-factory";
 
 const cx = bind(styles);
 
 export const Product: React.FunctionComponent = () => {
   const { id } = useParams();
 
-  const product: ProductModel | undefined = products.find(
-    (product) => product.id === id
-  );
+
+    const [product, setProduct] = useState<ProductModel>()
+
+    const getProduct= async (id:any)=>{
+        const productRepository = ProductRepositoryFactory.get()
+        const result = await productRepository.findById(id)
+        await setProduct(result)
+    }
+    useEffect(()=>{
+            getProduct(id)
+        },[])
+
+
 
  if(product === undefined){
      return(

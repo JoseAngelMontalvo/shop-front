@@ -1,0 +1,5 @@
+.main-content-theme{
+    font-size: var(--body-text);
+    color: var(--text-color);
+    background-color: var(--bk-body-color);
+}

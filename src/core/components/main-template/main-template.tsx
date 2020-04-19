@@ -7,12 +7,13 @@ import {Footer} from "../footer/ui/footer";
 
 const cx = bind(styles)
 
-export const MainTemplate: React.FC=()=>{
+export const MainTemplate: React.FC=({children})=>{
     return(
-        <div>
-            <Header/>
-            <Footer/>
-        </div>
+                <div className={cx("main-template-content")}>
+                    <Header/>
+                    {children}
+                    <Footer/>
+                </div>
     )
 }
 

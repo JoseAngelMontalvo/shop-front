@@ -1,0 +1,5 @@
+.main-template-content{
+    background-color: var(--bk-body-color);
+    color: var(--text-color);
+    font-size: var(--body-text);
+}

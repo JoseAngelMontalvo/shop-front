@@ -41,6 +41,7 @@
   line-height: 24px;
   margin: 5px 0 10px 0;
   font-family: var(--body-font);
+  color: var(--text-color);
 }
 .title-product-card {
   height: 23px;
