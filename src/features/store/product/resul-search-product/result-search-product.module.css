@@ -1,0 +1,45 @@
+/*RESULT SEARCH PRODUCT*/
+
+.result-search-content {
+  max-width: 1200px;
+  margin: auto;
+  padding: 66px 0 80px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: var(--primary-bk-color);
+}
+
+/*FILTRO*/
+
+.search-tools {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0px 0px 20px 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-product-result {
+  display: flex;
+  align-items: center;
+}
+
+.order-product-by {
+  align-items: center;
+}
+
+.order-product-by a {
+  font-size: var(--small-text);
+}
+
+.order-product-by a i {
+  font-size: var(--body-text);
+  position: relative;
+  top: 3px;
+}
+
+.order-product-by a span {
+  color: var(--text-color);
+}

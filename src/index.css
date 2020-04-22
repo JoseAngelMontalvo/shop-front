@@ -1,13 +1,14 @@
 @font-face {
   font-family: 'comercio-chino-icons';
   src: url('/fonts/comercio-chino-icons.eot?aixj7n');
-  src: url('/fonts/comercio-chino-icons.eot?aixj7n#iefix') format('embedded-opentype'), url('/fonts/comercio-chino-icons.ttf?aixj7n') format('truetype'), url('/fonts/comercio-chino-icons.woff?aixj7n') format('woff'), url('/fonts/comercio-chino-icons.svg?aixj7n#comercio-chino-icons') format('svg');
+  src: url('/fonts/comercio-chino-icons.eot?aixj7n#iefix') format('embedded-opentype'),
+    url('/fonts/comercio-chino-icons.ttf?aixj7n') format('truetype'),
+    url('/fonts/comercio-chino-icons.woff?aixj7n') format('woff'),
+    url('/fonts/comercio-chino-icons.svg?aixj7n#comercio-chino-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
-
-
 
 /*tema*/
 
@@ -25,18 +26,18 @@
   /*spacing*/
   --base: 0.25rem;
   --body-width: 50rem;
-  --small-size: calc(var(--base)*2);
-  --medium-size: calc(var(--base)*4);
-  --big-size: calc(var(--base)*8);
-  --large-size: calc(var(--base)*12);
+  --small-size: calc(var(--base) * 2);
+  --medium-size: calc(var(--base) * 4);
+  --big-size: calc(var(--base) * 8);
+  --large-size: calc(var(--base) * 12);
   /*LIGHT THEME*/
   --light-text-color: #303030;
   --light-primary-color: #ff2832;
   --light-accent-color: #919191;
   --ligh-link-color: #0000ee;
-  --light-body-bk-color: #FFF;
-  --light-primary-bk-color: #FFF;
-  --light-secondary-bk-color: #ECEFF1;
+  --light-body-bk-color: #fff;
+  --light-primary-bk-color: #fff;
+  --light-secondary-bk-color: #eceff1;
   --light-link-color: #0000ee;
   /*DARK THEME*/
   --dark-text-color: #f0f0f0;
@@ -49,7 +50,7 @@
 }
 
 .light,
-.light>* {
+.light > * {
   --primary-color: var(--light-primary-color);
   --accent-color: var(--light-accent-color);
   --bk-body-color: var(--light-body-bk-color);
@@ -60,7 +61,7 @@
 }
 
 .dark,
-.dark>* {
+.dark > * {
   --primary-color: var(--dark-primary-color);
   --accent-color: var(--dark-accent-color);
   --bk-body-color: var(--dark-body-bk-color);
@@ -69,7 +70,6 @@
   --text-color: var(--dark-text-color);
   --link-color: var(--dark-link-color);
 }
-
 
 /*UTILIDADES*/
 
@@ -87,12 +87,13 @@
 .flex {
   display: flex;
 }
-.width100{
-  width: 100%;}
+.width100 {
+  width: 100%;
+}
 
 /*RESET & UTILITIES*/
 
-body{
+body {
   padding: 0;
   margin: 0;
   font-family: 'Roboto', sans-serif;
