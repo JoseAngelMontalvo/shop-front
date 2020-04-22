@@ -1,9 +1,8 @@
-import React, { FC, createContext, useState } from 'react'
+import React, { FC, createContext, useState, useReducer } from 'react'
 import { bind } from '../../utils/bind'
 import styles from './main-template.module.css'
 import { Header } from '../header/header'
 import { Footer } from '../footer/ui/footer'
-import { ThemeContext } from '../main-content-theme/main-content-theme'
 
 const cx = bind(styles)
 
@@ -25,8 +24,9 @@ export const MainTemplate: React.FC = ({ children }) => {
       }}
     >
       <div className={cx('main-template-content')}>
+        {/*<!-- BORRAR PARRAFO -->*/}
+        <p>{`CONTEXT: ${keywords}`}</p>
         <Header />
-        <p>{`HELLO: ${keywords}`}</p>
         {children}
         <Footer />
       </div>
