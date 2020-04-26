@@ -34,7 +34,7 @@ export const ResultSearchProduct: React.FC<{ categories: CategoryModel[] }> = ({
                   className={'btn-model-window'}
                   onClick={() => toogleCategory(opened)}
                 >
-                  {categoryButton}
+                  {categoryButton.map((category) => category.text)}
                 </Button>
                 <div className={cx('modal-filter-categories', opened)}>
                   <p>Elige una categoría en la que buscar</p>

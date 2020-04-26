@@ -22,7 +22,6 @@ export const CategoriesHomeItem: React.FunctionComponent<Props> = ({ category, t
           key={category.id}
           onClick={() => {
             toogle(opened)
-            setCategoryButton(category.text)
           }}
         >
           <a href={'category.link'} target="_self" onClick={(event) => event.preventDefault()}>
