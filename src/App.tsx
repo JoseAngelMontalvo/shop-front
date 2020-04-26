@@ -10,7 +10,7 @@ import { Product } from './features/store/product/ui/product'
 import { SignIn } from './features/store/signin/ui/signin'
 import { MainTemplate } from './core/components/main-template/main-template'
 import { MainContentTheme } from './core/components/main-content-theme/main-content-theme'
-import { ResultSearchContent } from './features/store/product/resul-search-product/result-search-product'
+import { ResultSearchProduct } from './features/store/product/resul-search-product/result-search-product'
 
 const cx = bind(styles)
 function App() {
@@ -29,7 +29,7 @@ function App() {
         <Route path="/product/search">
           <MainContentTheme>
             <MainTemplate>
-              <ResultSearchContent />
+              <ResultSearchProduct categories={categories} />
             </MainTemplate>
           </MainContentTheme>
         </Route>

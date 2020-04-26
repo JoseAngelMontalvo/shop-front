@@ -1,33 +1,46 @@
-import React, { FC, createContext, useState, useReducer } from 'react'
+import React, { createContext, useState } from 'react'
 import { bind } from '../../utils/bind'
 import styles from './main-template.module.css'
 import { Header } from '../header/header'
 import { Footer } from '../footer/ui/footer'
+import { Category as CategoryModel } from '../../../features/store/home/domain/category'
 
 const cx = bind(styles)
 
 export const QueryContext = createContext<{
   keywords: string
-  setKeywords: (keywords: string) => void
-}>({ keywords: '', setKeywords: () => {} })
+  setkeywords: (keywords: string) => void
+  categoryButton: string
+  setCategoryButton: (cat: string) => void
+}>({
+  keywords: '',
+  setkeywords: () => {},
+  categoryButton: 'Todas las categorias',
+  setCategoryButton: () => {},
+})
 
 export const MainTemplate: React.FC = ({ children }) => {
-  const [keywords, setKeywords] = useState('')
+  const [stateKeyWords, setKeyWords] = useState('')
+  const [stateCategory, setCategory] = useState('Todas las categorias')
 
   return (
     <QueryContext.Provider
       value={{
-        keywords: keywords,
-        setKeywords: (keyword) => {
-          setKeywords(keyword)
+        keywords: stateKeyWords,
+        setkeywords: (keyword) => {
+          setKeyWords(keyword)
+        },
+        categoryButton: stateCategory,
+        setCategoryButton: (cat) => {
+          setCategory(cat)
         },
       }}
     >
       <div className={cx('main-template-content')}>
-        {/*<!-- BORRAR PARRAFO -->*/}
-        <p>{`CONTEXT: ${keywords}`}</p>
         <Header />
         {children}
+        <p>KEYWORDS: {stateKeyWords}</p>
+        <p>CATEGORIES: {stateCategory}</p>
         <Footer />
       </div>
     </QueryContext.Provider>

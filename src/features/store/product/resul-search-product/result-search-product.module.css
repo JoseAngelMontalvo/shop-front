@@ -3,7 +3,7 @@
 .result-search-content {
   max-width: 1200px;
   margin: auto;
-  padding: 66px 0 80px 0;
+  padding: 130px 0 80px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -19,6 +19,9 @@
   padding: 0px 0px 20px 0;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  max-width: 1200px;
+  top: 66px;
 }
 
 .filter-product-result {
@@ -42,4 +45,49 @@
 
 .order-product-by a span {
   color: var(--text-color);
+}
+
+.overlay-filter-product {
+  display: none;
+  position: fixed;
+  background-color: white;
+  opacity: 0.2;
+  width: 100%;
+  height: 100vh;
+  top: 66px;
+}
+.filter-categories {
+  display: flex;
+  position: relative;
+  margin-right: 20px;
+}
+.list-categories-filter {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+.modal-filter-categories {
+  display: none;
+  position: fixed;
+  top: 120px;
+  border: 1px solid var(--text-color);
+  border-radius: 15px;
+  width: 50%;
+  background-color: var(--secondary-bk-color);
+  padding: 20px 20px 0px 20px;
+  flex-wrap: wrap;
+}
+.opened {
+  display: flex;
+}
+.modal-filter-categories p {
+  margin-top: 0;
+}
+.filter-range-price {
+  display: flex;
+  position: relative;
 }
