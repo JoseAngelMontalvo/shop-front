@@ -1,4 +1,6 @@
 import React, { useReducer, useState } from 'react'
+import ReactDOM from 'react-dom'
+import InputRange from 'react-input-range'
 import { bind } from '../../../../core/utils/bind'
 import styles from './result-search-product.module.css'
 import { Button } from '../../../../core/components/buttons/button'
@@ -11,13 +13,23 @@ import { QueryContext } from '../../../../core/components/main-template/main-tem
 const cx = bind(styles)
 
 export const ResultSearchProduct: React.FC<{ categories: CategoryModel[] }> = ({ categories }) => {
-  const [opened, setOpened] = useState('')
+  const [openedCategory, setOpenedCategory] = useState('')
+  const [openedPrice, setOpenedPrice] = useState('')
+  const [state, setState] = useState<any>({
+    value: { min: 2, max: 10 },
+  })
 
   function toogleCategory(opened: string) {
-    if (opened === '') {
-      return setOpened('opened')
+    if (openedCategory === '') {
+      return setOpenedCategory('opened')
     }
-    return setOpened('')
+    return setOpenedCategory('')
+  }
+  function tooglePrice(opened: string) {
+    if (openedPrice === '') {
+      return setOpenedPrice('opened')
+    }
+    return setOpenedPrice('')
   }
 
   return (
@@ -32,11 +44,11 @@ export const ResultSearchProduct: React.FC<{ categories: CategoryModel[] }> = ({
                   theme={'primary'}
                   icon={<Icon type="material-icons" content={'category'} title="Select category" />}
                   className={'btn-model-window'}
-                  onClick={() => toogleCategory(opened)}
+                  onClick={() => toogleCategory(openedCategory)}
                 >
                   {categoryButton.map((category) => category.text)}
                 </Button>
-                <div className={cx('modal-filter-categories', opened)}>
+                <div className={cx('modal-filter-categories', openedCategory)}>
                   <p>Elige una categoría en la que buscar</p>
                   <ul className={cx('list-categories-filter')}>
                     {categories.map((category) => (
@@ -60,9 +72,19 @@ export const ResultSearchProduct: React.FC<{ categories: CategoryModel[] }> = ({
                     />
                   }
                   className={'btn-model-window'}
+                  onClick={() => tooglePrice(openedPrice)}
                 >
                   Precio
                 </Button>
+                <div className={cx('modal-filter-price', openedPrice)}>
+                  <p>Elige un rango de precio</p>
+                  <InputRange
+                    maxValue={20}
+                    minValue={0}
+                    value={state.value}
+                    onChange={(value) => setState({ value })}
+                  />
+                </div>
               </div>
             </div>
 
