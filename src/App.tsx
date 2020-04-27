@@ -11,6 +11,8 @@ import { SignIn } from './features/store/signin/ui/signin'
 import { MainTemplate } from './core/components/main-template/main-template'
 import { MainContentTheme } from './core/components/main-content-theme/main-content-theme'
 import { ResultSearchProduct } from './features/store/product/resul-search-product/result-search-product'
+import { SignUp } from './features/store/sing-up/sing-up'
+import { Footer } from './core/components/footer/ui/footer'
 
 const cx = bind(styles)
 function App() {
@@ -43,6 +45,12 @@ function App() {
         <Route path="/signin">
           <MainContentTheme>
             <SignIn />
+          </MainContentTheme>
+        </Route>
+        <Route path="/signup">
+          <MainContentTheme>
+            <SignUp />
+            <Footer />
           </MainContentTheme>
         </Route>
       </Switch>

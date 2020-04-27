@@ -1,62 +1,67 @@
 .button-theme-absolute {
-    position: absolute;
-    right: 10px;
-    top: 10px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
 
 .content-signin {
-    max-width: 339px;
-    margin: 0 auto;
-    padding: 40px 0 20px 0;
+  max-width: 339px;
+  margin: 0 auto;
+  padding: 40px 0 20px 0;
 }
 
 .logo-signin {
-    text-align: center;
+  text-align: center;
 }
 
 .form-signin {
-    background-color: var(--secondary-bk-color);
-    border: none;
-    border-radius: 10px;
-    padding: 20px 20px 20px 20px;
-    margin-bottom: 20px;
+  background-color: var(--secondary-bk-color);
+  border: none;
+  border-radius: 10px;
+  padding: 20px 20px 20px 20px;
+  margin-bottom: 20px;
 }
 
 .content-signin h1 {
-    font-family: var(--body-font);
-    font-weight: 300;
-    font-size: var(--x-bigger-text);
+  font-family: var(--body-font);
+  font-weight: 300;
+  font-size: var(--x-bigger-text);
 }
 
 .logo-signin img {
-    width: 60px;
-    height: auto;
+  width: 60px;
+  height: auto;
 }
 
 .new-account {
-    background-color: var(--secondary-bk-color);
-    border: none;
-    border-radius: 10px;
-    padding: 5px 20px 5px 20px;
-    margin-bottom: 20px;
-    color: var();
+  background-color: var(--secondary-bk-color);
+  border: none;
+  border-radius: 10px;
+  padding: 5px 20px 5px 20px;
+  margin-bottom: 20px;
+  color: var();
 }
 
 .link-forgot-pass-sigin {
-    text-align: right;
-    margin-top: 10px;
+  text-align: right;
+  margin-top: 10px;
 }
 
 .link-forgot-pass-sigin a {
-    font-size: var(--small-text);
+  font-size: var(--small-text);
 }
 
 .enlaces-footer-signin {
-    text-align: center;
-    margin-top: 50px;
+  text-align: center;
+  margin-top: 50px;
 }
 
 .enlaces-footer-signin a {
-    padding: 10px;
-    font-size: var(--small-text);
+  padding: 10px;
+  font-size: var(--small-text);
+}
+.signin-google {
+  display: flex;
+  padding-top: 20px;
+  justify-content: center;
 }

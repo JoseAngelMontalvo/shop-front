@@ -1,7 +1,6 @@
 import React from 'react'
 import { bind } from '../../utils/bind'
 import styles from './button.module.css'
-import { QueryContext } from '../main-template/main-template'
 
 const cx = bind(styles)
 
