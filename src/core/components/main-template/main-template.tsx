@@ -10,26 +10,30 @@ const cx = bind(styles)
 export const QueryContext = createContext<{
   keywords: string
   setkeywords: (keywords: string) => void
-  categoryButton: CategoryModel[]
+  categoryButton: CategoryModel
   setCategoryButton: (categoryButton: CategoryModel) => void
 }>({
   keywords: '',
   setkeywords: () => {},
-  categoryButton: [
-    {
-      id: '10',
-      text: 'Todas las categorias',
-      link: '/',
-      type: 'material-icons',
-      content: 'category',
-    },
-  ],
+  categoryButton: {
+    id: '10',
+    text: 'Todas las categorias',
+    link: '/',
+    type: 'material-icons',
+    content: 'category',
+  },
   setCategoryButton: () => {},
 })
 
 export const MainTemplate: React.FC = ({ children }) => {
   const [stateKeyWords, setKeyWords] = useState('')
-  const [stateCategory, setCategory] = useState<CategoryModel[]>([])
+  const [stateCategory, setCategory] = useState<CategoryModel>({
+    id: '10',
+    text: 'Todas las categorias',
+    link: '/',
+    type: 'material-icons',
+    content: 'category',
+  })
 
   return (
     <QueryContext.Provider
@@ -39,8 +43,8 @@ export const MainTemplate: React.FC = ({ children }) => {
           setKeyWords(keyword)
         },
         categoryButton: stateCategory,
-        setCategoryButton: (categorybutton) => {
-          setCategory([categorybutton])
+        setCategoryButton: (categoryButton) => {
+          setCategory(categoryButton)
         },
       }}
     >
@@ -48,7 +52,7 @@ export const MainTemplate: React.FC = ({ children }) => {
         <Header />
         {children}
         <p>KEYWORDS: {stateKeyWords}</p>
-        <p>CATEGORIES: {stateCategory}</p>
+        <p>CATEGORIES: {stateCategory.text}</p>
         <Footer />
       </div>
     </QueryContext.Provider>

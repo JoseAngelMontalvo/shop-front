@@ -39,6 +39,7 @@
   --light-primary-bk-color: #fff;
   --light-secondary-bk-color: #eceff1;
   --light-link-color: #0000ee;
+  --light-color-focus-button: #a5c7fe;
   /*DARK THEME*/
   --dark-text-color: #f0f0f0;
   --dark-primary-color: #ff2832;
@@ -47,6 +48,7 @@
   --dark-body-bk-color: #3c3c3c;
   --dark-primary-bk-color: #3c3c3c;
   --dark-secondary-bk-color: #535353;
+  --dark-color-focus-button: #44669d;
 }
 
 .light,
@@ -58,6 +60,7 @@
   --secondary-bk-color: var(--light-secondary-bk-color);
   --text-color: var(--light-text-color);
   --link-color: var(--light-link-color);
+  --border-color-focus-button: var(--light-color-focus-button);
 }
 
 .dark,
@@ -69,6 +72,7 @@
   --secondary-bk-color: var(--dark-secondary-bk-color);
   --text-color: var(--dark-text-color);
   --link-color: var(--dark-link-color);
+  --border-color-focus-button: var(--dark-color-focus-button);
 }
 
 /*UTILIDADES*/

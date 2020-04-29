@@ -13,13 +13,16 @@ export const ShowCaseHome: React.FunctionComponent = () => {
   const getAllProducts = async () => {
     const productRepository = ProductRepositoryFactory.get()
     const products = await productRepository.findAll()
-    await setProducts(products)
+    const showcaseProducts: ProductModel[] = []
+    for (let i = 0; i < 8; i++) {
+      showcaseProducts.push(products[i])
+    }
+    await setProducts(showcaseProducts)
   }
 
   useEffect(() => {
     getAllProducts()
   }, [])
-
 
   return (
     <>

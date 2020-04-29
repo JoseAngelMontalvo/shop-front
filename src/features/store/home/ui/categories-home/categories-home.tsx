@@ -14,7 +14,7 @@ export const CategoriesHome: React.FunctionComponent<{ categories: CategoryModel
       <h3>Categorías</h3>
       <ul>
         {categories.map((category) => (
-          <CategoriesHomeItem toogle={() => ''} key={category.id} category={category} />
+          <CategoriesHomeItem key={category.id} category={category} />
         ))}
       </ul>
     </div>

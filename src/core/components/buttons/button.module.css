@@ -17,6 +17,9 @@ button + button {
   outline: none;
   -webkit-appearance: button;
 }
+.btn-primary:focus {
+  border: 2px solid var(--border-color-focus-button);
+}
 
 .btn-secondary {
   display: flex;
@@ -32,6 +35,10 @@ button + button {
   cursor: pointer;
   outline: none;
   -webkit-appearance: button;
+}
+
+.btn-secondary:focus {
+  border: 2px solid var(--border-color-focus-button);
 }
 
 .btn-only-icon {

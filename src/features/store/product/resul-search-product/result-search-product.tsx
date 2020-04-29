@@ -1,5 +1,4 @@
-import React, { useReducer, useState } from 'react'
-import ReactDOM from 'react-dom'
+import React, { useState, useReducer } from 'react'
 import InputRange from 'react-input-range'
 import { bind } from '../../../../core/utils/bind'
 import styles from './result-search-product.module.css'
@@ -9,57 +8,60 @@ import { ProductCard } from '../../../../core/components/product-card/product-ca
 import { Category as CategoryModel } from '../../home/domain/category'
 import { CategoriesHomeItem } from '../../home/ui/categories-home/categories-home-item/categories-home-item'
 import { QueryContext } from '../../../../core/components/main-template/main-template'
+import { modalFilterReducer, initialState } from './infrastructure/reduce'
 
 const cx = bind(styles)
 
 export const ResultSearchProduct: React.FC<{ categories: CategoryModel[] }> = ({ categories }) => {
-  const [openedCategory, setOpenedCategory] = useState('')
-  const [openedPrice, setOpenedPrice] = useState('')
-  const [state, setState] = useState<any>({
+  const [state, dispatch] = useReducer(modalFilterReducer, initialState)
+
+  const [statePrice, setStatePrice] = useState<any>({
     value: { min: 2, max: 10 },
   })
-
-  function toogleCategory(opened: string) {
-    if (openedCategory === '') {
-      return setOpenedCategory('opened')
-    }
-    return setOpenedCategory('')
-  }
-  function tooglePrice(opened: string) {
-    if (openedPrice === '') {
-      return setOpenedPrice('opened')
-    }
-    return setOpenedPrice('')
-  }
-
+  const closeModal: any = () => dispatch({ type: 'closeAll' })
   return (
     <QueryContext.Consumer>
-      {({ categoryButton }) => (
+      {({ categoryButton, setCategoryButton }) => (
         <div className={cx('result-search-content')}>
           <div className={cx('search-tools')}>
-            <div className={cx('overlay-filter-product')}></div>
+            {(state.category || state.price || state.short) && (
+              <div
+                className={cx('overlay-filter-product')}
+                onClick={() => dispatch({ type: 'closeAll' })}
+              >
+                {' '}
+              </div>
+            )}
             <div className={cx('filter-product-result')}>
               <div className={cx('filter-categories')}>
                 <Button
                   theme={'primary'}
-                  icon={<Icon type="material-icons" content={'category'} title="Select category" />}
+                  icon={
+                    <Icon
+                      type={categoryButton.type}
+                      content={categoryButton.content}
+                      title="Select category"
+                    />
+                  }
                   className={'btn-model-window'}
-                  onClick={() => toogleCategory(openedCategory)}
+                  onClick={() => dispatch({ type: 'openCategory' })}
                 >
-                  {categoryButton.map((category) => category.text)}
+                  {categoryButton.text}
                 </Button>
-                <div className={cx('modal-filter-categories', openedCategory)}>
-                  <p>Elige una categoría en la que buscar</p>
-                  <ul className={cx('list-categories-filter')}>
-                    {categories.map((category) => (
-                      <CategoriesHomeItem
-                        toogle={toogleCategory}
-                        key={category.id}
-                        category={category}
-                      />
-                    ))}
-                  </ul>
-                </div>
+                {state.category && (
+                  <div className={cx('modal-filter-categories')}>
+                    <p>Elige una categoría en la que buscar</p>
+                    <ul className={cx('list-categories-filter')}>
+                      {categories.map((category) => (
+                        <CategoriesHomeItem
+                          key={category.id}
+                          category={category}
+                          close={closeModal}
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
               <div className={cx('filter-range-price')}>
                 <Button
@@ -72,27 +74,96 @@ export const ResultSearchProduct: React.FC<{ categories: CategoryModel[] }> = ({
                     />
                   }
                   className={'btn-model-window'}
-                  onClick={() => tooglePrice(openedPrice)}
+                  onClick={() => dispatch({ type: 'openPrice' })}
                 >
                   Precio
                 </Button>
-                <div className={cx('modal-filter-price', openedPrice)}>
-                  <p>Elige un rango de precio</p>
-                  <InputRange
-                    maxValue={20}
-                    minValue={0}
-                    value={state.value}
-                    onChange={(value) => setState({ value })}
-                  />
-                </div>
+                {state.price && (
+                  <div className={cx('modal-filter-price')}>
+                    <p>Elige un rango de precio</p>
+                    <InputRange
+                      maxValue={20}
+                      minValue={0}
+                      value={statePrice.value}
+                      onChange={(value) => setStatePrice({ value })}
+                    />
+                    <Button theme={'primary'} onClick={() => dispatch({ type: 'closeAll' })}>
+                      Aceptar
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
 
-            <div className={cx('order-product-by')}>
-              <a href="/" target="_selft">
+            <div className={cx('short-product-by')}>
+              <a
+                href="/"
+                target="_selft"
+                onClick={(event) => {
+                  event.preventDefault()
+                  dispatch({ type: 'openShort' })
+                }}
+              >
                 <i className={cx('material-icons')}>unfold_more</i>Ordenado por:{' '}
                 <span>Del más barato al más caro</span>
               </a>
+              {state.short && (
+                <div className={cx('modal-filter-short')}>
+                  <p>Ordenar por:</p>
+                  <ul>
+                    <li>
+                      <a
+                        href={'/'}
+                        target={'_self'}
+                        onClick={(event) => {
+                          event.preventDefault()
+                          dispatch({ type: 'closeAll' })
+                        }}
+                      >
+                        <Icon type={'material-icons'} content={'room'} /> Distancia
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href={'/'}
+                        target={'_self'}
+                        onClick={(event) => {
+                          event.preventDefault()
+                          dispatch({ type: 'closeAll' })
+                        }}
+                      >
+                        <Icon type={'material-icons'} content={'star_half'} /> Valoración media
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href={'/'}
+                        target={'_self'}
+                        onClick={(event) => {
+                          event.preventDefault()
+                          dispatch({ type: 'closeAll' })
+                        }}
+                      >
+                        <Icon type={'material-icons'} content={'call_made'} /> Del más barato al más
+                        caro
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href={'/'}
+                        target={'_self'}
+                        onClick={(event) => {
+                          event.preventDefault()
+                          dispatch({ type: 'closeAll' })
+                        }}
+                      >
+                        <Icon type={'material-icons'} content={'call_received'} /> Del más caro al
+                        más barato
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla gravida augue vitae mi

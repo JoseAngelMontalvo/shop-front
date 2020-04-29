@@ -1,43 +1,45 @@
 .categories-item {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    margin: 0 5px;
-    width: 130px;
-    box-sizing: border-box;
-    margin: 15px 0;
-    cursor:pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0 5px;
+  width: 130px;
+  box-sizing: border-box;
+  margin: 15px 0;
+  cursor: pointer;
 }
 
-.categories-item:hover a, .categories-item:focus a {
-    color: var(--primary-color)
+.categories-item:hover a,
+.categories-item:focus a {
+  color: var(--primary-color);
 }
 
 .categories-item:hover::after {
-    top: -18px;
-    z-index: 0;
-    position: absolute;
-    content: "";
-    height: 107px;
-    width: 136px;
-    background-image: url(/public/img/sombra-categoria.png);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    opacity: 0.5;
-    border-radius: 6px;
+  top: -18px;
+  z-index: 0;
+  position: absolute;
+  content: '';
+  height: 107px;
+  width: 136px;
+  background-image: url(/public/img/sombra-categoria.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  opacity: 0.5;
+  border-radius: 6px;
 }
 
 .categories-item a {
-    font-family: 'Roboto Condense', sans-serif;
-    text-decoration: none;
-    color: var(--text-color)
+  font-family: 'Roboto Condense', sans-serif;
+  text-decoration: none;
+  color: var(--text-color);
+  z-index: 99;
 }
 
 .categories-item a i {
-    font-size: 40px;
+  font-size: 40px;
 }
 
 .categories-item a p {
-    margin: 7px 0 0 0;
-    font-size: var(--medium-text);
+  margin: 7px 0 0 0;
+  font-size: var(--medium-text);
 }
