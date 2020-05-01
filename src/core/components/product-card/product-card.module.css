@@ -8,8 +8,9 @@
   border-radius: 4px;
   background-color: var(--secondary-bk-color);
 }
-.product-card a:hover, .product-card a:focus{
-    text-decoration: none;
+.product-card a:hover,
+.product-card a:focus {
+  text-decoration: none;
 }
 
 .product-body-card {

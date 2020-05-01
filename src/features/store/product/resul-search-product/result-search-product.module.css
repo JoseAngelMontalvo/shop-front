@@ -52,8 +52,8 @@
 .overlay-filter-product {
   display: flex;
   position: fixed;
-  background-color: white;
-  opacity: 0.2;
+  background-color: var(--bk-body-color);
+  opacity: 0.8;
   width: 100%;
   height: 100vh;
   top: 66px;
@@ -77,7 +77,7 @@
   display: flex;
   position: fixed;
   top: 120px;
-  border: 1px solid var(--text-color);
+  border: 1px solid var(--modal-border-color);
   border-radius: 15px;
   width: 42%;
   background-color: var(--secondary-bk-color);
@@ -92,19 +92,21 @@
   display: flex;
   position: fixed;
   top: 120px;
-  border: 1px solid var(--text-color);
+  border: 1px solid var(--modal-border-color);
   border-radius: 15px;
   width: 50%;
   background-color: var(--secondary-bk-color);
-  padding: 20px 20px 0px 20px;
+  padding: 20px 20px 20px 20px;
   flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 .modal-filter-short {
   right: 0;
   display: flex;
   position: absolute;
   top: 32px;
-  border: 1px solid var(--text-color);
+  border: 1px solid var(--modal-border-color);
   border-radius: 15px;
   width: auto;
   background-color: var(--secondary-bk-color);

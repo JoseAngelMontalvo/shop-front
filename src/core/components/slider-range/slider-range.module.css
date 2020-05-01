@@ -1,0 +1,29 @@
+.slider-wrapper {
+  height: 100px;
+  width: 100%;
+}
+.fields-range {
+  display: flex;
+  justify-content: space-between;
+}
+.input-range-content {
+  display: inline-block;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+.label-input-range {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.input-range {
+  height: 50px;
+  background-color: var(--bk-body-color);
+  border: 1px solid var(--accent-color);
+  font-size: var(--body-text);
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-color);
+  padding: 10px;
+  border-radius: 8px;
+  width: 150px;
+}

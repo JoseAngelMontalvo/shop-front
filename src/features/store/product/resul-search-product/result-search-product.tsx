@@ -1,5 +1,4 @@
 import React, { useState, useReducer } from 'react'
-import InputRange from 'react-input-range'
 import { bind } from '../../../../core/utils/bind'
 import styles from './result-search-product.module.css'
 import { Button } from '../../../../core/components/buttons/button'
@@ -9,15 +8,13 @@ import { Category as CategoryModel } from '../../home/domain/category'
 import { CategoriesHomeItem } from '../../home/ui/categories-home/categories-home-item/categories-home-item'
 import { QueryContext } from '../../../../core/components/main-template/main-template'
 import { modalFilterReducer, initialState } from './infrastructure/reduce'
+import { SliderRange } from '../../../../core/components/slider-range/slider-range'
 
 const cx = bind(styles)
 
 export const ResultSearchProduct: React.FC<{ categories: CategoryModel[] }> = ({ categories }) => {
   const [state, dispatch] = useReducer(modalFilterReducer, initialState)
 
-  const [statePrice, setStatePrice] = useState<any>({
-    value: { min: 2, max: 10 },
-  })
   const closeModal: any = () => dispatch({ type: 'closeAll' })
   return (
     <QueryContext.Consumer>
@@ -81,12 +78,7 @@ export const ResultSearchProduct: React.FC<{ categories: CategoryModel[] }> = ({
                 {state.price && (
                   <div className={cx('modal-filter-price')}>
                     <p>Elige un rango de precio</p>
-                    <InputRange
-                      maxValue={20}
-                      minValue={0}
-                      value={statePrice.value}
-                      onChange={(value) => setStatePrice({ value })}
-                    />
+                    <SliderRange />
                     <Button theme={'primary'} onClick={() => dispatch({ type: 'closeAll' })}>
                       Aceptar
                     </Button>

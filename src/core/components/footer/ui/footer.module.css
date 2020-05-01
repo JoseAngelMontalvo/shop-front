@@ -1,66 +1,61 @@
 .footer {
-    padding: 50px;
-    display: flex;
-    background-color: var(--secondary-bk-color)
+  padding: 50px;
+  display: flex;
+  background-color: var(--secondary-bk-color);
 }
 .logo-footer {
-    -ms-flex: 1 0 0;
-    flex: 1 0 0;
-    padding: 0 10px;
-    text-align: center;
+  -ms-flex: 1 0 0;
+  flex: 1 0 0;
+  padding: 0 10px;
+  text-align: center;
 }
 
 .logo-footer img {
-    width: 100px;
-    height: auto;
-    display: block;
-    margin: auto;
+  width: 100px;
+  height: auto;
+  display: block;
+  margin: auto;
 }
 
 .logo-footer p {
-    font-family: var(--title-font);
-    font-weight: bold;
-    font-size: 20px;
-    margin: 10px 0;
-    color: var(--text-color);
+  font-family: var(--title-font);
+  font-weight: bold;
+  font-size: 20px;
+  margin: 10px 0;
+  color: var(--text-color);
 }
 
 .logo-footer p.copyright {
-    font-size: var(--small-text);
-    font-weight: normal;
-    font-family: var(--body-text);
-    width: 200px;
-    text-align: center;
-    margin: auto;
+  font-size: var(--small-text);
+  font-weight: normal;
+  font-family: var(--body-text);
+  width: 200px;
+  text-align: center;
+  margin: auto;
 }
 
 .section-footer {
-    -ms-flex: 1 0 0;
-    flex: 1 0 0;
-    padding: 0 10px;
+  -ms-flex: 1 0 0;
+  flex: 1 0 0;
+  padding: 0 10px;
 }
 
 .section-footer h4 {
-    margin: 0 0 5px 0;
+  margin: 0 0 5px 0;
 }
 
 .section-footer ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .section-footer ul li {
-    padding: 5px 0;
+  padding: 5px 0;
 }
 
 .section-footer ul li a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: var(--small-text);
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: var(--small-text);
 }
-
-
-
-
-

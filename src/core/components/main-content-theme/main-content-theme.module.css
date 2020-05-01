@@ -1,7 +1,7 @@
-.main-content-theme{
-    max-width: 1366px;
-    margin: auto;
-    font-size: var(--body-text);
-    color: var(--text-color);
-    background-color: var(--bk-body-color);
+.main-content-theme {
+  max-width: 1366px;
+  margin: auto;
+  font-size: var(--body-text);
+  color: var(--text-color);
+  background-color: var(--bk-body-color);
 }

@@ -12,6 +12,8 @@ export const QueryContext = createContext<{
   setkeywords: (keywords: string) => void
   categoryButton: CategoryModel
   setCategoryButton: (categoryButton: CategoryModel) => void
+  rangePrice: number[]
+  setRangePrice: (rangePrice: number[]) => void
 }>({
   keywords: '',
   setkeywords: () => {},
@@ -23,6 +25,8 @@ export const QueryContext = createContext<{
     content: 'category',
   },
   setCategoryButton: () => {},
+  rangePrice: [],
+  setRangePrice: () => {},
 })
 
 export const MainTemplate: React.FC = ({ children }) => {
@@ -34,6 +38,7 @@ export const MainTemplate: React.FC = ({ children }) => {
     type: 'material-icons',
     content: 'category',
   })
+  const [stateRangePrice, setRangePrice] = useState<number[]>([])
 
   return (
     <QueryContext.Provider
@@ -46,6 +51,10 @@ export const MainTemplate: React.FC = ({ children }) => {
         setCategoryButton: (categoryButton) => {
           setCategory(categoryButton)
         },
+        rangePrice: stateRangePrice,
+        setRangePrice: (rangePrice) => {
+          setRangePrice(rangePrice)
+        },
       }}
     >
       <div className={cx('main-template-content')}>
@@ -53,6 +62,7 @@ export const MainTemplate: React.FC = ({ children }) => {
         {children}
         <p>KEYWORDS: {stateKeyWords}</p>
         <p>CATEGORIES: {stateCategory.text}</p>
+        <p>RANGE:{stateRangePrice[0]}</p>
         <Footer />
       </div>
     </QueryContext.Provider>

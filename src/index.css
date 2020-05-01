@@ -37,9 +37,10 @@
   --ligh-link-color: #0000ee;
   --light-body-bk-color: #fff;
   --light-primary-bk-color: #fff;
-  --light-secondary-bk-color: #eceff1;
+  --light-secondary-bk-color: #f3f3f3;
   --light-link-color: #0000ee;
   --light-color-focus-button: #a5c7fe;
+  --light-model-border-color: #919191;
   /*DARK THEME*/
   --dark-text-color: #f0f0f0;
   --dark-primary-color: #ff2832;
@@ -49,6 +50,7 @@
   --dark-primary-bk-color: #3c3c3c;
   --dark-secondary-bk-color: #535353;
   --dark-color-focus-button: #44669d;
+  --dark-model-border-color: #9a9a9a;
 }
 
 .light,
@@ -61,6 +63,7 @@
   --text-color: var(--light-text-color);
   --link-color: var(--light-link-color);
   --border-color-focus-button: var(--light-color-focus-button);
+  --modal-border-color: var(--light-model-border-color);
 }
 
 .dark,
@@ -73,6 +76,7 @@
   --text-color: var(--dark-text-color);
   --link-color: var(--dark-link-color);
   --border-color-focus-button: var(--dark-color-focus-button);
+  --modal-border-color: var(--dark-model-border-color);
 }
 
 /*UTILIDADES*/

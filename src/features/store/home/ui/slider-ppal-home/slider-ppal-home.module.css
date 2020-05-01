@@ -1,23 +1,23 @@
 .slider {
-    padding-top: 66px;
-    position: relative;
+  padding-top: 66px;
+  position: relative;
 }
 
 .slider h1 {
-    position: absolute;
-    font-family: var(--title-font);
-    font-weight: 900;
-    font-size: 36px;
-    top: 47%;
-    left: 5%;
-    margin: 0;
-    padding: 20px;
-    background-color: var(--bk-body-color);
-    border-radius: 20px;
-    line-height: 40px;
-    color: var(--text-color);
+  position: absolute;
+  font-family: var(--title-font);
+  font-weight: 900;
+  font-size: 36px;
+  top: 47%;
+  left: 5%;
+  margin: 0;
+  padding: 20px;
+  background-color: var(--bk-body-color);
+  border-radius: 20px;
+  line-height: 40px;
+  color: var(--text-color);
 }
 
 .slider img {
-    width: 100%;
+  width: 100%;
 }

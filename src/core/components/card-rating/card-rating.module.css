@@ -1,17 +1,17 @@
 .card-rating a {
-    display: inline-flex;
-    align-items: center;
-    font-size: 12px;
-    text-decoration: none;
-    color: var(--link-color);
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  text-decoration: none;
+  color: var(--link-color);
 }
 
 .card-rating i {
-    color: #f8df09;
-    font-size: 18px;
+  color: #f8df09;
+  font-size: 18px;
 }
 
 .card-number-rating-people i {
-    color: var(--text-color);
-    font-size: 14px;
+  color: var(--text-color);
+  font-size: 14px;
 }
