@@ -1,10 +1,12 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { bind } from '../../utils/bind'
 import styles from './main-template.module.css'
 import { Header } from '../header/header'
 import { Footer } from '../footer/ui/footer'
 import { Category as CategoryModel } from '../../../features/store/home/domain/category'
-
+import { Product as ProductModel } from '../../../features/store/product/domain/product'
+import { ProductRepositoryFactory } from '../../../features/store/product/infrastructure/product-repository-factory'
+import { Query } from '../../../features/store/product/domain/query'
 const cx = bind(styles)
 
 export const QueryContext = createContext<{
@@ -14,19 +16,23 @@ export const QueryContext = createContext<{
   setCategoryButton: (categoryButton: CategoryModel) => void
   rangePrice: number[]
   setRangePrice: (rangePrice: number[]) => void
+  sort: string
+  setSort: (sort: string) => void
 }>({
   keywords: '',
   setkeywords: () => {},
   categoryButton: {
-    id: '10',
-    text: 'Todas las categorias',
-    link: '/',
+    id: '',
+    text: '',
+    link: '',
     type: 'material-icons',
-    content: 'category',
+    content: '',
   },
   setCategoryButton: () => {},
-  rangePrice: [],
+  rangePrice: [0, 5000],
   setRangePrice: () => {},
+  sort: '',
+  setSort: () => {},
 })
 
 export const MainTemplate: React.FC = ({ children }) => {
@@ -38,7 +44,22 @@ export const MainTemplate: React.FC = ({ children }) => {
     type: 'material-icons',
     content: 'category',
   })
-  const [stateRangePrice, setRangePrice] = useState<number[]>([])
+  const [stateRangePrice, setRangePrice] = useState<number[]>([0, 5000])
+  const [stateSort, setSort] = useState('lowprice')
+  const [products, setProducts] = useState<ProductModel[]>([])
+
+  let query: Query = {
+    keyWords: stateKeyWords,
+    category: stateCategory.text,
+    range: stateRangePrice,
+    sort: stateSort,
+  }
+
+  const getProductsBySearch = async (query: Query) => {
+    const productRepository = ProductRepositoryFactory.get()
+    const result = await productRepository.findBySearch(query)
+    await setProducts(result)
+  }
 
   return (
     <QueryContext.Provider
@@ -55,6 +76,10 @@ export const MainTemplate: React.FC = ({ children }) => {
         setRangePrice: (rangePrice) => {
           setRangePrice(rangePrice)
         },
+        sort: stateSort,
+        setSort: (sort) => {
+          setSort(sort)
+        },
       }}
     >
       <div className={cx('main-template-content')}>
@@ -62,7 +87,8 @@ export const MainTemplate: React.FC = ({ children }) => {
         {children}
         <p>KEYWORDS: {stateKeyWords}</p>
         <p>CATEGORIES: {stateCategory.text}</p>
-        <p>RANGE:{stateRangePrice[0]}</p>
+        <p>RANGE:{stateRangePrice[0] + ',' + stateRangePrice[1]}</p>
+        <p>SORT:{stateSort}</p>
         <Footer />
       </div>
     </QueryContext.Provider>

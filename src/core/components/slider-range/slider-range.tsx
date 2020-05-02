@@ -5,11 +5,6 @@ import { Slider, Rail, Handles, Tracks, Ticks } from 'react-compound-slider'
 import { Handle } from './handle'
 import { Track } from './track'
 import { Tick } from './tick'
-import {
-  initialState,
-  modalFilterReducer,
-} from '../../../features/store/product/resul-search-product/infrastructure/reduce'
-import { Input } from '../input/input'
 import { QueryContext } from '../main-template/main-template'
 
 const cx = bind(styles)
@@ -27,26 +22,29 @@ const railStyle: React.CSSProperties = {
   cursor: 'pointer',
   backgroundColor: 'rgb(155,155,155)',
 }
-
+interface Props {
+  changeRange(range: number[]): void
+}
 const domain: number[] = [0, 5000]
-export const SliderRange: React.FC = () => {
-  const [state, setState] = useState({
-    values: [0, 5000],
-  })
+export const SliderRange: React.FC<Props> = ({ changeRange }) => {
+  const [state, setState] = useState([0, 5000])
 
   const onChange: any = (values: number[]) => {
     if (isNaN(values[1])) {
-      setState({ values: [state.values[0], 0] })
+      setState([state[0], 0])
+      changeRange([state[0], 0])
     } else if (isNaN(values[0])) {
-      setState({ values: [0, state.values[1]] })
+      setState([0, state[1]])
+      changeRange([0, state[1]])
     } else {
-      setState({ values })
+      setState(values)
+      changeRange(values)
     }
   }
 
   return (
     <QueryContext.Consumer>
-      {({ setRangePrice }) => (
+      {({ setRangePrice, rangePrice }) => (
         <>
           <div style={{ height: 100, width: '100%' }}>
             <Slider
@@ -55,7 +53,7 @@ export const SliderRange: React.FC = () => {
               domain={domain}
               rootStyle={sliderStyle}
               onChange={onChange}
-              values={state.values}
+              values={rangePrice}
             >
               <Rail>{({ getRailProps }) => <div style={railStyle} {...getRailProps()} />}</Rail>
               <Handles>
@@ -105,11 +103,11 @@ export const SliderRange: React.FC = () => {
               <input
                 className={cx('input-range')}
                 type="text"
-                value={state.values[0]}
+                value={rangePrice[0]}
                 name={'min-range'}
                 id={'min-range'}
                 onChange={(event) => {
-                  onChange([parseInt(event.target.value), state.values[1]])
+                  onChange([parseInt(event.target.value), rangePrice[1]])
                 }}
               />
             </div>
@@ -120,11 +118,11 @@ export const SliderRange: React.FC = () => {
               <input
                 className={cx('input-range')}
                 type={'text'}
-                value={state.values[1]}
+                value={rangePrice[1]}
                 name={'max-range'}
                 id={'max-range'}
                 onChange={(event) => {
-                  onChange([state.values[0], parseInt(event.target.value)])
+                  onChange([rangePrice[0], parseInt(event.target.value)])
                 }}
               />
             </div>

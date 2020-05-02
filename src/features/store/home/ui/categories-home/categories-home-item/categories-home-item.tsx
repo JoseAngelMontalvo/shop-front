@@ -18,7 +18,8 @@ export const CategoriesHomeItem: React.FunctionComponent<Props> = ({ category, c
         <li className={cx('categories-item')} key={category.id}>
           <a
             href={'#'}
-            onClick={() => {
+            onClick={(event) => {
+              event.preventDefault()
               setCategoryButton(category)
               if (close !== undefined) {
                 close((closeModal: any) => closeModal())
