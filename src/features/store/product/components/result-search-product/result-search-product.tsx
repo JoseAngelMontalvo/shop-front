@@ -7,7 +7,7 @@ import { ProductCard } from '../../../../../core/components/product-card/product
 import { Category as CategoryModel } from '../../../home/domain/category'
 import { CategoriesHomeItem } from '../../../home/ui/categories-home/categories-home-item/categories-home-item'
 import { QueryContext } from '../../../../../core/components/main-template/main-template'
-import { modalFilterReducer, initialState } from './infrastructure/reduce'
+import { modalFilterReducer, initialState } from './infrastructure/modal-filter-reducer'
 import { SliderRange } from '../../../../../core/components/slider-range/slider-range'
 
 const cx = bind(styles)
