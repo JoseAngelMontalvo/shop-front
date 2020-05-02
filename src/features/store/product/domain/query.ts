@@ -1,6 +1,7 @@
 export interface Query {
   keyWords: string
   category: string
-  range: number[]
+  minPrice: number
+  maxPrice: number
   sort: string
 }

@@ -4,6 +4,7 @@ import styles from './categories-home-item.module.css'
 import { Icon } from '../../../../../../core/components/icons/icon'
 import { Category as CategoryModel } from '../../../domain/category'
 import { QueryContext } from '../../../../../../core/components/main-template/main-template'
+import { querySearchReducer } from '../../../../../../core/components/main-template/infrastructure/query-search-products-reducer'
 
 const cx = bind(styles)
 
@@ -14,7 +15,7 @@ interface Props {
 export const CategoriesHomeItem: React.FunctionComponent<Props> = ({ category, close }) => {
   return (
     <QueryContext.Consumer>
-      {({ setCategory }) => (
+      {({ setCategory, getProducts }) => (
         <li className={cx('categories-item')} key={category.id}>
           <a
             href={'#'}

@@ -4,10 +4,11 @@ import styles from './main-template.module.css'
 import { Header } from '../header/header'
 import { Footer } from '../footer/ui/footer'
 import { Category as CategoryModel } from '../../../features/store/home/domain/category'
-import { Product as ProductModel } from '../../../features/store/product/domain/product'
 import { ProductRepositoryFactory } from '../../../features/store/product/infrastructure/product-repository-factory'
 import { Query } from '../../../features/store/product/domain/query'
 import { querySearchReducer, initialState } from './infrastructure/query-search-products-reducer'
+import { Product as ProductModel } from '../../../features/store/product/domain/product'
+
 const cx = bind(styles)
 
 export const QueryContext = createContext<{
@@ -19,6 +20,7 @@ export const QueryContext = createContext<{
   setRangePrice: (rangePrice: number[]) => void
   sort: string
   setSort: (sort: string) => void
+  getProducts: (query: Query) => void
 }>({
   keywords: '',
   setKeyWords: () => {},
@@ -34,19 +36,12 @@ export const QueryContext = createContext<{
   setRangePrice: () => {},
   sort: '',
   setSort: () => {},
+  getProducts: () => {},
 })
 
 export const MainTemplate: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(querySearchReducer, initialState)
-
   const [products, setProducts] = useState<ProductModel[]>([])
-
-  let query: Query = {
-    keyWords: state.keywords,
-    category: state.category.text,
-    range: state.rangePrice,
-    sort: state.sort,
-  }
 
   const getProductsBySearch = async (query: Query) => {
     const productRepository = ProductRepositoryFactory.get()
@@ -54,12 +49,19 @@ export const MainTemplate: React.FC = ({ children }) => {
     await setProducts(result)
   }
 
+  useEffect(() => {
+    getProductsBySearch(state.query)
+  }, [state])
+
   return (
     <QueryContext.Provider
       value={{
         keywords: state.keywords,
-        setKeyWords: (keyword) => {
-          dispatch({ type: 'setKeywords', payload: keyword })
+        setKeyWords: async (keyword) => {
+          dispatch({
+            type: 'setKeywords',
+            payload: keyword,
+          })
         },
         category: state.category,
         setCategory: (categoryButton) => {
@@ -73,6 +75,9 @@ export const MainTemplate: React.FC = ({ children }) => {
         setSort: (sort) => {
           dispatch({ type: 'setSort', payload: sort })
         },
+        getProducts: (query) => {
+          getProductsBySearch(query)
+        },
       }}
     >
       <div className={cx('main-template-content')}>
@@ -82,6 +87,10 @@ export const MainTemplate: React.FC = ({ children }) => {
         <p>CATEGORIES: {state.category.text}</p>
         <p>RANGE:{state.rangePrice[0] + ',' + state.rangePrice[1]}</p>
         <p>SORT:{state.sort}</p>
+        <p>QUERY:{state.query.keyWords}</p>
+        {state.products.map((product) => (
+          <p>{product.name}</p>
+        ))}
         <Footer />
       </div>
     </QueryContext.Provider>
