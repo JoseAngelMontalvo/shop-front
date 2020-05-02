@@ -36,7 +36,7 @@ export const ResultSearchProduct: React.FC<{ categories: CategoryModel[] }> = ({
   const closeModal: any = () => dispatch({ type: 'closeAll' })
   return (
     <QueryContext.Consumer>
-      {({ categoryButton, rangePrice, setRangePrice, sort, setSort }) => (
+      {({ category, rangePrice, setRangePrice, sort, setSort }) => (
         <>
           {setSortText(sort)}
           <div className={cx('result-search-content')}>
@@ -55,15 +55,15 @@ export const ResultSearchProduct: React.FC<{ categories: CategoryModel[] }> = ({
                     theme={'primary'}
                     icon={
                       <Icon
-                        type={categoryButton.type}
-                        content={categoryButton.content}
+                        type={category.type}
+                        content={category.content}
                         title="Select category"
                       />
                     }
                     className={'btn-model-window'}
                     onClick={() => dispatch({ type: 'openCategory' })}
                   >
-                    {categoryButton.text}
+                    {category.text}
                   </Button>
                   {state.category && (
                     <div className={cx('modal-filter-categories')}>

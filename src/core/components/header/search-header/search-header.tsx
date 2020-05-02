@@ -14,7 +14,7 @@ export const SearchHeader: React.FunctionComponent = () => {
 
   return (
     <QueryContext.Consumer>
-      {({ setkeywords }) => (
+      {({ setKeyWords }) => (
         <div className={cx('header-search')}>
           <i className={cx('material-icons', 'icon-input-header-search')}>search</i>
           <input
@@ -24,7 +24,7 @@ export const SearchHeader: React.FunctionComponent = () => {
             onChange={(event) => setState(event.target.value)}
             onKeyDown={(event) => {
               if (event.keyCode === 13) {
-                setkeywords(state)
+                setKeyWords(state)
               }
             }}
           />
@@ -33,7 +33,7 @@ export const SearchHeader: React.FunctionComponent = () => {
               className="btn-search-header-clear"
               onClick={() => {
                 setState('')
-                setkeywords('')
+                setKeyWords('')
               }}
               theme="only-icon"
               icon={iconSearch}

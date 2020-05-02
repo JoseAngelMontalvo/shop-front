@@ -12,24 +12,24 @@ const cx = bind(styles)
 
 export const QueryContext = createContext<{
   keywords: string
-  setkeywords: (keywords: string) => void
-  categoryButton: CategoryModel
-  setCategoryButton: (categoryButton: CategoryModel) => void
+  setKeyWords: (keywords: string) => void
+  category: CategoryModel
+  setCategory: (categoryButton: CategoryModel) => void
   rangePrice: number[]
   setRangePrice: (rangePrice: number[]) => void
   sort: string
   setSort: (sort: string) => void
 }>({
   keywords: '',
-  setkeywords: () => {},
-  categoryButton: {
+  setKeyWords: () => {},
+  category: {
     id: '',
     text: '',
     link: '',
     type: 'material-icons',
     content: '',
   },
-  setCategoryButton: () => {},
+  setCategory: () => {},
   rangePrice: [0, 5000],
   setRangePrice: () => {},
   sort: '',
@@ -58,11 +58,11 @@ export const MainTemplate: React.FC = ({ children }) => {
     <QueryContext.Provider
       value={{
         keywords: state.keywords,
-        setkeywords: (keyword) => {
+        setKeyWords: (keyword) => {
           dispatch({ type: 'setKeywords', payload: keyword })
         },
-        categoryButton: state.category,
-        setCategoryButton: (categoryButton) => {
+        category: state.category,
+        setCategory: (categoryButton) => {
           dispatch({ type: 'setCategory', payload: categoryButton })
         },
         rangePrice: state.rangePrice,

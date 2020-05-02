@@ -14,13 +14,13 @@ interface Props {
 export const CategoriesHomeItem: React.FunctionComponent<Props> = ({ category, close }) => {
   return (
     <QueryContext.Consumer>
-      {({ setCategoryButton }) => (
+      {({ setCategory }) => (
         <li className={cx('categories-item')} key={category.id}>
           <a
             href={'#'}
             onClick={(event) => {
               event.preventDefault()
-              setCategoryButton(category)
+              setCategory(category)
               if (close !== undefined) {
                 close((closeModal: any) => closeModal())
               }
