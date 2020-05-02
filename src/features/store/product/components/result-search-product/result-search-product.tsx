@@ -1,14 +1,14 @@
 import React, { useState, useReducer } from 'react'
-import { bind } from '../../../../core/utils/bind'
+import { bind } from '../../../../../core/utils/bind'
 import styles from './result-search-product.module.css'
-import { Button } from '../../../../core/components/buttons/button'
-import { Icon } from '../../../../core/components/icons/icon'
-import { ProductCard } from '../../../../core/components/product-card/product-card'
-import { Category as CategoryModel } from '../../home/domain/category'
-import { CategoriesHomeItem } from '../../home/ui/categories-home/categories-home-item/categories-home-item'
-import { QueryContext } from '../../../../core/components/main-template/main-template'
+import { Button } from '../../../../../core/components/buttons/button'
+import { Icon } from '../../../../../core/components/icons/icon'
+import { ProductCard } from '../../../../../core/components/product-card/product-card'
+import { Category as CategoryModel } from '../../../home/domain/category'
+import { CategoriesHomeItem } from '../../../home/ui/categories-home/categories-home-item/categories-home-item'
+import { QueryContext } from '../../../../../core/components/main-template/main-template'
 import { modalFilterReducer, initialState } from './infrastructure/reduce'
-import { SliderRange } from '../../../../core/components/slider-range/slider-range'
+import { SliderRange } from '../../../../../core/components/slider-range/slider-range'
 
 const cx = bind(styles)
 let sortBy: string

@@ -10,7 +10,7 @@ import { Product } from './features/store/product/ui/product'
 import { SignIn } from './features/store/signin/ui/signin'
 import { MainTemplate } from './core/components/main-template/main-template'
 import { MainContentTheme } from './core/components/main-content-theme/main-content-theme'
-import { ResultSearchProduct } from './features/store/product/resul-search-product/result-search-product'
+import { ResultSearchProduct } from './features/store/product/components/result-search-product/result-search-product'
 import { SignUp } from './features/store/sing-up/sing-up'
 import { Footer } from './core/components/footer/ui/footer'
 
