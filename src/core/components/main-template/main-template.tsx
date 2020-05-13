@@ -8,7 +8,9 @@ import { ProductRepositoryFactory } from '../../../features/store/product/infras
 import { Query } from '../../../features/store/product/domain/query'
 import { querySearchReducer, initialState } from './infrastructure/query-search-products-reducer'
 import { Product as ProductModel } from '../../../features/store/product/domain/product'
-
+import { useLocation, useParams } from 'react-router-dom'
+import { categories } from '../../../mock-up/categories-mokup'
+import { ResultSearchProduct } from '../../../features/store/product/components/result-search-product/result-search-product'
 const cx = bind(styles)
 
 export const QueryContext = createContext<{
@@ -42,6 +44,8 @@ export const QueryContext = createContext<{
 export const MainTemplate: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(querySearchReducer, initialState)
   const [products, setProducts] = useState<ProductModel[]>([])
+  let location = useLocation()
+  const { keyWord } = useParams()
 
   const getProductsBySearch = async (query: Query) => {
     const productRepository = ProductRepositoryFactory.get()
@@ -83,11 +87,12 @@ export const MainTemplate: React.FC = ({ children }) => {
       <div className={cx('main-template-content')}>
         <Header />
         {children}
+        {location.pathname !== `/` && <ResultSearchProduct categories={categories} />}
         <p>KEYWORDS: {state.keywords}</p>
         <p>CATEGORIES: {state.category.text}</p>
         <p>RANGE:{state.rangePrice[0] + ',' + state.rangePrice[1]}</p>
-        <p>SORT:{state.sort}</p>
-        <p>QUERY:{state.query.keyWords}</p>
+        <p>SORT:{location.pathname}</p>
+        <p id={keyWord}>QUERY:{keyWord}</p>
         {state.products.map((product) => (
           <p>{product.name}</p>
         ))}

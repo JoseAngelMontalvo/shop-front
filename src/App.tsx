@@ -28,11 +28,9 @@ function App() {
             </MainTemplate>
           </MainContentTheme>
         </Route>
-        <Route path="/product/search">
+        <Route path="/product/search/:keyWord">
           <MainContentTheme>
-            <MainTemplate>
-              <ResultSearchProduct categories={categories} />
-            </MainTemplate>
+            <MainTemplate></MainTemplate>
           </MainContentTheme>
         </Route>
         <Route path="/product/:id">

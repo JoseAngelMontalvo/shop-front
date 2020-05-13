@@ -4,13 +4,15 @@ import styles from './search-header.module.css'
 import { Icon } from '../../icons/icon'
 import { Button } from '../../buttons/button'
 import { QueryContext } from '../../main-template/main-template'
-
+import { useLocation, useHistory } from 'react-router-dom'
 const cx = bind(styles)
 
 export const SearchHeader: React.FunctionComponent = () => {
   const iconSearch = <Icon type="material-icons" content="clear" title="buscar" />
 
   const [state, setState] = useState('')
+  let location = useLocation()
+  const history = useHistory()
 
   return (
     <QueryContext.Consumer>
@@ -25,6 +27,9 @@ export const SearchHeader: React.FunctionComponent = () => {
             onKeyDown={(event) => {
               if (event.keyCode === 13) {
                 setKeyWords(state)
+                if (location.pathname === '/') {
+                  history.push(`/product/search/${state}`)
+                }
               }
             }}
           />
