@@ -28,7 +28,7 @@ function App() {
             </MainTemplate>
           </MainContentTheme>
         </Route>
-        <Route path="/product/search/:keyWord">
+        <Route path="/product/search">
           <MainContentTheme>
             <MainTemplate></MainTemplate>
           </MainContentTheme>

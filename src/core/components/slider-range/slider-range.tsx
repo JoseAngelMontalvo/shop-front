@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { bind } from '../../utils/bind'
 import styles from './slider-range.module.css'
 import { Slider, Rail, Handles, Tracks, Ticks } from 'react-compound-slider'
@@ -6,6 +6,8 @@ import { Handle } from './handle'
 import { Track } from './track'
 import { Tick } from './tick'
 import { QueryContext } from '../main-template/main-template'
+import { useLocation, useHistory } from 'react-router-dom'
+import { Query } from '../../../features/store/product/domain/query'
 
 const cx = bind(styles)
 const sliderStyle: React.CSSProperties = {
@@ -24,10 +26,12 @@ const railStyle: React.CSSProperties = {
 }
 interface Props {
   changeRange(range: number[]): void
+  query: Query
 }
 const domain: number[] = [0, 5000]
-export const SliderRange: React.FC<Props> = ({ changeRange }) => {
+export const SliderRange: React.FC<Props> = ({ changeRange, query }) => {
   const [state, setState] = useState([0, 5000])
+  const history = useHistory()
 
   const onChange: any = (values: number[]) => {
     if (isNaN(values[1])) {
@@ -41,10 +45,15 @@ export const SliderRange: React.FC<Props> = ({ changeRange }) => {
       changeRange(values)
     }
   }
+  useEffect(() => {
+    history.push(
+      `/product/search?keyWord=${query.keyWords}&category=${query.category}&minPrice=${state[0]}&maxPrice=${state[1]}&sort=${query.sort}`
+    )
+  }, [state])
 
   return (
     <QueryContext.Consumer>
-      {({ setRangePrice, rangePrice }) => (
+      {({ rangePrice }) => (
         <>
           <div style={{ height: 100, width: '100%' }}>
             <Slider

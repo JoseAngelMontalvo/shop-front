@@ -2,6 +2,13 @@ import { Category as CategoryModel } from '../features/store/home/domain/categor
 
 export const categories: CategoryModel[] = [
   {
+    id: '0',
+    text: 'Todas las categorias',
+    link: '/',
+    type: 'material-icons',
+    content: 'category',
+  },
+  {
     id: '1',
     text: 'Smart Phones',
     link: 'smart-phones.html',
@@ -63,12 +70,5 @@ export const categories: CategoryModel[] = [
     link: 'restaurantes.html',
     type: 'comercio-chino-icons',
     content: 'icon_restaurant',
-  },
-  {
-    id: '10',
-    text: 'Todas las categorias',
-    link: '/',
-    type: 'material-icons',
-    content: 'category',
   },
 ]

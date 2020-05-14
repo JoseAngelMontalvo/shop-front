@@ -10,7 +10,8 @@ export class ProductDtoToProductMapper {
     return {
       id: ProductDto._id,
       name: ProductDto.name,
-      category: ProductDto.category,
+      categoryName: ProductDto.categoryName,
+      categoryId: ProductDto.categoryId,
       description: ProductDto.description,
       price: ProductDto.price,
       shopId: ProductDto.shopId,

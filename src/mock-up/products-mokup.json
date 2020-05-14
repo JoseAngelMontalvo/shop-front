@@ -1,7 +1,8 @@
 [
   {
     "name": "Apple iPhone 11 Pro Max (256 GB) - de en Verde Noche",
-    "category": "Smart Phones",
+    "categoryName": "Smart Phones",
+    "categoryId": 1,
     "description":
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "price": 1000.2,
@@ -26,7 +27,8 @@
   },
   {
     "name": "GUESS Factory Womens Logo Duffle Bag",
-    "category": "Moda",
+    "categoryName": "Moda",
+    "categoryId": 3,
     "description":
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea inventore nam similique sequi, sint quae fugit...",
     "price": 50,
@@ -50,7 +52,8 @@
   },
   {
     "name": "Head Pala de Padel Ultimate Power Green 2018",
-    "category": "Moda",
+    "categoryName": "Deportes",
+    "categoryId": 5,
     "description":
       "Head Pala de Padel Ultimate Power Green 2018",
     "price": 90,
@@ -74,7 +77,8 @@
   },
   {
     "name": "GNABBAS - Cesta de almacenaje",
-    "category": "Decoración",
+    "categoryName": "Decoración",
+    "categoryId": 6,
     "description":
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "price": 50,
@@ -99,7 +103,8 @@
   },
   {
     "name": "TEODORES Silla de diseño Italiano Roja",
-    "category": "Decoración",
+    "categoryName": "Decoración",
+    "categoryId": 6,
     "description":
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "price": 50,
@@ -124,7 +129,8 @@
   },
   {
     "name": "Kit de Sushi",
-    "category": "Alimentación",
+    "categoryName": "Alimentación",
+    "categoryId": 8,
     "description":
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea inventore nam similique sequi, sint quae fugit...",
     "price": 50,
@@ -148,7 +154,8 @@
   },
   {
     "name": "Juguete Kidi Karaoke, versión española",
-    "category": "Juguetes",
+    "categoryName": "Juguetes",
+    "categoryId": 7,
     "description":
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "price": 50,
@@ -171,7 +178,8 @@
   },
   {
     "name": "Taller Mecánico Herramientas de Juguete y Accesorios de Bricolaje Playset",
-    "category": "Juguetes",
+    "categoryName": "Juguetes",
+    "categoryId": 7,
     "description":
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "price": 50,

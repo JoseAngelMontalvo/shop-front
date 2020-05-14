@@ -3,7 +3,8 @@ import { Id } from '../../../../core/domain/id/id'
 export interface Product {
   id: Id
   name: string
-  category: string
+  categoryName: string
+  categoryId: number
   description: string
   price: number
   shopId: string

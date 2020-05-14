@@ -30,7 +30,7 @@ export const initialState: State = {
   sort: 'Del más barato al más caro',
   query: {
     keyWords: '',
-    category: 'Moda',
+    category: 'Todas las categorias',
     minPrice: 0,
     maxPrice: 5000,
     sort: 'Del más barato al más caro',

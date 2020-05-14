@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react'
+import React, { useState, useReducer, useEffect } from 'react'
 import { bind } from '../../../../../core/utils/bind'
 import styles from './result-search-product.module.css'
 import { Button } from '../../../../../core/components/buttons/button'
@@ -9,12 +9,37 @@ import { CategoriesHomeItem } from '../../../home/ui/categories-home/categories-
 import { QueryContext } from '../../../../../core/components/main-template/main-template'
 import { modalFilterReducer, initialState } from './infrastructure/modal-filter-reducer'
 import { SliderRange } from '../../../../../core/components/slider-range/slider-range'
+import { Query } from '../../domain/query'
+import { ProductRepositoryFactory } from '../../infrastructure/product-repository-factory'
+import { Product as ProductModel } from '../../domain/product'
+import { useLocation } from 'react-router-dom'
 
 const cx = bind(styles)
 let sortBy: string
-export const ResultSearchProduct: React.FC<{ categories: CategoryModel[] }> = ({ categories }) => {
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search)
+}
+interface Props {
+  categories: CategoryModel[]
+  query: Query
+}
+export const ResultSearchProduct: React.FC<Props> = ({ categories, query }) => {
   const [state, dispatch] = useReducer(modalFilterReducer, initialState)
   const [sortText, setSortText] = useState('')
+  const [products, setProducts] = useState<ProductModel[]>([])
+
+  let qry: URLSearchParams = useQuery()
+
+  const getProductsBySearch = async (query: string) => {
+    const productRepository = ProductRepositoryFactory.get()
+    const result = await productRepository.findBySearch(query)
+    await setProducts(result)
+  }
+
+  useEffect(() => {
+    getProductsBySearch(qry.toString())
+  }, [query])
 
   switch (sortText) {
     case 'dist':
@@ -36,7 +61,7 @@ export const ResultSearchProduct: React.FC<{ categories: CategoryModel[] }> = ({
   const closeModal: any = () => dispatch({ type: 'closeAll' })
   return (
     <QueryContext.Consumer>
-      {({ category, rangePrice, setRangePrice, sort, setSort }) => (
+      {({ category, rangePrice, setRangePrice, sort, setSort, query }) => (
         <>
           {setSortText(sort)}
           <div className={cx('result-search-content')}>
@@ -100,7 +125,7 @@ export const ResultSearchProduct: React.FC<{ categories: CategoryModel[] }> = ({
                   {state.price && (
                     <div className={cx('modal-filter-price')}>
                       <p>Elige un rango de precio</p>
-                      <SliderRange changeRange={setRangePrice} />
+                      <SliderRange query={query} changeRange={setRangePrice} />
                     </div>
                   )}
                 </div>

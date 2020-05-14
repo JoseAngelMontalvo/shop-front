@@ -21,10 +21,8 @@ export class ProductHttpRepository implements ProductRepository {
     return result
   }
 
-  async findBySearch(query: Query): Promise<Product[]> {
-    const response = await fetch(
-      `http://localhost:3001/products/getproductsearch?keywords=${query.keyWords}&category=${query.category}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}&sort=${query.sort}`
-    )
+  async findBySearch(query: string): Promise<Product[]> {
+    const response = await fetch(`http://localhost:3001/products/getproductsearch?${query}`)
     const data = (await response.json()) as ProductDto[]
     const result: Product[] = data.map((data) => this.ProductDtoToProductMapper.map(data))
     return result

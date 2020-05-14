@@ -4,7 +4,6 @@ import styles from './main-template.module.css'
 import { Header } from '../header/header'
 import { Footer } from '../footer/ui/footer'
 import { Category as CategoryModel } from '../../../features/store/home/domain/category'
-import { ProductRepositoryFactory } from '../../../features/store/product/infrastructure/product-repository-factory'
 import { Query } from '../../../features/store/product/domain/query'
 import { querySearchReducer, initialState } from './infrastructure/query-search-products-reducer'
 import { Product as ProductModel } from '../../../features/store/product/domain/product'
@@ -22,7 +21,7 @@ export const QueryContext = createContext<{
   setRangePrice: (rangePrice: number[]) => void
   sort: string
   setSort: (sort: string) => void
-  getProducts: (query: Query) => void
+  query: Query
 }>({
   keywords: '',
   setKeyWords: () => {},
@@ -38,24 +37,19 @@ export const QueryContext = createContext<{
   setRangePrice: () => {},
   sort: '',
   setSort: () => {},
-  getProducts: () => {},
+  query: {
+    keyWords: '',
+    category: '',
+    minPrice: 0,
+    maxPrice: 5000,
+    sort: '',
+  },
 })
 
 export const MainTemplate: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(querySearchReducer, initialState)
   const [products, setProducts] = useState<ProductModel[]>([])
   let location = useLocation()
-  const { keyWord } = useParams()
-
-  const getProductsBySearch = async (query: Query) => {
-    const productRepository = ProductRepositoryFactory.get()
-    const result = await productRepository.findBySearch(query)
-    await setProducts(result)
-  }
-
-  useEffect(() => {
-    getProductsBySearch(state.query)
-  }, [state])
 
   return (
     <QueryContext.Provider
@@ -79,20 +73,20 @@ export const MainTemplate: React.FC = ({ children }) => {
         setSort: (sort) => {
           dispatch({ type: 'setSort', payload: sort })
         },
-        getProducts: (query) => {
-          getProductsBySearch(query)
-        },
+        query: state.query,
       }}
     >
       <div className={cx('main-template-content')}>
         <Header />
         {children}
-        {location.pathname !== `/` && <ResultSearchProduct categories={categories} />}
+        {location.pathname !== `/` && (
+          <ResultSearchProduct query={state.query} categories={categories} />
+        )}
         <p>KEYWORDS: {state.keywords}</p>
         <p>CATEGORIES: {state.category.text}</p>
         <p>RANGE:{state.rangePrice[0] + ',' + state.rangePrice[1]}</p>
         <p>SORT:{location.pathname}</p>
-        <p id={keyWord}>QUERY:{keyWord}</p>
+
         {state.products.map((product) => (
           <p>{product.name}</p>
         ))}
