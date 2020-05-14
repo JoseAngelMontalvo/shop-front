@@ -85,7 +85,7 @@ export const MainTemplate: React.FC = ({ children }) => {
         <p>KEYWORDS: {state.keywords}</p>
         <p>CATEGORIES: {state.category.text}</p>
         <p>RANGE:{state.rangePrice[0] + ',' + state.rangePrice[1]}</p>
-        <p>SORT:{location.pathname}</p>
+        <p>SORT:{state.sort}</p>
 
         {state.products.map((product) => (
           <p>{product.name}</p>

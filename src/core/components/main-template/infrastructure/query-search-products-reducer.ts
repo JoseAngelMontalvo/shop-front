@@ -20,20 +20,20 @@ export interface State {
 export const initialState: State = {
   keywords: '',
   category: {
-    id: '10',
+    id: '0',
     text: 'Todas las categorias',
     link: '/',
     type: 'material-icons',
     content: 'category',
   },
   rangePrice: [0, 5000],
-  sort: 'Del más barato al más caro',
+  sort: 'lowPrice',
   query: {
     keyWords: '',
     category: 'Todas las categorias',
     minPrice: 0,
     maxPrice: 5000,
-    sort: 'Del más barato al más caro',
+    sort: 'lowPrice',
   },
   products: [],
 }

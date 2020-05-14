@@ -31,7 +31,7 @@
     "categoryId": 3,
     "description":
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea inventore nam similique sequi, sint quae fugit...",
-    "price": 50,
+    "price": 150,
     "shopId": "20",
     "state": "activated",
     "thumb": "GUESS Factory Womens Logo Duffle Bag.jpg",
@@ -81,7 +81,7 @@
     "categoryId": 6,
     "description":
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "price": 50,
+    "price": 20,
     "shopId": "20",
     "state": "activated",
     "thumb": "gnabbas-basket__0713076_PE729180_S5.webp",
@@ -107,7 +107,7 @@
     "categoryId": 6,
     "description":
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "price": 50,
+    "price": 75,
     "shopId": "20",
     "state": "activated",
     "thumb": "teodores-chair__0551560_PE658676_S5.webp",
@@ -133,7 +133,7 @@
     "categoryId": 8,
     "description":
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea inventore nam similique sequi, sint quae fugit...",
-    "price": 50,
+    "price": 12,
     "shopId": "20",
     "state": "activated",
     "thumb": "71hS9sVjfLL._AC_SL1001_.jpg",
@@ -158,7 +158,7 @@
     "categoryId": 7,
     "description":
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "price": 50,
+    "price": 35,
     "shopId": "20",
     "state": "activated",
     "thumb": "81HBIpNGJ+L._AC_SL1.jpg",
@@ -182,7 +182,7 @@
     "categoryId": 7,
     "description":
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "price": 50,
+    "price": 45,
     "shopId": "20",
     "state": "activated",
     "thumb": "51f0rRJkexL._AC_.jpg",

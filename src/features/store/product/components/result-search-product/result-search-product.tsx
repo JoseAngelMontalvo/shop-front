@@ -12,7 +12,7 @@ import { SliderRange } from '../../../../../core/components/slider-range/slider-
 import { Query } from '../../domain/query'
 import { ProductRepositoryFactory } from '../../infrastructure/product-repository-factory'
 import { Product as ProductModel } from '../../domain/product'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 
 const cx = bind(styles)
 let sortBy: string
@@ -28,7 +28,7 @@ export const ResultSearchProduct: React.FC<Props> = ({ categories, query }) => {
   const [state, dispatch] = useReducer(modalFilterReducer, initialState)
   const [sortText, setSortText] = useState('')
   const [products, setProducts] = useState<ProductModel[]>([])
-
+  const history = useHistory()
   let qry: URLSearchParams = useQuery()
 
   const getProductsBySearch = async (query: string) => {
@@ -154,6 +154,9 @@ export const ResultSearchProduct: React.FC<Props> = ({ categories, query }) => {
                           onClick={(event) => {
                             event.preventDefault()
                             setSort('dist')
+                            history.push(
+                              `/product/search?keyWord=${query.keyWords}&category=${category.text}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}&sort=dist`
+                            )
                             dispatch({ type: 'closeAll' })
                           }}
                         >
@@ -167,6 +170,9 @@ export const ResultSearchProduct: React.FC<Props> = ({ categories, query }) => {
                           onClick={(event) => {
                             event.preventDefault()
                             setSort('rate')
+                            history.push(
+                              `/product/search?keyWord=${query.keyWords}&category=${category.text}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}&sort=rate`
+                            )
                             dispatch({ type: 'closeAll' })
                           }}
                         >
@@ -179,7 +185,10 @@ export const ResultSearchProduct: React.FC<Props> = ({ categories, query }) => {
                           target={'_self'}
                           onClick={(event) => {
                             event.preventDefault()
-                            setSort('lowprice')
+                            setSort('lowPrice')
+                            history.push(
+                              `/product/search?keyWord=${query.keyWords}&category=${category.text}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}&sort=lowPrice`
+                            )
                             dispatch({ type: 'closeAll' })
                           }}
                         >
@@ -193,7 +202,10 @@ export const ResultSearchProduct: React.FC<Props> = ({ categories, query }) => {
                           target={'_self'}
                           onClick={(event) => {
                             event.preventDefault()
-                            setSort('highprice')
+                            setSort('highPrice')
+                            history.push(
+                              `/product/search?keyWord=${query.keyWords}&category=${category.text}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}&sort=highPrice`
+                            )
                             dispatch({ type: 'closeAll' })
                           }}
                         >
