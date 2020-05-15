@@ -3,12 +3,11 @@ import { bind } from '../../utils/bind'
 import styles from './main-template.module.css'
 import { Header } from '../header/header'
 import { Footer } from '../footer/ui/footer'
-import { Category as CategoryModel } from '../../../features/store/home/domain/category'
+import { Category as CategoryModel } from '../categories-item/domain/category'
 import { Query } from '../../../features/store/product/domain/query'
 import { querySearchReducer, initialState } from './infrastructure/query-search-products-reducer'
 import { Product as ProductModel } from '../../../features/store/product/domain/product'
 import { useLocation, useParams } from 'react-router-dom'
-import { categories } from '../../../mock-up/categories-mokup'
 import { ResultSearchProduct } from '../../../features/store/product/components/result-search-product/result-search-product'
 const cx = bind(styles)
 
@@ -48,7 +47,6 @@ export const QueryContext = createContext<{
 
 export const MainTemplate: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(querySearchReducer, initialState)
-  const [products, setProducts] = useState<ProductModel[]>([])
   let location = useLocation()
 
   return (
@@ -79,9 +77,7 @@ export const MainTemplate: React.FC = ({ children }) => {
       <div className={cx('main-template-content')}>
         <Header />
         {children}
-        {location.pathname === `/product/search` && (
-          <ResultSearchProduct query={state.query} categories={categories} />
-        )}
+        {location.pathname === `/product/search` && <ResultSearchProduct query={state.query} />}
         <Footer />
       </div>
     </QueryContext.Provider>

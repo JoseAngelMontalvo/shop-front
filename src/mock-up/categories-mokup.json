@@ -1,0 +1,62 @@
+[
+  {
+    "text": "Todas las categorias",
+    "link": "/",
+    "type": "material-icons",
+    "content": "category"
+  },
+  {
+    "text": "Smart Phones",
+    "link": "smart-phones.html",
+    "type": "comercio-chino-icons",
+    "content": "icon_mobil"
+  },
+  {
+    "text": "Electronica",
+    "link": "electronica.html",
+    "type": "comercio-chino-icons",
+    "content": "icon_electronic"
+  },
+  {
+    "text": "Moda",
+    "link": "moda.html",
+    "type": "comercio-chino-icons",
+    "content": "icon_clothes"
+  },
+  {
+    "text": "Zapateria",
+    "link": "zapateria.html",
+    "type": "comercio-chino-icons",
+    "content": "icon_shoes"
+  },
+  {
+    "text": "Deportes",
+    "link": "deportes.html",
+    "type": "comercio-chino-icons",
+    "content": "icon_sports"
+  },
+  {
+    "text": "Decoración",
+    "link": "decoracion.html",
+    "type": "comercio-chino-icons",
+    "content": "icon_decoration"
+  },
+  {
+    "text": "Juguetes",
+    "link": "juguetes.html",
+    "type": "comercio-chino-icons",
+    "content": "icon_toys"
+  },
+  {
+    "text": "Alimentación",
+    "link": "alimentacion.html",
+    "type": "comercio-chino-icons",
+    "content": "icon_decoration"
+  },
+  {
+    "text": "Restaurantes",
+    "link": "restaurantes.html",
+    "type": "comercio-chino-icons",
+    "content": "icon_restaurant"
+  }
+]

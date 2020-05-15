@@ -1,10 +1,9 @@
 import React from 'react'
-import { bind } from '../../../../../../core/utils/bind'
-import styles from './categories-home-item.module.css'
-import { Icon } from '../../../../../../core/components/icons/icon'
-import { Category as CategoryModel } from '../../../domain/category'
-import { QueryContext } from '../../../../../../core/components/main-template/main-template'
-import { querySearchReducer } from '../../../../../../core/components/main-template/infrastructure/query-search-products-reducer'
+import { bind } from '../../utils/bind'
+import styles from './categories-item.module.css'
+import { Icon } from '../icons/icon'
+import { Category as CategoryModel } from './domain/category'
+import { QueryContext } from '../main-template/main-template'
 import { useLocation, useHistory } from 'react-router-dom'
 
 const cx = bind(styles)
@@ -13,7 +12,7 @@ interface Props {
   category: CategoryModel
   close?(closeModal: any): void
 }
-export const CategoriesHomeItem: React.FunctionComponent<Props> = ({ category, close }) => {
+export const CategoriesItem: React.FunctionComponent<Props> = ({ category, close }) => {
   const history = useHistory()
   return (
     <QueryContext.Consumer>

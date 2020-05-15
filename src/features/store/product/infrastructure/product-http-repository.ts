@@ -2,7 +2,6 @@ import { ProductRepository } from '../domain/product-repository'
 import { ProductDto } from './product-dto'
 import { ProductDtoToProductMapper } from './product-dto-to-product-mapper'
 import { Product } from '../domain/product'
-import { Query } from '../domain/query'
 
 export class ProductHttpRepository implements ProductRepository {
   constructor(private readonly ProductDtoToProductMapper: ProductDtoToProductMapper) {}

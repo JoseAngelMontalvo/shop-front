@@ -4,8 +4,8 @@ import styles from './result-search-product.module.css'
 import { Button } from '../../../../../core/components/buttons/button'
 import { Icon } from '../../../../../core/components/icons/icon'
 import { ProductCard } from '../../../../../core/components/product-card/product-card'
-import { Category as CategoryModel } from '../../../home/domain/category'
-import { CategoriesHomeItem } from '../../../home/ui/categories-home/categories-home-item/categories-home-item'
+import { Category as CategoryModel } from '../../../../../core/components/categories-item/domain/category'
+import { CategoriesItem } from '../../../../../core/components/categories-item/categories-item'
 import { QueryContext } from '../../../../../core/components/main-template/main-template'
 import { modalFilterReducer, initialState } from './infrastructure/modal-filter-reducer'
 import { SliderRange } from '../../../../../core/components/slider-range/slider-range'
@@ -13,6 +13,7 @@ import { Query } from '../../domain/query'
 import { ProductRepositoryFactory } from '../../infrastructure/product-repository-factory'
 import { Product as ProductModel } from '../../domain/product'
 import { useLocation, useHistory } from 'react-router-dom'
+import { CategoryRepositoryFactory } from '../../../../../core/components/categories-item/infrastructure/category-repository-factory'
 
 const cx = bind(styles)
 let sortBy: string
@@ -21,13 +22,13 @@ function useQuery() {
   return new URLSearchParams(useLocation().search)
 }
 interface Props {
-  categories: CategoryModel[]
   query: Query
 }
-export const ResultSearchProduct: React.FC<Props> = ({ categories, query }) => {
+export const ResultSearchProduct: React.FC<Props> = ({ query }) => {
   const [state, dispatch] = useReducer(modalFilterReducer, initialState)
   const [sortText, setSortText] = useState('')
   const [products, setProducts] = useState<ProductModel[]>([])
+  const [categories, setCategories] = useState<CategoryModel[]>([])
   const history = useHistory()
   let qry: URLSearchParams = useQuery()
 
@@ -37,9 +38,19 @@ export const ResultSearchProduct: React.FC<Props> = ({ categories, query }) => {
     await setProducts(result)
   }
 
+  const getCategories = async () => {
+    const categoryRepository = CategoryRepositoryFactory.get()
+    const result = await categoryRepository.findAll()
+    await setCategories(result)
+  }
+
   useEffect(() => {
     getProductsBySearch(qry.toString())
   }, [query])
+
+  useEffect(() => {
+    getCategories()
+  }, [])
 
   switch (sortText) {
     case 'dist':
@@ -95,7 +106,7 @@ export const ResultSearchProduct: React.FC<Props> = ({ categories, query }) => {
                       <p>Elige una categoría en la que buscar</p>
                       <ul className={cx('list-categories-filter')}>
                         {categories.map((category) => (
-                          <CategoriesHomeItem
+                          <CategoriesItem
                             key={category.id}
                             category={category}
                             close={closeModal}

@@ -1,5 +1,4 @@
 import { Product } from './product'
-import { Query } from './query'
 
 export interface ProductRepository {
   findAll(): Promise<Product[]>

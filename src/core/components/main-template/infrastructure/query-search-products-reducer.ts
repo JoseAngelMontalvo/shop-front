@@ -1,4 +1,4 @@
-import { Category as CategoryModel } from '../../../../features/store/home/domain/category'
+import { Category as CategoryModel } from '../../categories-item/domain/category'
 import { Product as ProductModel } from '../../../../features/store/product/domain/product'
 import { Query } from '../../../../features/store/product/domain/query'
 
