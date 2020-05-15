@@ -79,17 +79,9 @@ export const MainTemplate: React.FC = ({ children }) => {
       <div className={cx('main-template-content')}>
         <Header />
         {children}
-        {location.pathname !== `/` && (
+        {location.pathname === `/product/search` && (
           <ResultSearchProduct query={state.query} categories={categories} />
         )}
-        <p>KEYWORDS: {state.keywords}</p>
-        <p>CATEGORIES: {state.category.text}</p>
-        <p>RANGE:{state.rangePrice[0] + ',' + state.rangePrice[1]}</p>
-        <p>SORT:{state.sort}</p>
-
-        {state.products.map((product) => (
-          <p>{product.name}</p>
-        ))}
         <Footer />
       </div>
     </QueryContext.Provider>

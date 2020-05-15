@@ -254,3 +254,9 @@
   position: relative;
   width: 100%;
 }
+.result-search-product-content {
+  display: flex;
+  max-width: 965px;
+  flex-wrap: wrap;
+  padding-top: 30px;
+}
