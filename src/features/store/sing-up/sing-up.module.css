@@ -42,3 +42,7 @@
   padding-top: 20px;
   justify-content: center;
 }
+.item-form-100 {
+  flex: 0 0 100%;
+  padding: 0 10px;
+}

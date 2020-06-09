@@ -11,8 +11,18 @@ interface Props {
   width: '100' | '50' | '33' | '25' | '15'
   label?: boolean
   required?: boolean
+  onChangeValue?(names: string, value: string): void
 }
-export const Input: React.FC<Props> = ({ name, htmlId, type, value, width, label, required }) => {
+export const Input: React.FC<Props> = ({
+  name,
+  htmlId,
+  type,
+  value,
+  width,
+  label,
+  required,
+  onChangeValue,
+}) => {
   const [state, setState] = useState()
   return (
     <div className={cx(`item-form-${width}`)}>
@@ -28,8 +38,12 @@ export const Input: React.FC<Props> = ({ name, htmlId, type, value, width, label
         name={htmlId}
         id={htmlId}
         value={state}
+        required={required && required}
         onChange={(event) => {
           setState(event.target.value)
+          if (onChangeValue) {
+            onChangeValue(event.target.name, event.target.value)
+          }
         }}
       />
       {label && (type === 'checkbox' || type === 'radio') && (

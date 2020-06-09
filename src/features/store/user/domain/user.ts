@@ -5,7 +5,7 @@ export interface Product {
   name: string
   lastName: string
   email: string
-  password: number
+  password: string
   googleId: string
   ownAuth: boolean
   googleAuth: boolean

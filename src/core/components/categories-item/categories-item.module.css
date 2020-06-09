@@ -16,7 +16,7 @@
 
 .categories-item:hover::after {
   top: -18px;
-  z-index: 0;
+  z-index: -1;
   position: absolute;
   content: '';
   height: 107px;
@@ -32,7 +32,6 @@
   font-family: 'Roboto Condense', sans-serif;
   text-decoration: none;
   color: var(--text-color);
-  z-index: 99;
 }
 
 .categories-item a i {
