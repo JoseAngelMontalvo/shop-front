@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { bind } from '../../../../core/utils/bind'
 import styles from './signin.module.css'
 import { Button } from '../../../../core/components/buttons/button'
@@ -8,10 +8,30 @@ import { Input } from '../../../../core/components/input/input'
 import { SwitchTheme } from '../../../../core/components/switch-theme/switch-theme'
 import { Link } from 'react-router-dom'
 import { Icon } from '../../../../core/components/icons/icon'
+import { DataSignin } from '../domain/data-signin'
 
 const cx = bind(styles)
+interface Props {
+  login(email: string, password: string): void
+}
+export const SignIn: React.FC<Props> = ({ login }) => {
+  const [user, setUser] = useState<DataSignin>({
+    email: '',
+    password: '',
+  })
 
-export const SignIn: React.FC = () => {
+  function setDataSignin(name: string, value: string) {
+    setUser({
+      ...user,
+      [name]: value,
+    })
+  }
+  async function submitSignin(user: DataSignin) {
+    try {
+      login(user.email, user.password)
+    } catch (error) {}
+  }
+
   return (
     <div className={cx('content-signin')}>
       <div className={cx('button-theme-absolute')}>
@@ -23,14 +43,21 @@ export const SignIn: React.FC = () => {
         </Link>
         <h1>Sign in to Comercio Chino</h1>
       </div>
-      <form className={cx('form-signin')}>
+      <form
+        className={cx('form-signin')}
+        onSubmit={(event) => {
+          event.preventDefault()
+          submitSignin(user)
+        }}
+      >
         <Input
           name={'Username o Email address'}
-          htmlId={'name'}
+          htmlId={'email'}
           type={'text'}
           value={''}
           width={'100'}
           label
+          onChangeValue={setDataSignin}
           required
         />
         <Input
@@ -40,6 +67,7 @@ export const SignIn: React.FC = () => {
           value={''}
           width={'100'}
           label
+          onChangeValue={setDataSignin}
           required
         />
         <div className={cx('botonera-form')}>

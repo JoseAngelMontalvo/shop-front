@@ -1,6 +1,6 @@
 import { Id } from '../../../../core/domain/id/id'
 
-export interface Product {
+export interface User {
   id: Id
   name: string
   lastName: string

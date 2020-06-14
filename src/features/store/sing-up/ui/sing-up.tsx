@@ -1,22 +1,25 @@
 import React, { useState } from 'react'
-import { bind } from '../../../core/utils/bind'
+import { bind } from '../../../../core/utils/bind'
+import Axios from 'axios'
 import styles from './sing-up.module.css'
-import { SwitchTheme } from '../../../core/components/switch-theme/switch-theme'
+import { SwitchTheme } from '../../../../core/components/switch-theme/switch-theme'
 import { Link, useHistory } from 'react-router-dom'
-import { Input } from '../../../core/components/input/input'
-import { Button } from '../../../core/components/buttons/button'
-import { Icon } from '../../../core/components/icons/icon'
-import { DataSignup } from './domain/data-signup'
+import { Input } from '../../../../core/components/input/input'
+import { Button } from '../../../../core/components/buttons/button'
+import { Icon } from '../../../../core/components/icons/icon'
+import { DataSignup } from '../domain/data-signup'
 
 const cx = bind(styles)
-
-export const SignUp: React.FC = () => {
+interface Props {
+  signup(user: DataSignup): void
+}
+export const SignUp: React.FC<Props> = ({ signup }) => {
   let history = useHistory()
 
   function goUrl(url: string) {
     history.push(url)
   }
-  const [usuario, setUsuario] = useState<DataSignup>({
+  const [user, setUser] = useState<DataSignup>({
     name: '',
     lastName: '',
     email: '',
@@ -25,12 +28,18 @@ export const SignUp: React.FC = () => {
     checkTerms: '',
   })
 
-  function createAccount(name: string, value: string) {
-    setUsuario({
-      ...usuario,
+  function setDataSignup(name: string, value: string) {
+    setUser({
+      ...user,
       [name]: value,
     })
   }
+  async function submitSignup(user: DataSignup) {
+    try {
+      signup(user)
+    } catch (error) {}
+  }
+
   return (
     <div className={cx('content-signup')}>
       <div className={cx('button-theme-absolute')}>
@@ -42,62 +51,68 @@ export const SignUp: React.FC = () => {
         </Link>
         <h1>Sign in to Comercio Chino</h1>
       </div>
-      <form className={cx('form-create-account')}>
+      <form
+        className={cx('form-create-account')}
+        onSubmit={(event) => {
+          event.preventDefault()
+          submitSignup(user)
+        }}
+      >
         <fieldset className="form-info-product">
           <div className="content-fieldset">
             <Input
               name={'Nombre'}
               htmlId={'name'}
               type={'text'}
-              value={usuario.name}
+              value={user.name}
               width={'100'}
               label
               required
-              onChangeValue={createAccount}
+              onChangeValue={setDataSignup}
             />
 
             <Input
               name={'Apellido'}
               htmlId={'lastName'}
               type={'text'}
-              value={usuario.lastName}
+              value={user.lastName}
               width={'100'}
               label
               required
-              onChangeValue={createAccount}
+              onChangeValue={setDataSignup}
             />
 
             <Input
               name={'Email'}
               htmlId={'email'}
               type={'email'}
-              value={usuario.email}
+              value={user.email}
               width={'100'}
               label
               required
-              onChangeValue={createAccount}
+              onChangeValue={setDataSignup}
             />
 
             <Input
               name={'Password'}
               htmlId={'password'}
               type={'password'}
-              value={usuario.password}
+              value={user.password}
               width={'100'}
               label
               required
-              onChangeValue={createAccount}
+              onChangeValue={setDataSignup}
             />
 
             <Input
               name={'Confirm password'}
               htmlId={'confirmPassword'}
               type={'password'}
-              value={usuario.confirmPassword}
+              value={user.confirmPassword}
               width={'100'}
               label
               required
-              onChangeValue={createAccount}
+              onChangeValue={setDataSignup}
             />
 
             <div className={cx('item-form-100')}>
@@ -109,13 +124,13 @@ export const SignUp: React.FC = () => {
                 required
                 onChange={(event) => {
                   if (event.target.checked === true) {
-                    setUsuario({
-                      ...usuario,
+                    setUser({
+                      ...user,
                       checkTerms: 'confirmed',
                     })
                   } else {
-                    setUsuario({
-                      ...usuario,
+                    setUser({
+                      ...user,
                       checkTerms: '',
                     })
                   }
