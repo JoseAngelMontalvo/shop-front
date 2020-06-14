@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import styles from './App.module.css'
@@ -13,13 +13,30 @@ import { MainContentTheme } from './core/components/main-content-theme/main-cont
 import { SignUp } from './features/store/sing-up/ui/sing-up'
 import { Footer } from './core/components/footer/ui/footer'
 import { User } from './features/store/user/domain/user'
-import { setToken } from './core/utils/manage-token'
+import { deleteToken, getToken, setToken, initAxiosInterceptors } from './core/utils/manage-token'
 import { DataSignup } from './features/store/sing-up/domain/data-signup'
+initAxiosInterceptors()
 
 const cx = bind(styles)
 function App() {
-  const [user, setUser] = useState<User>()
-
+  const [user, setUser] = useState<User | null>(null)
+  const [loadingUser, setLoadingUser] = useState<boolean>(true)
+  useEffect(() => {
+    async function loadUser() {
+      if (!getToken) {
+        setLoadingUser(false)
+        return
+      }
+      try {
+        const { data } = await Axios.get('http://localhost:3001/api/auth/profile')
+        setUser(data.user)
+        setLoadingUser(false)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    loadUser()
+  }, [])
   async function login(email: string, password: string) {
     const { data } = await Axios.post('http://localhost:3001/api/auth/login', { email, password })
     setUser(data.user)
@@ -30,6 +47,11 @@ function App() {
     const { data } = await Axios.post('http://localhost:3001/api/auth/signup', user)
     setUser(data.user)
     setToken(data.token)
+  }
+
+  function logout() {
+    setUser(null)
+    deleteToken()
   }
 
   return (

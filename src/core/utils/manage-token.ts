@@ -3,7 +3,7 @@ import Axios from 'axios'
 const TOKEN_KEY = 'CHINO_COMMERCE_TOKEN'
 
 export function setToken(token: string) {
-  localStorage.setItem('TOKEN_KEY', token)
+  localStorage.setItem(TOKEN_KEY, token)
 }
 
 export function getToken() {
