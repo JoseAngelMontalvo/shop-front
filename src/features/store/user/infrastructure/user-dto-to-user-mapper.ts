@@ -8,11 +8,11 @@ export class UserDtoToUserMapper {
                UserDto.rating = 5
             }*/
     return {
-      id: UserDto.userLogin.id,
-      name: UserDto.userLogin.name,
-      lastName: UserDto.userLogin.lastName,
-      email: UserDto.userLogin.email,
-      role: UserDto.userLogin.role,
+      id: UserDto.user.id,
+      name: UserDto.user.name,
+      lastName: UserDto.user.lastName,
+      email: UserDto.user.email,
+      role: UserDto.user.role,
       token: UserDto.token,
     }
   }

@@ -7,14 +7,14 @@ import { SliderPpalHome } from './features/store/home/ui/slider-ppal-home/slider
 import { CategoriesHome } from './features/store/home/ui/categories-home/categories-home'
 import { ShowCaseHome } from './features/store/home/ui/showcase-home/showcase-home'
 import { Product } from './features/store/product/ui/product'
-import { SignIn } from './features/store/signin/ui/signin'
+import { SignIn } from './features/store/user/auth/signin/ui/signin'
 import { MainTemplate } from './core/components/main-template/main-template'
 import { MainContentTheme } from './core/components/main-content-theme/main-content-theme'
-import { SignUp } from './features/store/sing-up/ui/sing-up'
+import { SignUp } from './features/store/user/auth/signup/ui/sing-up'
 import { Footer } from './core/components/footer/ui/footer'
 import { User } from './features/store/user/domain/user'
 import { deleteToken, getToken, setToken, initAxiosInterceptors } from './core/utils/manage-token'
-import { DataSignup } from './features/store/sing-up/domain/data-signup'
+import { DataSignup } from './features/store/user/auth/signup/domain/data-signup'
 import { Loading } from './core/components/loading/loading'
 import { UserHttpRepository } from './features/store/user/infrastructure/user-http-repository'
 import { UserRepositoryFactory } from './features/store/user/infrastructure/user-repository-factory'
@@ -29,7 +29,7 @@ function App() {
   if (user) {
     nameUser = user.name
   }
-  useEffect(() => {
+  /*useEffect(() => {
     async function loadUser() {
       if (!getToken) {
         setLoadingUser(false)
@@ -44,19 +44,20 @@ function App() {
       }
     }
     loadUser()
-  }, [])
+  }, [])*/
 
   async function login(email: string, password: string) {
     const userRepository = UserRepositoryFactory.post()
-    const result = await userRepository.findByLogin(email, password)
+    const result = await userRepository.Login(email, password)
     setUser(result)
     setToken(result.token)
   }
 
   async function signup(dataUser: DataSignup) {
-    const { data } = await Axios.post('http://localhost:3001/api/auth/signup', user)
-    setUser(data.user)
-    setToken(data.token)
+    const userRepository = UserRepositoryFactory.post()
+    const result = await userRepository.Signup(dataUser)
+    setUser(result)
+    setToken(result.token)
   }
 
   function logout() {
@@ -69,7 +70,7 @@ function App() {
       <Switch>
         <Route exact path="/">
           <MainContentTheme>
-            {loadingUser ? (
+            {false ? (
               <MainTemplate user={nameUser}>
                 <Loading />
               </MainTemplate>

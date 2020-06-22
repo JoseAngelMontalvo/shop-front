@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { bind } from '../../../../core/utils/bind'
+import { bind } from '../../../../../../core/utils/bind'
 import styles from './signin.module.css'
-import { Button } from '../../../../core/components/buttons/button'
+import { Button } from '../../../../../../core/components/buttons/button'
 
-import { Input } from '../../../../core/components/input/input'
+import { Input } from '../../../../../../core/components/input/input'
 
-import { SwitchTheme } from '../../../../core/components/switch-theme/switch-theme'
+import { SwitchTheme } from '../../../../../../core/components/switch-theme/switch-theme'
 import { Link } from 'react-router-dom'
-import { Icon } from '../../../../core/components/icons/icon'
+import { Icon } from '../../../../../../core/components/icons/icon'
 import { DataSignin } from '../domain/data-signin'
 
 const cx = bind(styles)

@@ -1,5 +1,5 @@
 export interface UserDto {
-  userLogin: {
+  user: {
     id: string
     name: string
     lastName: string
