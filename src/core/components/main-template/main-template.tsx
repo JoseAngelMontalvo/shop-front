@@ -44,8 +44,10 @@ export const QueryContext = createContext<{
     sort: '',
   },
 })
-
-export const MainTemplate: React.FC = ({ children }) => {
+interface Props {
+  user?: string
+}
+export const MainTemplate: React.FC<Props> = ({ children, user }) => {
   const [state, dispatch] = useReducer(querySearchReducer, initialState)
   let location = useLocation()
 
@@ -75,7 +77,7 @@ export const MainTemplate: React.FC = ({ children }) => {
       }}
     >
       <div className={cx('main-template-content')}>
-        <Header />
+        <Header user={user} />
         {children}
         {location.pathname === `/product/search` && <ResultSearchProduct query={state.query} />}
         <Footer />

@@ -11,7 +11,7 @@ import { DataSignup } from '../domain/data-signup'
 
 const cx = bind(styles)
 interface Props {
-  signup(user: DataSignup): void
+  signup(dataUser: DataSignup): void
 }
 export const SignUp: React.FC<Props> = ({ signup }) => {
   let history = useHistory()
@@ -34,9 +34,9 @@ export const SignUp: React.FC<Props> = ({ signup }) => {
       [name]: value,
     })
   }
-  async function submitSignup(user: DataSignup) {
+  async function submitSignup(dataUser: DataSignup) {
     try {
-      signup(user)
+      signup(dataUser)
     } catch (error) {}
   }
 
@@ -49,7 +49,7 @@ export const SignUp: React.FC<Props> = ({ signup }) => {
         <Link to="/" target={'_self'} title={'Ir a la Home'}>
           <img src="/img/neko_svg.svg" alt="Logotipo comercio chino" />
         </Link>
-        <h1>Sign in to Comercio Chino</h1>
+        <h1>Sign up to Comercio Chino</h1>
       </div>
       <form
         className={cx('form-create-account')}

@@ -76,7 +76,7 @@ export const SignIn: React.FC<Props> = ({ login }) => {
           </Button>
         </div>
         <div className={cx('link-forgot-pass-sigin')}>
-          <a href="forgotpassword.html">¿Olvidaste la contraseña?</a>
+          <Link to="forgotpassword.html">¿Olvidaste la contraseña?</Link>
         </div>
         <div className={cx('botonera-form')}>
           <div className={cx('signin-google')}>
@@ -94,23 +94,23 @@ export const SignIn: React.FC<Props> = ({ login }) => {
         <p>
           ¿Nuevo en Comercio chino?
           <Link to="/signup" target={'_self'}>
-            <a href="createaccount.html"> Crear cuenta</a>
+            Crear cuenta
           </Link>
         </p>
       </div>
       <div className={cx('enlaces-footer-signin')}>
-        <a href="/" target="_self">
+        <Link to="/" target="_self">
           Terminos
-        </a>
-        <a href="/" target="_self">
+        </Link>
+        <Link to="/" target="_self">
           Privacidad
-        </a>
-        <a href="/" target="_self">
+        </Link>
+        <Link to="/" target="_self">
           Seguridad
-        </a>
-        <a href="/" target="_self">
+        </Link>
+        <Link to="/" target="_self">
           Contacto
-        </a>
+        </Link>
       </div>
     </div>
   )

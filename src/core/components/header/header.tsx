@@ -6,15 +6,17 @@ import { HeaderTools } from './header-tools/header-tools'
 import { Link } from 'react-router-dom'
 
 const cx = bind(styles)
-
-export const Header: React.FunctionComponent = () => {
+interface Props {
+  user?: string
+}
+export const Header: React.FunctionComponent<Props> = ({ user }) => {
   return (
     <div className={cx('header')}>
       <Link to="/" className={cx('logo-ppal')} target={'_self'} title={'Ir a la Home'}>
         <i />
       </Link>
       <SearchHeader></SearchHeader>
-      <HeaderTools></HeaderTools>
+      <HeaderTools user={user}></HeaderTools>
     </div>
   )
 }

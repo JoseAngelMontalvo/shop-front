@@ -15,12 +15,20 @@ import { Footer } from './core/components/footer/ui/footer'
 import { User } from './features/store/user/domain/user'
 import { deleteToken, getToken, setToken, initAxiosInterceptors } from './core/utils/manage-token'
 import { DataSignup } from './features/store/sing-up/domain/data-signup'
+import { Loading } from './core/components/loading/loading'
+import { UserHttpRepository } from './features/store/user/infrastructure/user-http-repository'
+import { UserRepositoryFactory } from './features/store/user/infrastructure/user-repository-factory'
+
 initAxiosInterceptors()
 
 const cx = bind(styles)
 function App() {
   const [user, setUser] = useState<User | null>(null)
   const [loadingUser, setLoadingUser] = useState<boolean>(true)
+  let nameUser: string = ''
+  if (user) {
+    nameUser = user.name
+  }
   useEffect(() => {
     async function loadUser() {
       if (!getToken) {
@@ -37,13 +45,15 @@ function App() {
     }
     loadUser()
   }, [])
+
   async function login(email: string, password: string) {
-    const { data } = await Axios.post('http://localhost:3001/api/auth/login', { email, password })
-    setUser(data.user)
-    setToken(data.token)
+    const userRepository = UserRepositoryFactory.post()
+    const result = await userRepository.findByLogin(email, password)
+    setUser(result)
+    setToken(result.token)
   }
 
-  async function signup(user: DataSignup) {
+  async function signup(dataUser: DataSignup) {
     const { data } = await Axios.post('http://localhost:3001/api/auth/signup', user)
     setUser(data.user)
     setToken(data.token)
@@ -59,13 +69,20 @@ function App() {
       <Switch>
         <Route exact path="/">
           <MainContentTheme>
-            <MainTemplate>
-              <SliderPpalHome urlImage="/img/banner_3.jpg" alt="Imagen slider home" />
-              <CategoriesHome />
-              <ShowCaseHome />
-            </MainTemplate>
+            {loadingUser ? (
+              <MainTemplate user={nameUser}>
+                <Loading />
+              </MainTemplate>
+            ) : (
+              <MainTemplate>
+                <SliderPpalHome urlImage="/img/banner_3.jpg" alt="Imagen slider home" />
+                <CategoriesHome />
+                <ShowCaseHome />
+              </MainTemplate>
+            )}
           </MainContentTheme>
         </Route>
+
         <Route path="/product/search">
           <MainContentTheme>
             <MainTemplate></MainTemplate>
@@ -82,6 +99,7 @@ function App() {
           <MainContentTheme>
             <div>
               <SignIn login={login} />
+              <div>{nameUser}</div>
             </div>
           </MainContentTheme>
         </Route>
