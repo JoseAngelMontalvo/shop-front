@@ -9,6 +9,7 @@ import { querySearchReducer, initialState } from './infrastructure/query-search-
 import { Product as ProductModel } from '../../../features/store/product/domain/product'
 import { useLocation, useParams } from 'react-router-dom'
 import { ResultSearchProduct } from '../../../features/store/product/components/result-search-product/result-search-product'
+import { User } from '../../../features/store/user/domain/user'
 const cx = bind(styles)
 
 export const QueryContext = createContext<{
@@ -45,7 +46,7 @@ export const QueryContext = createContext<{
   },
 })
 interface Props {
-  user?: string
+  user?: User | null
 }
 export const MainTemplate: React.FC<Props> = ({ children, user }) => {
   const [state, dispatch] = useReducer(querySearchReducer, initialState)

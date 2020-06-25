@@ -4,10 +4,11 @@ import styles from './header.module.css'
 import { SearchHeader } from './search-header/search-header'
 import { HeaderTools } from './header-tools/header-tools'
 import { Link } from 'react-router-dom'
+import { User } from '../../../features/store/user/domain/user'
 
 const cx = bind(styles)
 interface Props {
-  user?: string
+  user?: User | null
 }
 export const Header: React.FunctionComponent<Props> = ({ user }) => {
   return (

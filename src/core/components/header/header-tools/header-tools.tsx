@@ -5,10 +5,11 @@ import { Button } from '../../buttons/button'
 import { SwitchTheme } from '../../switch-theme/switch-theme'
 import { Link, useHistory } from 'react-router-dom'
 import { Icon } from '../../icons/icon'
+import { User } from '../../../../features/store/user/domain/user'
 
 const cx = bind(styles)
 interface Props {
-  user?: string
+  user?: User | null
 }
 export const HeaderTools: React.FunctionComponent<Props> = ({ user }) => {
   let history = useHistory()
@@ -19,7 +20,7 @@ export const HeaderTools: React.FunctionComponent<Props> = ({ user }) => {
   return (
     <div className={cx('header-tools')}>
       <div className={cx('header-profile')}>
-        <p className={cx('name-user-profile')}>{user}</p>
+        <p className={cx('name-user-profile')}>{user && user.name}</p>
         <Button
           theme={'only-icon'}
           icon={<Icon type="material-icons" content={'person'} title="Profile tools" />}

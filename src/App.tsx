@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom'
 import styles from './App.module.css'
 import { bind } from './core/utils/bind'
 import { SliderPpalHome } from './features/store/home/ui/slider-ppal-home/slider-ppal-home'
@@ -18,6 +18,7 @@ import { DataSignup } from './features/store/user/auth/signup/domain/data-signup
 import { Loading } from './core/components/loading/loading'
 import { UserHttpRepository } from './features/store/user/infrastructure/user-http-repository'
 import { UserRepositoryFactory } from './features/store/user/infrastructure/user-repository-factory'
+import { UserDto } from './features/store/user/infrastructure/user-dto'
 
 initAxiosInterceptors()
 
@@ -26,10 +27,11 @@ function App() {
   const [user, setUser] = useState<User | null>(null)
   const [loadingUser, setLoadingUser] = useState<boolean>(true)
   let nameUser: string = ''
+
   if (user) {
     nameUser = user.name
   }
-  /*useEffect(() => {
+  useEffect(() => {
     async function loadUser() {
       if (!getToken) {
         setLoadingUser(false)
@@ -44,7 +46,7 @@ function App() {
       }
     }
     loadUser()
-  }, [])*/
+  }, [])
 
   async function login(email: string, password: string) {
     const userRepository = UserRepositoryFactory.post()
@@ -64,54 +66,67 @@ function App() {
     setUser(null)
     deleteToken()
   }
-
+  console.log(user)
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <MainContentTheme>
-            {false ? (
-              <MainTemplate user={nameUser}>
-                <Loading />
-              </MainTemplate>
-            ) : (
-              <MainTemplate>
-                <SliderPpalHome urlImage="/img/banner_3.jpg" alt="Imagen slider home" />
-                <CategoriesHome />
-                <ShowCaseHome />
-              </MainTemplate>
-            )}
-          </MainContentTheme>
-        </Route>
+    <Router>
+      {user ? (
+        <LoginRoutes user={user} loading={loadingUser} />
+      ) : (
+        <LogoutRoutes signup={signup} login={login} />
+      )}
+    </Router>
+  )
+}
 
-        <Route path="/product/search">
-          <MainContentTheme>
-            <MainTemplate></MainTemplate>
-          </MainContentTheme>
-        </Route>
-        <Route path="/product/:id">
-          <MainContentTheme>
+interface Props {
+  login(email: string, password: string): void
+  signup(dataUser: DataSignup): void
+}
+interface PropsLoginRoutes {
+  user?: User | null
+  loading: boolean
+}
+export const LoginRoutes: React.FC<PropsLoginRoutes> = ({ user, loading }) => {
+  return (
+    <Switch>
+      <Route path="/product/search">
+        <MainContentTheme>
+          <MainTemplate user={user}></MainTemplate>
+        </MainContentTheme>
+      </Route>
+      <Route exact path="/">
+        <MainContentTheme>
+          {loading ? (
             <MainTemplate>
-              <Product />
+              <Loading />
             </MainTemplate>
-          </MainContentTheme>
-        </Route>
-        <Route path="/signin">
-          <MainContentTheme>
-            <div>
-              <SignIn login={login} />
-              <div>{nameUser}</div>
-            </div>
-          </MainContentTheme>
-        </Route>
-        <Route path="/signup">
-          <MainContentTheme>
-            <SignUp signup={signup} />
-            <Footer />
-          </MainContentTheme>
-        </Route>
-      </Switch>
-    </BrowserRouter>
+          ) : (
+            <MainTemplate user={user}>
+              <SliderPpalHome urlImage="/img/banner_3.jpg" alt="Imagen slider home" />
+              <CategoriesHome />
+              <ShowCaseHome />
+            </MainTemplate>
+          )}
+        </MainContentTheme>
+      </Route>
+    </Switch>
+  )
+}
+export const LogoutRoutes: React.FC<Props> = ({ login, signup }) => {
+  return (
+    <Switch>
+      <Route path="/signin">
+        <MainContentTheme>
+          <SignIn login={login} />
+        </MainContentTheme>
+      </Route>
+      <Route path="/signup">
+        <MainContentTheme>
+          <SignUp signup={signup} />
+        </MainContentTheme>
+        <Footer />
+      </Route>
+    </Switch>
   )
 }
 
