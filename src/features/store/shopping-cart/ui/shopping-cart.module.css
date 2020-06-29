@@ -1,0 +1,23 @@
+.shopping-cart-content {
+  padding: 100px 50px 80px 50px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.shopping-cart-list {
+  margin: 20px auto;
+  width: 100%;
+}
+
+.shopping-cart-list th {
+  padding: 10px 20px 20px 20px;
+  font-weight: normal;
+  border-bottom: 1px solid var(--accent-color);
+}
+
+.shopping-cart-list thead tr td {
+  padding: 10px 20px;
+  height: 100px;
+}

@@ -13,12 +13,18 @@ import { MainContentTheme } from './core/components/main-content-theme/main-cont
 import { SignUp } from './features/store/user/auth/signup/ui/sing-up'
 import { Footer } from './core/components/footer/ui/footer'
 import { User } from './features/store/user/domain/user'
-import { deleteToken, getToken, setToken, initAxiosInterceptors } from './core/utils/manage-token'
+import {
+  deleteToken,
+  getToken,
+  setToken,
+  initAxiosInterceptors,
+} from './features/store/user/domain/manage-token'
 import { DataSignup } from './features/store/user/auth/signup/domain/data-signup'
 import { Loading } from './core/components/loading/loading'
 import { UserHttpRepository } from './features/store/user/infrastructure/user-http-repository'
 import { UserRepositoryFactory } from './features/store/user/infrastructure/user-repository-factory'
 import { UserDto } from './features/store/user/infrastructure/user-dto'
+import { ShoppingCart } from './features/store/shopping-cart/ui/shopping-cart'
 
 initAxiosInterceptors()
 
@@ -92,6 +98,20 @@ export const LoginRoutes: React.FC<PropsLoginRoutes> = ({ user, loading }) => {
       <Route path="/product/search">
         <MainContentTheme>
           <MainTemplate user={user}></MainTemplate>
+        </MainContentTheme>
+      </Route>
+      <Route path="/product/:id">
+        <MainContentTheme>
+          <MainTemplate>
+            <Product />
+          </MainTemplate>
+        </MainContentTheme>
+      </Route>
+      <Route path="/shoppingcart">
+        <MainContentTheme>
+          <MainTemplate>
+            <ShoppingCart />
+          </MainTemplate>
         </MainContentTheme>
       </Route>
       <Route exact path="/">

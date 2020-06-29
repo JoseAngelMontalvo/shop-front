@@ -26,6 +26,11 @@ export const HeaderTools: React.FunctionComponent<Props> = ({ user }) => {
           icon={<Icon type="material-icons" content={'person'} title="Profile tools" />}
         />
       </div>
+      <Button
+        theme={'only-icon'}
+        icon={<Icon type="material-icons" content={'add_shopping_cart'} title="Shopping cart" />}
+        onClick={() => goUrl('/shoppingcart')}
+      />
       <SwitchTheme />
       <Button theme={'secondary'} onClick={() => goUrl('/signin')}>
         Sign in
