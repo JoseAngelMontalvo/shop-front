@@ -46,12 +46,7 @@ export const QueryContext = createContext<{
     sort: '',
   },
 })
-
-export const CartContext = createContext<{
-  products: ProductCart[]
-  incrementCount: () => void
-  decrementCount: () => void
-}>({
+export const CartContext = createContext({
   products: [
     {
       id: '123456',
@@ -61,8 +56,8 @@ export const CartContext = createContext<{
       quantity: 1,
     },
   ],
-  incrementCount: () => {},
-  decrementCount: () => {},
+  incrementCount: (id: Id) => {},
+  decrementCount: (id: Id) => {},
 })
 
 interface Props {
@@ -74,21 +69,21 @@ export const MainTemplate: React.FC<Props> = ({ children, user }) => {
     {
       id: '1',
       image: 'ndsnkds',
-      price: 44,
+      price: 33,
       name: 'Loren ipsum',
       quantity: 1,
     },
     {
       id: '2',
       image: 'ndsnkds',
-      price: 44,
+      price: 33,
       name: 'Loren ipsum',
       quantity: 1,
     },
     {
       id: '3',
       image: 'ndsnkds',
-      price: 44,
+      price: 33,
       name: 'Loren ipsum',
       quantity: 1,
     },
@@ -96,21 +91,33 @@ export const MainTemplate: React.FC<Props> = ({ children, user }) => {
   const [quantity, setQuantity] = useState<number>(1)
   const [id, setId] = useState('')
 
-  function increment(id: string) {
-    console.log(id)
+  async function increment(id: Id) {
     setQuantity(quantity + 1)
     let newProductList: ProductCart[] = productsList
 
-    newProductList.map((product) => {
+    await newProductList.map((product) => {
       if (product.id === id) {
-        console.log('HOLA')
+        product.quantity = product.quantity + 1
       }
     })
     setProductList(newProductList)
   }
-  function decrement(id: Id) {
+  async function decrement(id: Id) {
     setQuantity(quantity - 1)
+    let newProductList: ProductCart[] = productsList
+
+    await newProductList.map((product) => {
+      if (product.id === id) {
+        if (product.quantity !== 1) {
+          product.quantity = product.quantity - 1
+        } else {
+          product.quantity = 1
+        }
+      }
+    })
+    setProductList(newProductList)
   }
+
   let location = useLocation()
 
   return (
@@ -142,10 +149,10 @@ export const MainTemplate: React.FC<Props> = ({ children, user }) => {
         <CartContext.Provider
           value={{
             products: productsList,
-            incrementCount: () => {
+            incrementCount: (id) => {
               increment(id)
             },
-            decrementCount: () => {
+            decrementCount: (id) => {
               decrement(id)
             },
           }}

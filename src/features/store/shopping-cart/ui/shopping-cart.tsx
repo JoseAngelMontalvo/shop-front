@@ -9,7 +9,7 @@ const cx = bind(styles)
 export const ShoppingCart: React.FC = () => {
   return (
     <CartContext.Consumer>
-      {({ products, incrementCount, decrementCount }) => (
+      {({ products }) => (
         <div className={cx('shopping-cart-content')}>
           <table className={cx('shopping-cart-list')}>
             <thead>
@@ -22,11 +22,7 @@ export const ShoppingCart: React.FC = () => {
             </thead>
             <tbody>
               {products.map((product) => (
-                <ShoppingCartItem
-                  incrementCount={incrementCount}
-                  decrementCount={decrementCount}
-                  product={product}
-                />
+                <ShoppingCartItem product={product} />
               ))}
             </tbody>
           </table>
