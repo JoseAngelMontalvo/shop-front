@@ -4,6 +4,7 @@ import styles from './product-card.module.css'
 import { CardRating } from '../card-rating/card-rating'
 import { splitDescription } from './domain-infraestructura/methods'
 import { Product } from '../../../features/store/product/domain/product'
+import { Link } from 'react-router-dom'
 const cx = bind(styles)
 
 interface Props {
@@ -17,7 +18,7 @@ function splitTitle(title: string) {
 export const ProductCard: React.FunctionComponent<Props> = ({ product }) => {
   return (
     <div className={cx('product-card')}>
-      <a href={`/product/${product.id}`} target={'_self'}>
+      <Link to={`/product/${product.id}`} target={'_self'}>
         <div className={cx('img-product')}>
           <img src={`/img/products/${product.thumb}`} alt="Imagen producto" />
         </div>
@@ -30,7 +31,7 @@ export const ProductCard: React.FunctionComponent<Props> = ({ product }) => {
             <span>€</span>
           </p>
         </div>
-      </a>
+      </Link>
     </div>
   )
 }

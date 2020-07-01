@@ -8,6 +8,7 @@ import { Icon } from '../../icons/icon'
 import { User } from '../../../../features/store/user/domain/user'
 
 const cx = bind(styles)
+
 interface Props {
   user?: User | null
 }

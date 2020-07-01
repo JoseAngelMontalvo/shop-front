@@ -9,25 +9,31 @@ const cx = bind(styles)
 export const ShoppingCart: React.FC = () => {
   return (
     <CartContext.Consumer>
-      {({ products }) => (
-        <div className={cx('shopping-cart-content')}>
-          <table className={cx('shopping-cart-list')}>
-            <thead>
-              <tr>
-                <th className={cx('th-thumb-product-list')}>Imagen</th>
-                <th className={cx('th-price-product-list')}>Precio</th>
-                <th className={cx('th-name-product-list')}>Nombre</th>
-                <th className={cx('th-create-product-list')}>Cantidad</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <ShoppingCartItem product={product} />
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      {({ products }) =>
+        products.length !== 0 ? (
+          <div className={cx('shopping-cart-content')}>
+            <table className={cx('shopping-cart-list')}>
+              <thead>
+                <tr>
+                  <th className={cx('th-thumb-product-list')}>Imagen</th>
+                  <th className={cx('th-price-product-list')}>Precio</th>
+                  <th className={cx('th-name-product-list')}>Nombre</th>
+                  <th className={cx('th-create-product-list')}>Cantidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                {products.map((product) => (
+                  <ShoppingCartItem product={product} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div>
+            <p>Tu lista de la compra esta vacia</p>
+          </div>
+        )
+      }
     </CartContext.Consumer>
   )
 }

@@ -12,7 +12,7 @@ import { SliderRange } from '../../../../../core/components/slider-range/slider-
 import { Query } from '../../domain/query'
 import { ProductRepositoryFactory } from '../../infrastructure/product-repository-factory'
 import { Product as ProductModel } from '../../domain/product'
-import { useLocation, useHistory } from 'react-router-dom'
+import { useLocation, useHistory, Link } from 'react-router-dom'
 import { CategoryRepositoryFactory } from '../../../../../core/components/categories-item/infrastructure/category-repository-factory'
 
 const cx = bind(styles)
@@ -143,8 +143,8 @@ export const ResultSearchProduct: React.FC<Props> = ({ query }) => {
               </div>
 
               <div className={cx('short-product-by')}>
-                <a
-                  href="/"
+                <Link
+                  to="/"
                   target="_selft"
                   onClick={(event) => {
                     event.preventDefault()
@@ -153,14 +153,14 @@ export const ResultSearchProduct: React.FC<Props> = ({ query }) => {
                 >
                   <i className={cx('material-icons')}>unfold_more</i>Ordenado por:{' '}
                   <span>{sortBy}</span>
-                </a>
+                </Link>
                 {state.short && (
                   <div className={cx('modal-filter-short')}>
                     <p>Ordenar por:</p>
                     <ul>
                       <li>
-                        <a
-                          href={'/'}
+                        <Link
+                          to={'/'}
                           target={'_self'}
                           onClick={(event) => {
                             event.preventDefault()
@@ -172,11 +172,11 @@ export const ResultSearchProduct: React.FC<Props> = ({ query }) => {
                           }}
                         >
                           <Icon type={'material-icons'} content={'room'} /> Distancia
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href={'/'}
+                        <Link
+                          to={'/'}
                           target={'_self'}
                           onClick={(event) => {
                             event.preventDefault()
@@ -188,11 +188,11 @@ export const ResultSearchProduct: React.FC<Props> = ({ query }) => {
                           }}
                         >
                           <Icon type={'material-icons'} content={'star_half'} /> Valoración media
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href={'/'}
+                        <Link
+                          to={'/'}
                           target={'_self'}
                           onClick={(event) => {
                             event.preventDefault()
@@ -205,11 +205,11 @@ export const ResultSearchProduct: React.FC<Props> = ({ query }) => {
                         >
                           <Icon type={'material-icons'} content={'call_made'} /> Del más barato al
                           más caro
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href={'/'}
+                        <Link
+                          to={'/'}
                           target={'_self'}
                           onClick={(event) => {
                             event.preventDefault()
@@ -222,7 +222,7 @@ export const ResultSearchProduct: React.FC<Props> = ({ query }) => {
                         >
                           <Icon type={'material-icons'} content={'call_received'} /> Del más caro al
                           más barato
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>

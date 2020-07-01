@@ -11,6 +11,7 @@ import { ResultSearchProduct } from '../../../features/store/product/components/
 import { User } from '../../../features/store/user/domain/user'
 import { ProductCart } from '../../../features/store/shopping-cart/domain/productCart'
 import { Id } from '../../domain/id/id'
+import { Product } from '../../../features/store/product/domain/product'
 const cx = bind(styles)
 
 export const QueryContext = createContext<{
@@ -49,15 +50,16 @@ export const QueryContext = createContext<{
 export const CartContext = createContext({
   products: [
     {
-      id: '123456',
-      image: 'ndsnkds',
-      price: 44,
+      id: '',
+      image: '',
+      price: 0,
       name: 'Loren ipsum',
       quantity: 1,
     },
   ],
   incrementCount: (id: Id) => {},
   decrementCount: (id: Id) => {},
+  addProduct: (product: Product, count: number) => {},
 })
 
 interface Props {
@@ -65,29 +67,7 @@ interface Props {
 }
 export const MainTemplate: React.FC<Props> = ({ children, user }) => {
   const [state, dispatch] = useReducer(querySearchReducer, initialState)
-  const [productsList, setProductList] = useState<ProductCart[]>([
-    {
-      id: '1',
-      image: 'ndsnkds',
-      price: 33,
-      name: 'Loren ipsum',
-      quantity: 1,
-    },
-    {
-      id: '2',
-      image: 'ndsnkds',
-      price: 33,
-      name: 'Loren ipsum',
-      quantity: 1,
-    },
-    {
-      id: '3',
-      image: 'ndsnkds',
-      price: 33,
-      name: 'Loren ipsum',
-      quantity: 1,
-    },
-  ])
+  const [productsList, setProductList] = useState<ProductCart[]>([])
   const [quantity, setQuantity] = useState<number>(1)
   const [id, setId] = useState('')
 
@@ -116,6 +96,36 @@ export const MainTemplate: React.FC<Props> = ({ children, user }) => {
       }
     })
     setProductList(newProductList)
+  }
+
+  async function addProduct(product: Product, count: number) {
+    let newProduct: ProductCart = {
+      id: product.id,
+      image: product.thumb,
+      price: product.price,
+      name: product.name,
+      quantity: count,
+    }
+    console.log(product.id)
+    if (productsList.length === 0) {
+      setProductList([newProduct])
+    } else {
+      let newProductList: ProductCart[] = productsList
+      let productExist = await productsList.filter((product) => product.id === newProduct.id)
+      console.log(productExist)
+      if (productExist.length !== 0) {
+        await newProductList.map((product: ProductCart) => {
+          if (product.id === newProduct.id) {
+            console.log('igual ID')
+            product.quantity = product.quantity + count
+            setProductList(newProductList)
+          }
+        })
+      } else {
+        console.log('NO igual ID')
+        setProductList([...productsList, newProduct])
+      }
+    }
   }
 
   let location = useLocation()
@@ -154,6 +164,9 @@ export const MainTemplate: React.FC<Props> = ({ children, user }) => {
             },
             decrementCount: (id) => {
               decrement(id)
+            },
+            addProduct: (product: Product, count) => {
+              addProduct(product, count)
             },
           }}
         >

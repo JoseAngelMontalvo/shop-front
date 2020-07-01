@@ -102,14 +102,14 @@ export const LoginRoutes: React.FC<PropsLoginRoutes> = ({ user, loading }) => {
       </Route>
       <Route path="/product/:id">
         <MainContentTheme>
-          <MainTemplate>
+          <MainTemplate user={user}>
             <Product />
           </MainTemplate>
         </MainContentTheme>
       </Route>
       <Route path="/shoppingcart">
         <MainContentTheme>
-          <MainTemplate>
+          <MainTemplate user={user}>
             <ShoppingCart />
           </MainTemplate>
         </MainContentTheme>

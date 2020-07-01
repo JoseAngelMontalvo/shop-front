@@ -18,7 +18,7 @@ export const ShoppingCartItem: React.FunctionComponent<Props> = ({ product }) =>
       {({ decrementCount, incrementCount }) => (
         <tr id={product.id} className={cx('product-item-list')}>
           <td className={cx('thumb-product-list')}>
-            <img src={product.image} alt="Imagen producto" />
+            <img src={`/img/products/${product.image}`} alt="Imagen producto" />
           </td>
           <td className={cx('price-product-list')}>{product.price}</td>
           <td className={cx('name-product-list')}>{product.name}</td>

@@ -1,11 +1,3 @@
-.shopping-cart-list tr:first-child td {
-  padding-top: 20px;
-}
-
-.shopping-cart-list tr:last-child td {
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--accent-color);
-}
 .thumb-product-list img {
   width: 75px;
   height: auto;
