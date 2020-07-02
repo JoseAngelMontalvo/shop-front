@@ -29,3 +29,33 @@
   padding-bottom: 20px;
   border-bottom: 1px solid var(--accent-color);
 }
+.empty-cart {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.empty-cart h2 {
+  font-size: 2em;
+}
+.comercio-chino-icons {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'comercio-chino-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.empty-cart i {
+  display: block;
+  font-size: 150px;
+}
+.empty-cart i:before {
+  content: '\e909';
+}

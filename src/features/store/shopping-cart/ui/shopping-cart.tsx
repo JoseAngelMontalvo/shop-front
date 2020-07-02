@@ -29,8 +29,9 @@ export const ShoppingCart: React.FC = () => {
             </table>
           </div>
         ) : (
-          <div>
-            <p>Tu lista de la compra esta vacia</p>
+          <div className={cx('empty-cart')}>
+            <i className={cx('comercio-chino-icons')}></i>
+            <h2>Opss!!! Tu lista de la compra esta vacía</h2>
           </div>
         )
       }
