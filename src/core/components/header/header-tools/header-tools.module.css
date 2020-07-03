@@ -11,3 +11,12 @@
 .name-user-profile {
   margin: 0px 10px 0px 0px;
 }
+.count-items-cart {
+  position: relative;
+  top: -20px;
+  display: block;
+  font-size: 12px;
+}
+.btn-cart-header {
+  padding: 5px 2px;
+}

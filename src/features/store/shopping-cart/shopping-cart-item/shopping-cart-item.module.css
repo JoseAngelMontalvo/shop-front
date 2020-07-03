@@ -17,6 +17,9 @@
   padding: 10px 20px;
   height: 100px;
 }
+.delete-product-list {
+  text-align: center;
+}
 
 /*QUANTITY*/
 .quantity {

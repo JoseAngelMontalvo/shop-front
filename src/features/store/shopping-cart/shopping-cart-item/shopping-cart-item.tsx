@@ -15,7 +15,7 @@ interface Props {
 export const ShoppingCartItem: React.FunctionComponent<Props> = ({ product }) => {
   return (
     <CartContext.Consumer>
-      {({ decrementCount, incrementCount }) => (
+      {({ decrementCount, incrementCount, deleteProduct }) => (
         <tr id={product.id} className={cx('product-item-list')}>
           <td className={cx('thumb-product-list')}>
             <img src={`/img/products/${product.image}`} alt="Imagen producto" />
@@ -42,6 +42,15 @@ export const ShoppingCartItem: React.FunctionComponent<Props> = ({ product }) =>
                 />
               </div>
             </div>
+          </td>
+          <td className={cx('delete-product-list')}>
+            <Button
+              theme={'only-icon'}
+              onClick={() => {
+                deleteProduct(product.id)
+              }}
+              icon={<Icon type={'material-icons'} content={'delete'} />}
+            />
           </td>
         </tr>
       )}

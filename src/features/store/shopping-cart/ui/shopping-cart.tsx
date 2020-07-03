@@ -3,10 +3,14 @@ import { bind } from '../../../../core/utils/bind'
 import styles from './shopping-cart.module.css'
 import { CartContext } from '../../../../core/components/main-template/main-template'
 import { ShoppingCartItem } from '../shopping-cart-item/shopping-cart-item'
+import { User } from '../../user/domain/user'
+import { Icon } from '../../../../core/components/icons/icon'
 
 const cx = bind(styles)
-
-export const ShoppingCart: React.FC = () => {
+interface Props {
+  user?: User | null
+}
+export const ShoppingCart: React.FC<Props> = ({ user }) => {
   return (
     <CartContext.Consumer>
       {({ products }) =>
@@ -19,6 +23,7 @@ export const ShoppingCart: React.FC = () => {
                   <th className={cx('th-price-product-list')}>Precio</th>
                   <th className={cx('th-name-product-list')}>Nombre</th>
                   <th className={cx('th-create-product-list')}>Cantidad</th>
+                  <th className={cx('th-actions')}></th>
                 </tr>
               </thead>
               <tbody>
@@ -30,7 +35,7 @@ export const ShoppingCart: React.FC = () => {
           </div>
         ) : (
           <div className={cx('empty-cart')}>
-            <i className={cx('comercio-chino-icons')}></i>
+            <Icon type="comercio-chino-icons" content={'icon_opps'} />
             <h2>Opss!!! Tu lista de la compra esta vacía</h2>
           </div>
         )

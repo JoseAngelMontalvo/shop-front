@@ -6,6 +6,7 @@ import { SwitchTheme } from '../../switch-theme/switch-theme'
 import { Link, useHistory } from 'react-router-dom'
 import { Icon } from '../../icons/icon'
 import { User } from '../../../../features/store/user/domain/user'
+import { CartContext } from '../../main-template/main-template'
 
 const cx = bind(styles)
 
@@ -19,27 +20,34 @@ export const HeaderTools: React.FunctionComponent<Props> = ({ user }) => {
     history.push(url)
   }
   return (
-    <div className={cx('header-tools')}>
-      <div className={cx('header-profile')}>
-        <p className={cx('name-user-profile')}>{user && user.name}</p>
-        <Button
-          theme={'only-icon'}
-          icon={<Icon type="material-icons" content={'person'} title="Profile tools" />}
-        />
-      </div>
-      <Button
-        theme={'only-icon'}
-        icon={<Icon type="material-icons" content={'add_shopping_cart'} title="Shopping cart" />}
-        onClick={() => goUrl('/shoppingcart')}
-      />
-      <SwitchTheme />
-      <Button theme={'secondary'} onClick={() => goUrl('/signin')}>
-        Sign in
-      </Button>
+    <CartContext.Consumer>
+      {({ products }) => (
+        <div className={cx('header-tools')}>
+          <div className={cx('header-profile')}>
+            <p className={cx('name-user-profile')}>{user && user.name}</p>
+            <Button
+              theme={'only-icon'}
+              icon={<Icon type="material-icons" content={'person'} title="Profile tools" />}
+            />
+          </div>
+          <Button
+            className={cx('btn-cart-header')}
+            theme={'only-icon'}
+            icon={<Icon type="comercio-chino-icons" content={'icon_cart'} title="Shopping cart" />}
+            onClick={() => goUrl('/shoppingcart')}
+          >
+            <span className={cx('count-items-cart')}>{products.length}</span>
+          </Button>
+          <SwitchTheme />
+          <Button theme={'secondary'} onClick={() => goUrl('/signin')}>
+            Sign in
+          </Button>
 
-      <Button theme={'primary'} onClick={() => goUrl('/signup')}>
-        Sign up
-      </Button>
-    </div>
+          <Button theme={'primary'} onClick={() => goUrl('/signup')}>
+            Sign up
+          </Button>
+        </div>
+      )}
+    </CartContext.Consumer>
   )
 }

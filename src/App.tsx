@@ -72,7 +72,7 @@ function App() {
     setUser(null)
     deleteToken()
   }
-  console.log(user)
+
   return (
     <Router>
       {user ? (

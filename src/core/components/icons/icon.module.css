@@ -1,65 +1,73 @@
 .material-icons {
-    font-family: 'Material Icons';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px;
-    /* Preferred icon size */
-    display: inline-block;
-    line-height: 1;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    direction: ltr;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
 }
 
-
 .comercio-chino-icons {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'comercio-chino-icons' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'comercio-chino-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .icon_mobil:before {
-    content: "\e904";
+  content: '\e904';
 }
 
 .icon_clothes:before {
-    content: "\e900";
+  content: '\e900';
 }
 
 .icon_decoration:before {
-    content: "\e901";
+  content: '\e901';
 }
 
 .icon_electronic:before {
-    content: "\e902";
+  content: '\e902';
 }
 
 .icon_food:before {
-    content: "\e903";
+  content: '\e903';
 }
 
 .icon_restaurant:before {
-    content: "\e905";
+  content: '\e905';
 }
 
 .icon_shoes:before {
-    content: "\e906";
+  content: '\e906';
 }
 
 .icon_sports:before {
-    content: "\e907";
+  content: '\e907';
 }
 
 .icon_toys:before {
-    content: "\e908";
+  content: '\e908';
+}
+.icon_cart {
+  font-size: 22px;
+}
+.icon_cart:before {
+  content: '\e909';
+}
+.icon_opps:before {
+  content: '\e90a';
 }

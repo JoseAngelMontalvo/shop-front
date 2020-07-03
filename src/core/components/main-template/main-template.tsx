@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useState } from 'react'
+import React, { createContext, useEffect, useReducer, useState } from 'react'
 import { bind } from '../../utils/bind'
 import styles from './main-template.module.css'
 import { Header } from '../header/header'
@@ -12,6 +12,8 @@ import { User } from '../../../features/store/user/domain/user'
 import { ProductCart } from '../../../features/store/shopping-cart/domain/productCart'
 import { Id } from '../../domain/id/id'
 import { Product } from '../../../features/store/product/domain/product'
+import { getToken } from '../../../features/store/user/domain/manage-token'
+import Axios from 'axios'
 const cx = bind(styles)
 
 export const QueryContext = createContext<{
@@ -60,6 +62,7 @@ export const CartContext = createContext({
   incrementCount: (id: Id) => {},
   decrementCount: (id: Id) => {},
   addProduct: (product: Product, count: number) => {},
+  deleteProduct: (id: Id) => {},
 })
 
 interface Props {
@@ -67,9 +70,8 @@ interface Props {
 }
 export const MainTemplate: React.FC<Props> = ({ children, user }) => {
   const [state, dispatch] = useReducer(querySearchReducer, initialState)
-  const [productsList, setProductList] = useState<ProductCart[]>([])
+  const [productsList, setProductsList] = useState<ProductCart[]>([])
   const [quantity, setQuantity] = useState<number>(1)
-  const [id, setId] = useState('')
 
   async function increment(id: Id) {
     setQuantity(quantity + 1)
@@ -80,8 +82,10 @@ export const MainTemplate: React.FC<Props> = ({ children, user }) => {
         product.quantity = product.quantity + 1
       }
     })
-    setProductList(newProductList)
+    setProductsList(newProductList)
+    storeShoppingCart(productsList, user?.id)
   }
+
   async function decrement(id: Id) {
     setQuantity(quantity - 1)
     let newProductList: ProductCart[] = productsList
@@ -95,7 +99,8 @@ export const MainTemplate: React.FC<Props> = ({ children, user }) => {
         }
       }
     })
-    setProductList(newProductList)
+    setProductsList(newProductList)
+    storeShoppingCart(productsList, user?.id)
   }
 
   async function addProduct(product: Product, count: number) {
@@ -106,27 +111,49 @@ export const MainTemplate: React.FC<Props> = ({ children, user }) => {
       name: product.name,
       quantity: count,
     }
-    console.log(product.id)
     if (productsList.length === 0) {
-      setProductList([newProduct])
+      setProductsList([newProduct])
     } else {
-      let newProductList: ProductCart[] = productsList
-      let productExist = await productsList.filter((product) => product.id === newProduct.id)
-      console.log(productExist)
+      const newProductList: ProductCart[] = productsList
+      const productExist = await productsList.filter((product) => product.id === newProduct.id)
       if (productExist.length !== 0) {
         await newProductList.map((product: ProductCart) => {
           if (product.id === newProduct.id) {
-            console.log('igual ID')
             product.quantity = product.quantity + count
-            setProductList(newProductList)
+            setProductsList(newProductList)
+            storeShoppingCart(productsList, user?.id)
           }
         })
       } else {
-        console.log('NO igual ID')
-        setProductList([...productsList, newProduct])
+        setProductsList([...productsList, newProduct])
       }
     }
   }
+
+  function deleteProduct(id: Id) {
+    const newProductList: ProductCart[] = productsList.filter((product) => product.id !== id)
+    setProductsList(newProductList)
+  }
+
+  async function storeShoppingCart(productsList: ProductCart[], idUser?: Id) {
+    if (!idUser || idUser === null) {
+      //saveShoppingCartLocalStorage()
+      return
+    }
+    try {
+      const shoppingCartDB = { userid: idUser, products: productsList }
+      const { data } = await Axios.post(
+        'http://localhost:3001/api/shoppingcart/updateshoppingcart/',
+        shoppingCartDB
+      )
+      return
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(() => {
+    storeShoppingCart(productsList, user?.id)
+  }, [productsList])
 
   let location = useLocation()
 
@@ -167,6 +194,9 @@ export const MainTemplate: React.FC<Props> = ({ children, user }) => {
             },
             addProduct: (product: Product, count) => {
               addProduct(product, count)
+            },
+            deleteProduct: (id: Id) => {
+              deleteProduct(id)
             },
           }}
         >
