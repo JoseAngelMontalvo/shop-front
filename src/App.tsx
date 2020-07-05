@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-  Redirect,
-  useLocation,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import styles from './App.module.css'
 import { bind } from './core/utils/bind'
 import { SliderPpalHome } from './features/store/home/ui/slider-ppal-home/slider-ppal-home'
@@ -28,10 +21,10 @@ import {
 } from './features/store/user/domain/manage-token'
 import { DataSignup } from './features/store/user/auth/signup/domain/data-signup'
 import { Loading } from './core/components/loading/loading'
-import { UserHttpRepository } from './features/store/user/infrastructure/user-http-repository'
 import { UserRepositoryFactory } from './features/store/user/infrastructure/user-repository-factory'
-import { UserDto } from './features/store/user/infrastructure/user-dto'
 import { ShoppingCart } from './features/store/shopping-cart/ui/shopping-cart'
+import { ShoppingCart as ShoppingCartModel } from './features/store/shopping-cart/domain/shoppingCart'
+import { ShoppingCartRepositoryFactory } from './features/store/shopping-cart/infrastructure/shoppingCart-repository-factory'
 
 initAxiosInterceptors()
 
@@ -40,22 +33,25 @@ const cx = bind(styles)
 function App() {
   const [user, setUser] = useState<User | null>(null)
   const [loadingUser, setLoadingUser] = useState<boolean>(false)
+  const [shoppingCart, setShoppingCart] = useState<ShoppingCartModel>({
+    products: [],
+    userid: '',
+  })
   let nameUser: string = ''
 
   if (user) {
     nameUser = user.name
   }
+
   useEffect(() => {
     setLoadingUser(true)
     async function loadUser() {
       const token = getToken()
       if (token === null) {
-        console.log('NO Hay token')
         setLoadingUser(false)
         return
       }
       try {
-        console.log('Hay token')
         const { data } = await Axios.get('http://localhost:3001/api/auth/profile')
         setUser(data.user)
         setLoadingUser(false)
@@ -65,6 +61,18 @@ function App() {
     }
     loadUser()
   }, [])
+
+  useEffect(() => {
+    async function getshoppingcart(id: string) {
+      try {
+        const shoppingCartRepository = ShoppingCartRepositoryFactory.get()
+        const resultShoppingCart = await shoppingCartRepository.findById(id)
+        setShoppingCart(resultShoppingCart)
+      } catch (error) {
+        return error
+      }
+    }
+  }, [user])
 
   async function login(email: string, password: string) {
     setLoadingUser(true)
@@ -94,27 +102,27 @@ function App() {
       {user && user.role === 'ADMIN_ROLE' ? (
         <Route path="/product/search">
           <MainContentTheme>
-            <MainTemplate user={user} logout={logout}></MainTemplate>
+            <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}></MainTemplate>
           </MainContentTheme>
         </Route>
       ) : (
         <Switch>
           <Route path="/product/search">
             <MainContentTheme>
-              <MainTemplate user={user} logout={logout}></MainTemplate>
+              <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}></MainTemplate>
             </MainContentTheme>
           </Route>
           <Route path="/product/:id">
             <MainContentTheme>
-              <MainTemplate user={user} logout={logout}>
+              <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
                 <Product />
               </MainTemplate>
             </MainContentTheme>
           </Route>
           <Route path="/shoppingcart">
             <MainContentTheme>
-              <MainTemplate user={user} logout={logout}>
-                <ShoppingCart />
+              <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
+                <ShoppingCart shoppingcart={shoppingCart} />
               </MainTemplate>
             </MainContentTheme>
           </Route>
@@ -132,11 +140,11 @@ function App() {
           <Route exact path="/">
             <MainContentTheme>
               {loadingUser ? (
-                <MainTemplate logout={logout}>
+                <MainTemplate shoppingcart={shoppingCart} logout={logout}>
                   <Loading />
                 </MainTemplate>
               ) : (
-                <MainTemplate user={user} logout={logout}>
+                <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
                   <SliderPpalHome urlImage="/img/banner_3.jpg" alt="Imagen slider home" />
                   <CategoriesHome />
                   <ShowCaseHome />

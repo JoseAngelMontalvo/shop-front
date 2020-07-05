@@ -7,6 +7,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { Icon } from '../../icons/icon'
 import { User } from '../../../../features/store/user/domain/user'
 import { CartContext } from '../../main-template/main-template'
+import { ShoppingCart } from '../../../../features/store/shopping-cart/domain/shoppingCart'
 
 const cx = bind(styles)
 
@@ -20,9 +21,7 @@ export const HeaderTools: React.FunctionComponent<Props> = ({ user, logout }) =>
   function goUrl(url: string) {
     history.push(url)
   }
-  function hola() {
-    console.log('kaka')
-  }
+
   return (
     <CartContext.Consumer>
       {({ products }) =>
@@ -45,7 +44,13 @@ export const HeaderTools: React.FunctionComponent<Props> = ({ user, logout }) =>
             >
               <span className={cx('count-items-cart')}>{products.length}</span>
             </Button>
-            <Button theme={'secondary'} onClick={() => logout && logout()}>
+            <Button
+              theme={'secondary'}
+              onClick={() => {
+                logout && logout()
+                goUrl('/')
+              }}
+            >
               Sign out
             </Button>
           </div>

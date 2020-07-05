@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom'
 import { Icon } from '../../../../../../core/components/icons/icon'
 import { DataSignin } from '../domain/data-signin'
 import { User } from '../../../domain/user'
+import { ShoppingCartRepositoryFactory } from '../../../../shopping-cart/infrastructure/shoppingCart-repository-factory'
 
 const cx = bind(styles)
 interface Props {
@@ -41,7 +42,17 @@ export const SignIn: React.FC<Props> = ({ login }) => {
     } catch (error) {}
     history.push('/')
   }
-
+  async function getshoppingcart(id: string) {
+    console.log('Hola')
+    try {
+      const shoppingCartRepository = ShoppingCartRepositoryFactory.get()
+      const result = await shoppingCartRepository.findById(id)
+      console.log(result)
+      return result
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className={cx('content-signin')}>
       <div className={cx('button-theme-absolute')}>
@@ -53,13 +64,7 @@ export const SignIn: React.FC<Props> = ({ login }) => {
         </Link>
         <h1>Sign in to Comercio Chino</h1>
       </div>
-      <form
-        className={cx('form-signin')}
-        onSubmit={(event) => {
-          event.preventDefault()
-          submitSignin(user)
-        }}
-      >
+      <form className={cx('form-signin')}>
         <Input
           name={'Username o Email address'}
           htmlId={'email'}
@@ -81,7 +86,7 @@ export const SignIn: React.FC<Props> = ({ login }) => {
           required
         />
         <div className={cx('botonera-form')}>
-          <Button theme={'primary'} submit className="btn-100">
+          <Button theme={'primary'} className="btn-100" onClick={() => submitSignin(user)}>
             Sign in
           </Button>
         </div>

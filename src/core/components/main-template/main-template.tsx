@@ -13,6 +13,10 @@ import { ProductCart } from '../../../features/store/shopping-cart/domain/produc
 import { Id } from '../../domain/id/id'
 import { Product } from '../../../features/store/product/domain/product'
 import Axios from 'axios'
+import { UserRepositoryFactory } from '../../../features/store/user/infrastructure/user-repository-factory'
+import { ShoppingCartRepositoryFactory } from '../../../features/store/shopping-cart/infrastructure/shoppingCart-repository-factory'
+import { ShoppingCartDB } from '../../../features/store/shopping-cart/domain/shopingCartDB'
+import { ShoppingCart } from '../../../features/store/shopping-cart/domain/shoppingCart'
 const cx = bind(styles)
 
 export const QueryContext = createContext<{
@@ -67,10 +71,11 @@ export const CartContext = createContext({
 interface Props {
   user?: User | null
   logout?(): void
+  shoppingcart: ShoppingCart
 }
-export const MainTemplate: React.FC<Props> = ({ children, user, logout }) => {
+export const MainTemplate: React.FC<Props> = ({ children, user, logout, shoppingcart }) => {
   const [state, dispatch] = useReducer(querySearchReducer, initialState)
-  const [productsList, setProductsList] = useState<ProductCart[]>([])
+  const [productsList, setProductsList] = useState<ProductCart[]>(shoppingcart.products)
   const [quantity, setQuantity] = useState<number>(1)
 
   async function increment(id: Id) {
@@ -113,6 +118,7 @@ export const MainTemplate: React.FC<Props> = ({ children, user, logout }) => {
     }
     if (productsList.length === 0) {
       setProductsList([newProduct])
+      storeShoppingCart(productsList, user?.id)
     } else {
       const newProductList: ProductCart[] = productsList
       const productExist = await productsList.filter((product) => product.id === newProduct.id)
@@ -126,13 +132,15 @@ export const MainTemplate: React.FC<Props> = ({ children, user, logout }) => {
         })
       } else {
         setProductsList([...productsList, newProduct])
+        storeShoppingCart(productsList, user?.id)
       }
     }
   }
 
-  function deleteProduct(id: Id) {
-    const newProductList: ProductCart[] = productsList.filter((product) => product.id !== id)
+  async function deleteProduct(id: Id) {
+    const newProductList: ProductCart[] = await productsList.filter((product) => product.id !== id)
     setProductsList(newProductList)
+    storeShoppingCart(productsList, user?.id)
   }
 
   async function storeShoppingCart(productsList: ProductCart[], idUser?: Id) {
@@ -141,16 +149,17 @@ export const MainTemplate: React.FC<Props> = ({ children, user, logout }) => {
       return
     }
     try {
-      const shoppingCartDB = { userid: idUser, products: productsList }
-      const { data } = await Axios.post(
-        'http://localhost:3001/api/shoppingcart/updateshoppingcart/',
-        shoppingCartDB
-      )
+      const shoppingCartDB: ShoppingCartDB = { userid: idUser, products: productsList }
+
+      const shoppingCartRepository = ShoppingCartRepositoryFactory.post()
+      const result = await shoppingCartRepository.storeShoppingCart(shoppingCartDB)
+
       return
     } catch (error) {
       console.log(error)
     }
   }
+
   useEffect(() => {
     storeShoppingCart(productsList, user?.id)
   }, [productsList])

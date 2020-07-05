@@ -5,12 +5,14 @@ import { CartContext } from '../../../../core/components/main-template/main-temp
 import { ShoppingCartItem } from '../shopping-cart-item/shopping-cart-item'
 import { User } from '../../user/domain/user'
 import { Icon } from '../../../../core/components/icons/icon'
+import { ShoppingCart as ShoppingcartModel } from '../domain/shoppingCart'
 
 const cx = bind(styles)
 interface Props {
   user?: User | null
+  shoppingcart?: ShoppingcartModel
 }
-export const ShoppingCart: React.FC<Props> = ({ user }) => {
+export const ShoppingCart: React.FC<Props> = ({ user, shoppingcart }) => {
   return (
     <CartContext.Consumer>
       {({ products }) =>
