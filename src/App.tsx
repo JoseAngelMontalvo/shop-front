@@ -76,7 +76,7 @@ function App() {
   return (
     <Router>
       {user ? (
-        <LoginRoutes user={user} loading={loadingUser} />
+        <LoginRoutes user={user} loading={loadingUser} logout={logout} />
       ) : (
         <LogoutRoutes signup={signup} login={login} />
       )}
@@ -84,32 +84,29 @@ function App() {
   )
 }
 
-interface Props {
-  login(email: string, password: string): void
-  signup(dataUser: DataSignup): void
-}
 interface PropsLoginRoutes {
   user?: User | null
   loading: boolean
+  logout?(): void
 }
-export const LoginRoutes: React.FC<PropsLoginRoutes> = ({ user, loading }) => {
+export const LoginRoutes: React.FC<PropsLoginRoutes> = ({ user, loading, logout }) => {
   return (
     <Switch>
       <Route path="/product/search">
         <MainContentTheme>
-          <MainTemplate user={user}></MainTemplate>
+          <MainTemplate user={user} logout={logout}></MainTemplate>
         </MainContentTheme>
       </Route>
       <Route path="/product/:id">
         <MainContentTheme>
-          <MainTemplate user={user}>
+          <MainTemplate user={user} logout={logout}>
             <Product />
           </MainTemplate>
         </MainContentTheme>
       </Route>
       <Route path="/shoppingcart">
         <MainContentTheme>
-          <MainTemplate user={user}>
+          <MainTemplate user={user} logout={logout}>
             <ShoppingCart />
           </MainTemplate>
         </MainContentTheme>
@@ -117,11 +114,11 @@ export const LoginRoutes: React.FC<PropsLoginRoutes> = ({ user, loading }) => {
       <Route exact path="/">
         <MainContentTheme>
           {loading ? (
-            <MainTemplate>
+            <MainTemplate logout={logout}>
               <Loading />
             </MainTemplate>
           ) : (
-            <MainTemplate user={user}>
+            <MainTemplate user={user} logout={logout}>
               <SliderPpalHome urlImage="/img/banner_3.jpg" alt="Imagen slider home" />
               <CategoriesHome />
               <ShowCaseHome />
@@ -131,6 +128,11 @@ export const LoginRoutes: React.FC<PropsLoginRoutes> = ({ user, loading }) => {
       </Route>
     </Switch>
   )
+}
+
+interface Props {
+  login(email: string, password: string): void
+  signup(dataUser: DataSignup): void
 }
 export const LogoutRoutes: React.FC<Props> = ({ login, signup }) => {
   return (

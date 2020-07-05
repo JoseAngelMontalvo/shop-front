@@ -9,15 +9,16 @@ import { User } from '../../../features/store/user/domain/user'
 const cx = bind(styles)
 interface Props {
   user?: User | null
+  logout?(): void
 }
-export const Header: React.FunctionComponent<Props> = ({ user }) => {
+export const Header: React.FunctionComponent<Props> = ({ user, logout }) => {
   return (
     <div className={cx('header')}>
       <Link to="/" className={cx('logo-ppal')} target={'_self'} title={'Ir a la Home'}>
         <i />
       </Link>
       <SearchHeader></SearchHeader>
-      <HeaderTools user={user}></HeaderTools>
+      <HeaderTools user={user} logout={logout} />
     </div>
   )
 }

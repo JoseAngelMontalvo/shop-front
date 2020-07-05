@@ -67,8 +67,9 @@ export const CartContext = createContext({
 
 interface Props {
   user?: User | null
+  logout?(): void
 }
-export const MainTemplate: React.FC<Props> = ({ children, user }) => {
+export const MainTemplate: React.FC<Props> = ({ children, user, logout }) => {
   const [state, dispatch] = useReducer(querySearchReducer, initialState)
   const [productsList, setProductsList] = useState<ProductCart[]>([])
   const [quantity, setQuantity] = useState<number>(1)
@@ -201,7 +202,7 @@ export const MainTemplate: React.FC<Props> = ({ children, user }) => {
           }}
         >
           <div className={cx('main-template-content')}>
-            <Header user={user} />
+            <Header user={user} logout={logout} />
             {children}
             {location.pathname === `/product/search` && <ResultSearchProduct query={state.query} />}
             <Footer />
