@@ -12,7 +12,6 @@ import { User } from '../../../features/store/user/domain/user'
 import { ProductCart } from '../../../features/store/shopping-cart/domain/productCart'
 import { Id } from '../../domain/id/id'
 import { Product } from '../../../features/store/product/domain/product'
-import { getToken } from '../../../features/store/user/domain/manage-token'
 import Axios from 'axios'
 const cx = bind(styles)
 

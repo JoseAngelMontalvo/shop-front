@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
-import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+  Redirect,
+  useLocation,
+} from 'react-router-dom'
 import styles from './App.module.css'
 import { bind } from './core/utils/bind'
 import { SliderPpalHome } from './features/store/home/ui/slider-ppal-home/slider-ppal-home'
@@ -29,21 +36,26 @@ import { ShoppingCart } from './features/store/shopping-cart/ui/shopping-cart'
 initAxiosInterceptors()
 
 const cx = bind(styles)
+
 function App() {
   const [user, setUser] = useState<User | null>(null)
-  const [loadingUser, setLoadingUser] = useState<boolean>(true)
+  const [loadingUser, setLoadingUser] = useState<boolean>(false)
   let nameUser: string = ''
 
   if (user) {
     nameUser = user.name
   }
   useEffect(() => {
+    setLoadingUser(true)
     async function loadUser() {
-      if (!getToken) {
+      const token = getToken()
+      if (token === null) {
+        console.log('NO Hay token')
         setLoadingUser(false)
         return
       }
       try {
+        console.log('Hay token')
         const { data } = await Axios.get('http://localhost:3001/api/auth/profile')
         setUser(data.user)
         setLoadingUser(false)
@@ -55,17 +67,21 @@ function App() {
   }, [])
 
   async function login(email: string, password: string) {
+    setLoadingUser(true)
     const userRepository = UserRepositoryFactory.post()
     const result = await userRepository.Login(email, password)
     setUser(result)
     setToken(result.token)
+    setLoadingUser(false)
   }
 
   async function signup(dataUser: DataSignup) {
+    setLoadingUser(true)
     const userRepository = UserRepositoryFactory.post()
     const result = await userRepository.Signup(dataUser)
     setUser(result)
     setToken(result.token)
+    setLoadingUser(false)
   }
 
   function logout() {
@@ -75,80 +91,62 @@ function App() {
 
   return (
     <Router>
-      {user ? (
-        <LoginRoutes user={user} loading={loadingUser} logout={logout} />
+      {user && user.role === 'ADMIN_ROLE' ? (
+        <Route path="/product/search">
+          <MainContentTheme>
+            <MainTemplate user={user} logout={logout}></MainTemplate>
+          </MainContentTheme>
+        </Route>
       ) : (
-        <LogoutRoutes signup={signup} login={login} />
+        <Switch>
+          <Route path="/product/search">
+            <MainContentTheme>
+              <MainTemplate user={user} logout={logout}></MainTemplate>
+            </MainContentTheme>
+          </Route>
+          <Route path="/product/:id">
+            <MainContentTheme>
+              <MainTemplate user={user} logout={logout}>
+                <Product />
+              </MainTemplate>
+            </MainContentTheme>
+          </Route>
+          <Route path="/shoppingcart">
+            <MainContentTheme>
+              <MainTemplate user={user} logout={logout}>
+                <ShoppingCart />
+              </MainTemplate>
+            </MainContentTheme>
+          </Route>
+          <Route path="/signin">
+            <MainContentTheme>
+              <SignIn login={login} />
+            </MainContentTheme>
+          </Route>
+          <Route path="/signup">
+            <MainContentTheme>
+              <SignUp signup={signup} />
+            </MainContentTheme>
+            <Footer />
+          </Route>
+          <Route exact path="/">
+            <MainContentTheme>
+              {loadingUser ? (
+                <MainTemplate logout={logout}>
+                  <Loading />
+                </MainTemplate>
+              ) : (
+                <MainTemplate user={user} logout={logout}>
+                  <SliderPpalHome urlImage="/img/banner_3.jpg" alt="Imagen slider home" />
+                  <CategoriesHome />
+                  <ShowCaseHome />
+                </MainTemplate>
+              )}
+            </MainContentTheme>
+          </Route>
+        </Switch>
       )}
     </Router>
-  )
-}
-
-interface PropsLoginRoutes {
-  user?: User | null
-  loading: boolean
-  logout?(): void
-}
-export const LoginRoutes: React.FC<PropsLoginRoutes> = ({ user, loading, logout }) => {
-  return (
-    <Switch>
-      <Route path="/product/search">
-        <MainContentTheme>
-          <MainTemplate user={user} logout={logout}></MainTemplate>
-        </MainContentTheme>
-      </Route>
-      <Route path="/product/:id">
-        <MainContentTheme>
-          <MainTemplate user={user} logout={logout}>
-            <Product />
-          </MainTemplate>
-        </MainContentTheme>
-      </Route>
-      <Route path="/shoppingcart">
-        <MainContentTheme>
-          <MainTemplate user={user} logout={logout}>
-            <ShoppingCart />
-          </MainTemplate>
-        </MainContentTheme>
-      </Route>
-      <Route exact path="/">
-        <MainContentTheme>
-          {loading ? (
-            <MainTemplate logout={logout}>
-              <Loading />
-            </MainTemplate>
-          ) : (
-            <MainTemplate user={user} logout={logout}>
-              <SliderPpalHome urlImage="/img/banner_3.jpg" alt="Imagen slider home" />
-              <CategoriesHome />
-              <ShowCaseHome />
-            </MainTemplate>
-          )}
-        </MainContentTheme>
-      </Route>
-    </Switch>
-  )
-}
-
-interface Props {
-  login(email: string, password: string): void
-  signup(dataUser: DataSignup): void
-}
-export const LogoutRoutes: React.FC<Props> = ({ login, signup }) => {
-  return (
-    <Switch>
-      <Route path="/signin">
-        <MainContentTheme>
-          <SignIn login={login} />
-        </MainContentTheme>
-      </Route>
-      <Route path="/signup">
-        <MainContentTheme>
-          <SignUp signup={signup} />
-        </MainContentTheme>
-        <Footer />
-      </Route>
-    </Switch>
   )
 }
 

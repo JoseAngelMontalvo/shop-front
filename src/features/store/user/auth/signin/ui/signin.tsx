@@ -2,13 +2,21 @@ import React, { useState } from 'react'
 import { bind } from '../../../../../../core/utils/bind'
 import styles from './signin.module.css'
 import { Button } from '../../../../../../core/components/buttons/button'
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+  Redirect,
+  useLocation,
+} from 'react-router-dom'
 import { Input } from '../../../../../../core/components/input/input'
 
 import { SwitchTheme } from '../../../../../../core/components/switch-theme/switch-theme'
 import { Link } from 'react-router-dom'
 import { Icon } from '../../../../../../core/components/icons/icon'
 import { DataSignin } from '../domain/data-signin'
+import { User } from '../../../domain/user'
 
 const cx = bind(styles)
 interface Props {
@@ -19,6 +27,7 @@ export const SignIn: React.FC<Props> = ({ login }) => {
     email: '',
     password: '',
   })
+  let history = useHistory()
 
   function setDataSignin(name: string, value: string) {
     setUser({
@@ -26,10 +35,11 @@ export const SignIn: React.FC<Props> = ({ login }) => {
       [name]: value,
     })
   }
-  async function submitSignin(user: DataSignin) {
+  function submitSignin(user: DataSignin) {
     try {
       login(user.email, user.password)
     } catch (error) {}
+    history.push('/')
   }
 
   return (
