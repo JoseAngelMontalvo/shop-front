@@ -24,7 +24,7 @@ export const HeaderTools: React.FunctionComponent<Props> = ({ user, logout }) =>
 
   return (
     <CartContext.Consumer>
-      {({ products }) =>
+      {({ products, emptyShoppingCart }) =>
         user ? (
           <div className={cx('header-tools')}>
             <div className={cx('header-profile')}>
@@ -48,6 +48,7 @@ export const HeaderTools: React.FunctionComponent<Props> = ({ user, logout }) =>
               theme={'secondary'}
               onClick={() => {
                 logout && logout()
+                emptyShoppingCart()
                 goUrl('/')
               }}
             >

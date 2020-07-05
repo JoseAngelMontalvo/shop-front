@@ -62,18 +62,6 @@ function App() {
     loadUser()
   }, [])
 
-  useEffect(() => {
-    async function getshoppingcart(id: string) {
-      try {
-        const shoppingCartRepository = ShoppingCartRepositoryFactory.get()
-        const resultShoppingCart = await shoppingCartRepository.findById(id)
-        setShoppingCart(resultShoppingCart)
-      } catch (error) {
-        return error
-      }
-    }
-  }, [user])
-
   async function login(email: string, password: string) {
     setLoadingUser(true)
     const userRepository = UserRepositoryFactory.post()

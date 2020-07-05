@@ -66,6 +66,7 @@ export const CartContext = createContext({
   decrementCount: (id: Id) => {},
   addProduct: (product: Product, count: number) => {},
   deleteProduct: (id: Id) => {},
+  emptyShoppingCart: () => {},
 })
 
 interface Props {
@@ -76,7 +77,27 @@ interface Props {
 export const MainTemplate: React.FC<Props> = ({ children, user, logout, shoppingcart }) => {
   const [state, dispatch] = useReducer(querySearchReducer, initialState)
   const [productsList, setProductsList] = useState<ProductCart[]>(shoppingcart.products)
+  const [switchUser, setSwitchUser] = useState<boolean>(false)
   const [quantity, setQuantity] = useState<number>(1)
+
+  if (user && !switchUser) {
+    getshoppingcart(user.id)
+    setSwitchUser(true)
+  }
+
+  function emptyProducts() {
+    console.log('Hola magete')
+    setProductsList([])
+  }
+  async function getshoppingcart(id: string) {
+    try {
+      const shoppingCartRepository = ShoppingCartRepositoryFactory.get()
+      const resultShoppingCart = await shoppingCartRepository.findById(id)
+      setProductsList(resultShoppingCart.products)
+    } catch (error) {
+      return error
+    }
+  }
 
   async function increment(id: Id) {
     setQuantity(quantity + 1)
@@ -206,6 +227,9 @@ export const MainTemplate: React.FC<Props> = ({ children, user, logout, shopping
             },
             deleteProduct: (id: Id) => {
               deleteProduct(id)
+            },
+            emptyShoppingCart: () => {
+              emptyProducts()
             },
           }}
         >
