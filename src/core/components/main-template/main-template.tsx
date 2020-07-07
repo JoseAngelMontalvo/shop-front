@@ -76,6 +76,7 @@ interface Props {
 }
 export const MainTemplate: React.FC<Props> = ({ children, user, logout, shoppingcart }) => {
   const [state, dispatch] = useReducer(querySearchReducer, initialState)
+
   const [productsList, setProductsList] = useState<ProductCart[]>(shoppingcart.products)
   const [switchUser, setSwitchUser] = useState<boolean>(false)
   const [quantity, setQuantity] = useState<number>(1)
@@ -137,7 +138,7 @@ export const MainTemplate: React.FC<Props> = ({ children, user, logout, shopping
       name: product.name,
       quantity: count,
     }
-    if (productsList.length === 0) {
+    if (productsList.length === 0 || null || undefined) {
       setProductsList([newProduct])
       storeShoppingCart(productsList, user?.id)
     } else {
