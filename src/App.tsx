@@ -97,7 +97,7 @@ function App() {
         </Route>
       ) : (
         <Switch>
-          <Route path="/product/search?query">
+          <Route path="/product/search">
             <MainContentTheme>
               <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}></MainTemplate>
             </MainContentTheme>
