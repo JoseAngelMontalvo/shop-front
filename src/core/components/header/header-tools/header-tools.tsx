@@ -42,7 +42,9 @@ export const HeaderTools: React.FunctionComponent<Props> = ({ user, logout }) =>
               }
               onClick={() => goUrl('/shoppingcart')}
             >
-              <span className={cx('count-items-cart')}>{products.length}</span>
+              <span className={cx('count-items-cart')}>
+                {products !== undefined && products.length}
+              </span>
             </Button>
             <Button
               theme={'secondary'}

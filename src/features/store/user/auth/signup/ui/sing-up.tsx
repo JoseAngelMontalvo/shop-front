@@ -38,6 +38,7 @@ export const SignUp: React.FC<Props> = ({ signup }) => {
     try {
       signup(dataUser)
     } catch (error) {}
+    history.push('/')
   }
 
   return (
