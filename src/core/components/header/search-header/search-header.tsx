@@ -28,7 +28,7 @@ export const SearchHeader: React.FunctionComponent = () => {
               if (event.keyCode === 13) {
                 setKeyWords(state)
                 history.push(
-                  `/product/search?keyWord=${state}&category=${query.category}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}&sort=${query.sort}`
+                  `/api/products/getproductsearch?keyWord=${state}&category=${query.category}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}&sort=${query.sort}`
                 )
               }
             }}
