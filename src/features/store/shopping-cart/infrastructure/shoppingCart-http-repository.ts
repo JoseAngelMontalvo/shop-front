@@ -13,13 +13,13 @@ export class ShoppingCartHttpRepository implements ShoppingCartRepository {
 
   async findById(id: string): Promise<ShoppingCart> {
     const result = await Axios.get<ShoppingCartDto>(
-      `http://localhost:3001/api/shoppingcart/getshoppingcart/${id}`
+      `https://comercio-chino-back.herokuapp.com/api/shoppingcart/getshoppingcart/${id}`
     )
     return this.ShoppingCartDtoToShoppingCatMapper.map(result.data)
   }
   async storeShoppingCart(shoppingCartDB: ShoppingCartDB): Promise<ShoppingCart> {
     const result = await Axios.post<ShoppingCartDto>(
-      'http://localhost:3001/api/shoppingcart/updateshoppingcart/',
+      'https://comercio-chino-back.herokuapp.com/api/shoppingcart/updateshoppingcart/',
       shoppingCartDB
     )
     return this.ShoppingCartDtoToShoppingCatMapper.map(result.data)

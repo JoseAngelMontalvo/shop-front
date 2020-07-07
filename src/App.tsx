@@ -52,7 +52,9 @@ function App() {
         return
       }
       try {
-        const { data } = await Axios.get('http://localhost:3001/api/auth/profile')
+        const { data } = await Axios.get(
+          'https://comercio-chino-back.herokuapp.com/api/auth/profile'
+        )
         setUser(data.user)
         setLoadingUser(false)
       } catch (error) {
