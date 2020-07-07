@@ -138,7 +138,7 @@ export const MainTemplate: React.FC<Props> = ({ children, user, logout, shopping
       name: product.name,
       quantity: count,
     }
-    if (productsList.length === 0 || null || undefined) {
+    if (productsList === null || undefined) {
       setProductsList([newProduct])
       storeShoppingCart(productsList, user?.id)
     } else {

@@ -16,7 +16,7 @@ export const ShoppingCart: React.FC<Props> = ({ user, shoppingcart }) => {
   return (
     <CartContext.Consumer>
       {({ products }) =>
-        products.length !== 0 ? (
+        products !== null || undefined ? (
           <div className={cx('shopping-cart-content')}>
             <table className={cx('shopping-cart-list')}>
               <thead>
