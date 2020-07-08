@@ -55,6 +55,7 @@
   background-color: var(--bk-body-color);
   opacity: 0.8;
   width: 100%;
+  max-width: 1366px;
   height: 100vh;
   top: 66px;
   left: 0;
