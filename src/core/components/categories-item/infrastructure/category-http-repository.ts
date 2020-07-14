@@ -7,9 +7,7 @@ export class CategoryHttpRepository implements CategoryRepository {
   constructor(private readonly CategoryDtoToCategoryMapper: CategoryDtoToCategoryMapper) {}
 
   async findAll(): Promise<Category[]> {
-    const response = await fetch(
-      'https://comercio-chino-back.herokuapp.com/api/categories/getallcategories'
-    )
+    const response = await fetch(`${process.env.REACT_APP_URL_API}/categories/getallcategories`)
     const data = (await response.json()) as CategoryDto[]
     const result: Category[] = data.map((data) => this.CategoryDtoToCategoryMapper.map(data))
     return result
