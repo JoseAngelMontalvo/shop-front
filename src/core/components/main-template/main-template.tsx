@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useReducer, useState } from 'react'
 import { bind } from '../../utils/bind'
 import styles from './main-template.module.css'
-import { Header } from '../header/header'
 import { Footer } from '../footer/ui/footer'
 import { Category as CategoryModel } from '../categories-item/domain/category'
 import { Query } from '../../../features/store/product/domain/query'
@@ -12,8 +11,6 @@ import { User } from '../../../features/store/user/domain/user'
 import { ProductCart } from '../../../features/store/shopping-cart/domain/productCart'
 import { Id } from '../../domain/id/id'
 import { Product } from '../../../features/store/product/domain/product'
-import Axios from 'axios'
-import { UserRepositoryFactory } from '../../../features/store/user/infrastructure/user-repository-factory'
 import { ShoppingCartRepositoryFactory } from '../../../features/store/shopping-cart/infrastructure/shoppingCart-repository-factory'
 import { ShoppingCartDB } from '../../../features/store/shopping-cart/domain/shopingCartDB'
 import { ShoppingCart } from '../../../features/store/shopping-cart/domain/shoppingCart'
@@ -76,7 +73,6 @@ interface Props {
 }
 export const MainTemplate: React.FC<Props> = ({ children, user, logout, shoppingcart }) => {
   const [state, dispatch] = useReducer(querySearchReducer, initialState)
-
   const [productsList, setProductsList] = useState<ProductCart[]>(shoppingcart.products)
   const [switchUser, setSwitchUser] = useState<boolean>(false)
   const [quantity, setQuantity] = useState<number>(1)
@@ -183,10 +179,6 @@ export const MainTemplate: React.FC<Props> = ({ children, user, logout, shopping
     }
   }
 
-  useEffect(() => {
-    storeShoppingCart(productsList, user?.id)
-  }, [productsList])
-
   let location = useLocation()
 
   return (
@@ -236,16 +228,20 @@ export const MainTemplate: React.FC<Props> = ({ children, user, logout, shopping
           }}
         >
           <div className={cx('main-template-content')}>
-            <Header user={user} logout={logout} />
             {children}
             {location.pathname === `/product/search` && <ResultSearchProduct query={state.query} />}
-            <div>
-              <ul>
-                {productsList.map((product) => (
-                  <li>{product.name}</li>
-                ))}
-              </ul>
-            </div>
+            {productsList !== undefined && (
+              <div>
+                <ul>
+                  {productsList.map((product) => (
+                    <li>
+                      <p>{product.name}</p>
+                      <p>{product.quantity}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             <Footer />
           </div>
