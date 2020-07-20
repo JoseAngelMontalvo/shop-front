@@ -1,4 +1,4 @@
-import { Id } from '../../../../core/domain/id/id'
+import { Id } from '../id/id'
 
 export interface User {
   id: Id

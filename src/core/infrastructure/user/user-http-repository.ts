@@ -1,9 +1,9 @@
-import { UserRepository } from '../domain/user-repository'
+import { UserRepository } from '../../domain/user/user-repository'
 import { UserDto } from './user-dto'
 import { UserDtoToUserMapper } from './user-dto-to-user-mapper'
-import { User } from '../domain/user'
+import { User } from '../../domain/user/user'
 import Axios from 'axios'
-import { DataSignup } from '../auth/signup/domain/data-signup'
+import { DataSignup } from '../../../features/store/auth/domain/data-signup'
 
 export class UserHttpRepository implements UserRepository {
   constructor(private readonly UserDtoToUserMapper: UserDtoToUserMapper) {}

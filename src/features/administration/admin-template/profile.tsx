@@ -1,9 +1,9 @@
 import React from 'react'
-import { bind } from '../../../../core/utils/bind'
+import { bind } from '../../../core/utils/bind'
 import styles from './profile.module.css'
 import { Link } from 'react-router-dom'
-import { Icon } from '../../../../core/components/icons/icon'
-import { Button } from '../../../../core/components/buttons/button'
+import { Icon } from '../../../core/components/icons/icon'
+import { Button } from '../../../core/components/buttons/button'
 
 const cx = bind(styles)
 

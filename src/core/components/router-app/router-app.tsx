@@ -7,22 +7,22 @@ import { MainTemplate } from '../main-template/main-template'
 import { Header } from '../header/header'
 import { Product } from '../../../features/store/product/ui/product'
 import { ShoppingCart } from '../../../features/store/shopping-cart/ui/shopping-cart'
-import { SignIn } from '../../../features/store/user/auth/signin/ui/signin'
-import { SignUp } from '../../../features/store/user/auth/signup/ui/sing-up'
+import { SignIn } from '../../../features/store/auth/ui/signin/signin'
+import { SignUp } from '../../../features/store/auth/ui/signup/sing-up'
 import { Footer } from '../footer/ui/footer'
 import { Loading } from '../loading/loading'
 import { SliderPpalHome } from '../../../features/store/home/ui/slider-ppal-home/slider-ppal-home'
 import { CategoriesHome } from '../../../features/store/home/ui/categories-home/categories-home'
 import { ShowCaseHome } from '../../../features/store/home/ui/showcase-home/showcase-home'
-import { User } from '../../../features/store/user/domain/user'
+import { User } from '../../domain/user/user'
 import { ShoppingCart as ShoppingCartModel } from '../../../features/store/shopping-cart/domain/shoppingCart'
-import { UserRepositoryFactory } from '../../../features/store/user/infrastructure/user-repository-factory'
+import { UserRepositoryFactory } from '../../infrastructure/user/user-repository-factory'
 import {
   deleteToken,
   initAxiosInterceptors,
   setToken,
-} from '../../../features/store/user/domain/manage-token'
-import { DataSignup } from '../../../features/store/user/auth/signup/domain/data-signup'
+} from '../../../features/store/auth/domain/manage-token'
+import { DataSignup } from '../../../features/store/auth/domain/data-signup'
 import { ProductCart } from '../../../features/store/shopping-cart/domain/productCart'
 import { ManageShoppingCart } from '../../../features/store/shopping-cart/infrastructure/manage-shoppingCart'
 const cx = bind(styles)

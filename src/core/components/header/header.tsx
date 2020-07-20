@@ -4,7 +4,7 @@ import styles from './header.module.css'
 import { SearchHeader } from './search-header/search-header'
 import { HeaderTools } from './header-tools/header-tools'
 import { Link } from 'react-router-dom'
-import { User } from '../../../features/store/user/domain/user'
+import { User } from '../../domain/user/user'
 import { ShoppingCart } from '../../../features/store/shopping-cart/domain/shoppingCart'
 
 const cx = bind(styles)

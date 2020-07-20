@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { Button } from '../../../../core/components/buttons/button'
-import { Icon } from '../../../../core/components/icons/icon'
-import { bind } from '../../../../core/utils/bind'
+import { Button } from '../../../../../core/components/buttons/button'
+import { Icon } from '../../../../../core/components/icons/icon'
+import { bind } from '../../../../../core/utils/bind'
 import styles from './shopping-cart-item.module.css'
-import { Id } from '../../../../core/domain/id/id'
-import { ProductCart } from '../domain/productCart'
-import { CartContext } from '../../../../core/components/main-template/main-template'
+import { Id } from '../../../../../core/domain/id/id'
+import { ProductCart } from '../../domain/productCart'
+import { CartContext } from '../../../../../core/components/main-template/main-template'
 
 const cx = bind(styles)
 

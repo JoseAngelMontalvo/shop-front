@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { bind } from '../../../../../../core/utils/bind'
+import { bind } from '../../../../../core/utils/bind'
 import styles from './signin.module.css'
-import { Button } from '../../../../../../core/components/buttons/button'
+import { Button } from '../../../../../core/components/buttons/button'
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,16 +10,16 @@ import {
   Redirect,
   useLocation,
 } from 'react-router-dom'
-import { Input } from '../../../../../../core/components/input/input'
+import { Input } from '../../../../../core/components/input/input'
 
-import { SwitchTheme } from '../../../../../../core/components/switch-theme/switch-theme'
+import { SwitchTheme } from '../../../../../core/components/switch-theme/switch-theme'
 import { Link } from 'react-router-dom'
-import { Icon } from '../../../../../../core/components/icons/icon'
-import { DataSignin } from '../domain/data-signin'
-import { User } from '../../../domain/user'
-import { ShoppingCartRepositoryFactory } from '../../../../shopping-cart/infrastructure/shoppingCart-repository-factory'
-import { CartContext } from '../../../../../../core/components/main-template/main-template'
-import { ProductCart } from '../../../../shopping-cart/domain/productCart'
+import { Icon } from '../../../../../core/components/icons/icon'
+import { DataSignin } from '../../domain/data-signin'
+import { User } from '../../../../../core/domain/user/user'
+import { ShoppingCartRepositoryFactory } from '../../../shopping-cart/infrastructure/shoppingCart-repository-factory'
+import { CartContext } from '../../../../../core/components/main-template/main-template'
+import { ProductCart } from '../../../shopping-cart/domain/productCart'
 
 const cx = bind(styles)
 interface Props {

@@ -5,7 +5,7 @@ import { Button } from '../../buttons/button'
 import { SwitchTheme } from '../../switch-theme/switch-theme'
 import { Link, useHistory } from 'react-router-dom'
 import { Icon } from '../../icons/icon'
-import { User } from '../../../../features/store/user/domain/user'
+import { User } from '../../../domain/user/user'
 import { CartContext } from '../../main-template/main-template'
 import { ShoppingCart } from '../../../../features/store/shopping-cart/domain/shoppingCart'
 

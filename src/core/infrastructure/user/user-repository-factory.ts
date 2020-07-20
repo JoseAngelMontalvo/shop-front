@@ -1,4 +1,4 @@
-import { UserRepository } from '../domain/user-repository'
+import { UserRepository } from '../../domain/user/user-repository'
 import { UserHttpRepository } from './user-http-repository'
 import { UserDtoToUserMapper } from './user-dto-to-user-mapper'
 

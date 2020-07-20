@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { bind } from '../../../../../../core/utils/bind'
+import { bind } from '../../../../../core/utils/bind'
 import Axios from 'axios'
 import styles from './sing-up.module.css'
-import { SwitchTheme } from '../../../../../../core/components/switch-theme/switch-theme'
+import { SwitchTheme } from '../../../../../core/components/switch-theme/switch-theme'
 import { Link, useHistory } from 'react-router-dom'
-import { Input } from '../../../../../../core/components/input/input'
-import { Button } from '../../../../../../core/components/buttons/button'
-import { Icon } from '../../../../../../core/components/icons/icon'
-import { DataSignup } from '../domain/data-signup'
-import { CartContext } from '../../../../../../core/components/main-template/main-template'
-import { ProductCart } from '../../../../shopping-cart/domain/productCart'
+import { Input } from '../../../../../core/components/input/input'
+import { Button } from '../../../../../core/components/buttons/button'
+import { Icon } from '../../../../../core/components/icons/icon'
+import { DataSignup } from '../../domain/data-signup'
+import { CartContext } from '../../../../../core/components/main-template/main-template'
+import { ProductCart } from '../../../shopping-cart/domain/productCart'
 
 const cx = bind(styles)
 interface Props {

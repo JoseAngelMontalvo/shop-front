@@ -1,5 +1,5 @@
 import { UserDto } from './user-dto'
-import { User } from '../domain/user'
+import { User } from '../../domain/user/user'
 
 export class UserDtoToUserMapper {
   map(UserDto: UserDto): User {
