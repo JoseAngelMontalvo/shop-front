@@ -17,12 +17,16 @@ export const ShoppingCartItem: React.FunctionComponent<Props> = ({ product }) =>
     <CartContext.Consumer>
       {({ decrementCount, incrementCount, deleteProduct }) => (
         <tr id={product.id} className={cx('product-item-list')}>
-          <td className={cx('thumb-product-list')}>
+          <td data-head={'Imagen Producto'} className={cx('thumb-product-list')}>
             <img src={`/img/products/${product.image}`} alt="Imagen producto" />
           </td>
-          <td className={cx('price-product-list')}>{product.price}</td>
-          <td className={cx('name-product-list')}>{product.name}</td>
-          <td className={cx('count-product-list')}>
+          <td data-head={'Precio'} className={cx('price-product-list')}>
+            {product.price}
+          </td>
+          <td data-head={'Nombre'} className={cx('name-product-list')}>
+            {product.name}
+          </td>
+          <td data-head={'Cantidad'} className={cx('count-product-list')}>
             <div className={cx('quantity')}>
               <div className={cx('controls-quantity')}>
                 <Button
@@ -43,7 +47,7 @@ export const ShoppingCartItem: React.FunctionComponent<Props> = ({ product }) =>
               </div>
             </div>
           </td>
-          <td className={cx('delete-product-list')}>
+          <td data-head={'Eliminar Product'} className={cx('delete-product-list')}>
             <Button
               theme={'only-icon'}
               onClick={() => {

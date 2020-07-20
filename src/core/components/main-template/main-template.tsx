@@ -138,9 +138,10 @@ export const MainTemplate: React.FC<Props> = ({ children, user, logout, shopping
       name: product.name,
       quantity: count,
     }
-    if (productsList === null || undefined) {
+    if (productsList === null || productsList === undefined) {
       setProductsList([newProduct])
       storeShoppingCart(productsList, user?.id)
+      console.log('kakafuty')
     } else {
       const newProductList: ProductCart[] = productsList
       const productExist = await productsList.filter((product) => product.id === newProduct.id)
@@ -238,6 +239,14 @@ export const MainTemplate: React.FC<Props> = ({ children, user, logout, shopping
             <Header user={user} logout={logout} />
             {children}
             {location.pathname === `/product/search` && <ResultSearchProduct query={state.query} />}
+            <div>
+              <ul>
+                {productsList.map((product) => (
+                  <li>{product.name}</li>
+                ))}
+              </ul>
+            </div>
+
             <Footer />
           </div>
         </CartContext.Provider>

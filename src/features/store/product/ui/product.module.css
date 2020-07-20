@@ -1,5 +1,16 @@
-.name-product-top {
-    width: 100%;
-    display: none;
+.main-content {
+  padding: 66px 50px 80px 50px;
+  display: flex;
+  flex-wrap: wrap;
 }
+.name-product-top {
+  width: 100%;
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .main-content {
+    padding: 106px 50px 80px 50px;
 
+    flex-direction: column-reverse;
+  }
+}

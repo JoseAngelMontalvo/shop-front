@@ -261,3 +261,8 @@
   flex-wrap: wrap;
   padding-top: 30px;
 }
+@media screen and (max-width: 767px) {
+  .search-tools {
+    top: 106px;
+  }
+}

@@ -4,7 +4,6 @@
   position: relative;
   padding: 0 16px;
   flex-grow: 2;
-  max-width: 50%;
 }
 
 .header-search form {

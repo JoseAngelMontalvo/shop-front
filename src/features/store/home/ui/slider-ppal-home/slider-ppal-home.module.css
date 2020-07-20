@@ -21,3 +21,14 @@
 .slider img {
   width: 100%;
 }
+@media screen and (max-width: 767px) {
+  .slider {
+    padding-top: 106px;
+  }
+  .slider h1 {
+    font-size: 1em;
+    line-height: 20px;
+    top: unset;
+    bottom: 5%;
+  }
+}

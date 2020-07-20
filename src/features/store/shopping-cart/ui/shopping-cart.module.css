@@ -27,7 +27,6 @@
 
 .shopping-cart-list tr:last-child td {
   padding-bottom: 20px;
-  border-bottom: 1px solid var(--accent-color);
 }
 .empty-cart {
   height: 90vh;
@@ -55,4 +54,28 @@
 .empty-cart i {
   display: block;
   font-size: 150px;
+}
+@media screen and (max-width: 767px) {
+  .shopping-cart-list thead {
+    display: none;
+  }
+  .shopping-cart-list tr:nth-child(even) {
+    background-color: #272727;
+  }
+  .shopping-cart-list tr td {
+    display: block;
+    padding: 20px 20px 10px 20px;
+  }
+  .shopping-cart-list tr td:last-child {
+    padding-bottom: 40px;
+  }
+  .shopping-cart-list tr td::before {
+    clear: both;
+    content: attr(data-head);
+    display: block;
+    font-weight: bold;
+    width: 100%;
+    font-size: 16px;
+    padding-bottom: 10px;
+  }
 }

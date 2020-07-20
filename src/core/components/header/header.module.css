@@ -6,6 +6,7 @@
   height: 66px;
   padding: 0 16px;
   display: flex;
+  flex-wrap: wrap;
   background-color: var(--bk-body-color);
 }
 
@@ -24,4 +25,10 @@
   background-color: #fff;
   display: block;
   border-radius: 33px;
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    height: 106px;
+  }
 }

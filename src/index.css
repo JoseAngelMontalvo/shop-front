@@ -124,8 +124,3 @@ a:focus {
   flex: 0 0 100%;
   padding: 0 10px;
 }
-.main-content {
-  padding: 66px 50px 80px 50px;
-  display: flex;
-  flex-wrap: wrap;
-}
