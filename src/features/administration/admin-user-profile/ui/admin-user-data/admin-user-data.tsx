@@ -16,7 +16,6 @@ export const AdminUserData: React.FC<Props> = ({ user, saveProfile }) => {
   const [userProfile, setUserProfile] = useState<User | null>(user && user)
 
   function onchangeProfile(names: string, value: string) {
-    console.log('pollas')
     userProfile && setUserProfile({ ...userProfile, [names]: value })
   }
 

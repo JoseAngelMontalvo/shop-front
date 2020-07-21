@@ -89,9 +89,12 @@ export const RouterApp: React.FunctionComponent = () => {
   }
 
   async function saveProfile(userProfile: User) {
-    setUser(userProfile)
+    function setUserData(userProfile: User) {
+      setUser(userProfile)
+    }
+    user && (await setUserData(user))
     const userRepository = UserRepositoryFactory.post()
-    const result = await userRepository.UpdateUserProfile(userProfile)
+    const result = user && (await userRepository.UpdateUserProfile(user))
   }
 
   function logout() {

@@ -2,7 +2,6 @@ import { ShoppingCartRepository } from '../domain/shoppingCart-repository'
 import { ShoppingCartDto } from './shoppingCart-dto'
 import { ShoppingCartDtoToShoppingCatMapper } from './shoppingCart-dto-to-shoppingCart-mapper'
 import { ShoppingCart } from '../domain/shoppingCart'
-import { ProductCart } from '../domain/productCart'
 import Axios from 'axios'
 import { ShoppingCartDB } from '../domain/shopingCartDB'
 

@@ -18,7 +18,4 @@ export class ManageShoppingCart {
       console.log(error)
     }
   }
-  updateShoppingCart() {
-    console.log('mecago en san dios')
-  }
 }

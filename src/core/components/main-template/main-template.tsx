@@ -83,7 +83,6 @@ export const MainTemplate: React.FC<Props> = ({ children, user, logout, shopping
   }
 
   function emptyProducts() {
-    console.log('Hola magete')
     setProductsList([])
   }
   async function getshoppingcart(id: string) {
@@ -137,7 +136,6 @@ export const MainTemplate: React.FC<Props> = ({ children, user, logout, shopping
     if (productsList === null || productsList === undefined) {
       setProductsList([newProduct])
       storeShoppingCart(productsList, user?.id)
-      console.log('kakafuty')
     } else {
       const newProductList: ProductCart[] = productsList
       const productExist = await productsList.filter((product) => product.id === newProduct.id)
