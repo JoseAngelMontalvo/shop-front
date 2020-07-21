@@ -18,4 +18,5 @@ export class ManageShoppingCart {
       console.log(error)
     }
   }
+  async updateShoppingCart() {}
 }
