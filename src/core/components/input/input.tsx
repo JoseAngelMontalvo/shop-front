@@ -23,7 +23,7 @@ export const Input: React.FC<Props> = ({
   required,
   onChangeValue,
 }) => {
-  const [state, setState] = useState()
+  const [state, setState] = useState(value)
   return (
     <div className={cx(`item-form-${width}`)}>
       {label && type !== 'checkbox' && type !== 'radio' && (
@@ -41,9 +41,7 @@ export const Input: React.FC<Props> = ({
         required={required && required}
         onChange={(event) => {
           setState(event.target.value)
-          if (onChangeValue) {
-            onChangeValue(event.target.name, event.target.value)
-          }
+          onChangeValue && onChangeValue(event.target.name, event.target.value)
         }}
       />
       {label && (type === 'checkbox' || type === 'radio') && (

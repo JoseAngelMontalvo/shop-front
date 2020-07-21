@@ -4,4 +4,5 @@ import { DataSignup } from '../../../features/store/auth/domain/data-signup'
 export interface UserRepository {
   Login(email: string, password: string): Promise<User>
   Signup(dataSignup: DataSignup): Promise<User>
+  UpdateUserProfile(user: User): Promise<User>
 }

@@ -21,4 +21,8 @@ export class UserHttpRepository implements UserRepository {
     })
     return this.UserDtoToUserMapper.map(result.data)
   }
+  async UpdateUserProfile(user: User): Promise<User> {
+    const result = await Axios.post<User>(`${process.env.REACT_APP_URL_API}/users/updateuser`, user)
+    return result.data
+  }
 }

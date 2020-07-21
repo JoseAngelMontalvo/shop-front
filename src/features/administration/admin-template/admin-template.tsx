@@ -10,8 +10,6 @@ interface Props {
   user?: User | null
 }
 export const AdminTemplate: React.FC<Props> = ({ children, user }) => {
-  if (user) {
-  }
   return user === undefined || user === null ? (
     <div>
       <p>NO TIENES PERMISOS</p>

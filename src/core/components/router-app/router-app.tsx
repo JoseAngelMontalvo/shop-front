@@ -88,6 +88,12 @@ export const RouterApp: React.FunctionComponent = () => {
     manageShoppingCart.storeShoppingCart(products, result.id)
   }
 
+  async function saveProfile(userProfile: User) {
+    setUser(userProfile)
+    const userRepository = UserRepositoryFactory.post()
+    const result = await userRepository.UpdateUserProfile(userProfile)
+  }
+
   function logout() {
     setUser(null)
     deleteToken()
@@ -123,7 +129,7 @@ export const RouterApp: React.FunctionComponent = () => {
             <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
               <Header user={user} logout={logout} />
               <AdminTemplate user={user}>
-                <AdminUserData />
+                <AdminUserData saveProfile={saveProfile} user={user} />
               </AdminTemplate>
             </MainTemplate>
           </MainContentTheme>
