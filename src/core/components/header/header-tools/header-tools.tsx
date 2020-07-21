@@ -31,7 +31,8 @@ export const HeaderTools: React.FunctionComponent<Props> = ({ user, logout }) =>
               <p className={cx('name-user-profile')}>{user && user.name}</p>
               <Button
                 theme={'only-icon'}
-                icon={<Icon type="material-icons" content={'person'} title="Profile tools" />}
+                icon={<Icon type="material-icons" content={'person'} title="AdminTemplate tools" />}
+                onClick={() => goUrl('/admin/profile')}
               />
             </div>
             <Button

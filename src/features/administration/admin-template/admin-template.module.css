@@ -1,0 +1,40 @@
+.main-content-admin {
+  padding: 66px 0px 0px 0px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.form-edit-profile {
+  width: 100%;
+  max-width: 680px;
+  margin: auto;
+}
+
+.form-edit-profile fieldset {
+  background-color: var(--secondary-bk-color);
+  border: none;
+  border-radius: 10px;
+  padding: 50px 20px 20px 20px;
+  margin-bottom: 20px;
+}
+
+.form-edit-profile fieldset legend {
+  top: 30px;
+  position: relative;
+}
+
+.form-edit-profile .content-fieldset {
+  display: flex;
+  max-width: 640px;
+  flex-wrap: wrap;
+}
+
+.link-edit-profile {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.edit-form i {
+  font-size: var(--small-text);
+}

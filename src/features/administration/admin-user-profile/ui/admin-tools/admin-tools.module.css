@@ -1,0 +1,25 @@
+.tools-admin {
+  flex-grow: 1;
+  max-width: 110px;
+  background-color: #9c9cfd;
+  background-color: var(--bk-body-color);
+  border-right: 1px solid var(--accent-color);
+}
+.tools-admin-item a {
+  display: block;
+  font-family: 'Roboto Condense', sans-serif;
+  text-decoration: none;
+  color: var(--text-color);
+  text-align: center;
+  padding: 10px;
+}
+
+.tools-admin-item a:hover,
+.tools-admin-item a:focus {
+  color: var(--primary-color);
+  background-color: var(--secondary-bk-color);
+}
+
+.tools-admin-item a p {
+  margin: 0;
+}

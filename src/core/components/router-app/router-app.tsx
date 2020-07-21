@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { bind } from '../../utils/bind'
 import styles from './router-app.module.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
@@ -19,14 +19,21 @@ import { ShoppingCart as ShoppingCartModel } from '../../../features/store/shopp
 import { UserRepositoryFactory } from '../../infrastructure/user/user-repository-factory'
 import {
   deleteToken,
+  getToken,
   initAxiosInterceptors,
   setToken,
 } from '../../../features/store/auth/domain/manage-token'
 import { DataSignup } from '../../../features/store/auth/domain/data-signup'
 import { ProductCart } from '../../../features/store/shopping-cart/domain/productCart'
 import { ManageShoppingCart } from '../../../features/store/shopping-cart/infrastructure/manage-shoppingCart'
+import { AdminTemplate } from '../../../features/administration/admin-template/admin-template'
+import { AdminUserData } from '../../../features/administration/admin-user-profile/ui/admin-user-data/admin-user-data'
+import Axios from 'axios'
+
 const cx = bind(styles)
+
 initAxiosInterceptors()
+
 export const RouterApp: React.FunctionComponent = () => {
   const [user, setUser] = useState<User | null>(null)
   const [loadingUser, setLoadingUser] = useState<boolean>(false)
@@ -39,6 +46,25 @@ export const RouterApp: React.FunctionComponent = () => {
   if (user) {
     nameUser = user.name
   }
+
+  useEffect(() => {
+    setLoadingUser(true)
+    async function loadUser() {
+      const token = getToken()
+      if (token === null) {
+        setLoadingUser(false)
+        return
+      }
+      try {
+        const { data } = await Axios.get('http://localhost:3001/api/auth/profile')
+        setUser(data.user)
+        setLoadingUser(false)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    loadUser()
+  }, [])
 
   async function login(email: string, password: string, products: ProductCart[]) {
     setLoadingUser(true)
@@ -68,81 +94,72 @@ export const RouterApp: React.FunctionComponent = () => {
   }
   return (
     <Router>
-      {user && user.role === 'ADMIN_ROLE' ? (
-        <Switch>
-          <Route path="/product/search">
-            <MainContentTheme>
+      <Switch>
+        <Route path="/product/search">
+          <MainContentTheme>
+            <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
+              <Header user={user} logout={logout} />
+            </MainTemplate>
+          </MainContentTheme>
+        </Route>
+        <Route path="/product/:id">
+          <MainContentTheme>
+            <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
+              <Header user={user} logout={logout} />
+              <Product />
+            </MainTemplate>
+          </MainContentTheme>
+        </Route>
+        <Route path="/shoppingcart">
+          <MainContentTheme>
+            <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
+              <Header user={user} logout={logout} />
+              <ShoppingCart shoppingcart={shoppingCart} />
+            </MainTemplate>
+          </MainContentTheme>
+        </Route>
+        <Route path="/admin/profile">
+          <MainContentTheme>
+            <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
+              <Header user={user} logout={logout} />
+              <AdminTemplate user={user}>
+                <AdminUserData />
+              </AdminTemplate>
+            </MainTemplate>
+          </MainContentTheme>
+        </Route>
+        <Route path="/signin">
+          <MainContentTheme>
+            <MainTemplate shoppingcart={shoppingCart}>
+              <SignIn login={login} />
+            </MainTemplate>
+          </MainContentTheme>
+        </Route>
+        <Route path="/signup">
+          <MainContentTheme>
+            <MainTemplate shoppingcart={shoppingCart}>
+              <SignUp signup={signup} />
+            </MainTemplate>
+          </MainContentTheme>
+          <Footer />
+        </Route>
+        <Route exact path="/">
+          <MainContentTheme>
+            {loadingUser ? (
+              <MainTemplate shoppingcart={shoppingCart} logout={logout}>
+                <Loading />
+              </MainTemplate>
+            ) : (
               <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
                 <Header user={user} logout={logout} />
+                <SliderPpalHome urlImage="/img/banner_3.jpg" alt="Imagen slider home" />
+                <CategoriesHome />
+                <ShowCaseHome />
               </MainTemplate>
-            </MainContentTheme>
-          </Route>
-          <Route path="/profile">
-            <MainContentTheme>
-              <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
-                <Header user={user} logout={logout} />
-              </MainTemplate>
-            </MainContentTheme>
-          </Route>
-        </Switch>
-      ) : (
-        <Switch>
-          <Route path="/product/search">
-            <MainContentTheme>
-              <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
-                <Header user={user} logout={logout} />
-              </MainTemplate>
-            </MainContentTheme>
-          </Route>
-          <Route path="/product/:id">
-            <MainContentTheme>
-              <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
-                <Header user={user} logout={logout} />
-                <Product />
-              </MainTemplate>
-            </MainContentTheme>
-          </Route>
-          <Route path="/shoppingcart">
-            <MainContentTheme>
-              <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
-                <Header user={user} logout={logout} />
-                <ShoppingCart shoppingcart={shoppingCart} />
-              </MainTemplate>
-            </MainContentTheme>
-          </Route>
-          <Route path="/signin">
-            <MainContentTheme>
-              <MainTemplate shoppingcart={shoppingCart}>
-                <SignIn login={login} />
-              </MainTemplate>
-            </MainContentTheme>
-          </Route>
-          <Route path="/signup">
-            <MainContentTheme>
-              <MainTemplate shoppingcart={shoppingCart}>
-                <SignUp signup={signup} />
-              </MainTemplate>
-            </MainContentTheme>
-            <Footer />
-          </Route>
-          <Route exact path="/">
-            <MainContentTheme>
-              {loadingUser ? (
-                <MainTemplate shoppingcart={shoppingCart} logout={logout}>
-                  <Loading />
-                </MainTemplate>
-              ) : (
-                <MainTemplate shoppingcart={shoppingCart} user={user} logout={logout}>
-                  <Header user={user} logout={logout} />
-                  <SliderPpalHome urlImage="/img/banner_3.jpg" alt="Imagen slider home" />
-                  <CategoriesHome />
-                  <ShowCaseHome />
-                </MainTemplate>
-              )}
-            </MainContentTheme>
-          </Route>
-        </Switch>
-      )}
+            )}
+          </MainContentTheme>
+        </Route>
+      </Switch>
     </Router>
   )
 }
