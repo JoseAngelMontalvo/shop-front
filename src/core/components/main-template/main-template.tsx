@@ -228,19 +228,6 @@ export const MainTemplate: React.FC<Props> = ({ children, user, logout, shopping
           <div className={cx('main-template-content')}>
             {children}
             {location.pathname === `/product/search` && <ResultSearchProduct query={state.query} />}
-            {productsList !== undefined && (
-              <div>
-                <ul>
-                  {productsList.map((product) => (
-                    <li>
-                      <p>{product.name}</p>
-                      <p>{product.quantity}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
             <Footer />
           </div>
         </CartContext.Provider>
